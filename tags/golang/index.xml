@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>golang on Thomas&#39; blog</title>
+    <title>golang on /var/log/tmaurice</title>
     <link>http://blog.thomas.maurice.fr/tags/golang/</link>
-    <description>Recent content in golang on Thomas&#39; blog</description>
+    <description>Recent content in golang on /var/log/tmaurice</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <managingEditor>thomas@maurice.fr (Thomas)</managingEditor>

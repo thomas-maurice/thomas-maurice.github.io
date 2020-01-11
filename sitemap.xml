@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://blog.thomas.maurice.fr/</loc>
+    <lastmod>2020-01-11T13:52:19+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.thomas.maurice.fr/categories/</loc>
     <lastmod>2020-01-11T13:52:19+00:00</lastmod>
   </url>
@@ -39,11 +44,6 @@
   
   <url>
     <loc>http://blog.thomas.maurice.fr/tags/test/</loc>
-    <lastmod>2020-01-11T13:52:19+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.thomas.maurice.fr/</loc>
     <lastmod>2020-01-11T13:52:19+00:00</lastmod>
   </url>
   

@@ -1,5 +1,14 @@
 [
 {
+	"uri": "http://blog.thomas.maurice.fr/",
+	"title": "/var/log/tmaurice",
+	"tags": [],
+	"categories": [],
+	"series": [],
+	"description": "",
+	"content": ""
+},
+{
 	"uri": "http://blog.thomas.maurice.fr/categories/",
 	"title": "Categories",
 	"tags": [],
@@ -65,15 +74,6 @@
 {
 	"uri": "http://blog.thomas.maurice.fr/tags/test/",
 	"title": "test",
-	"tags": [],
-	"categories": [],
-	"series": [],
-	"description": "",
-	"content": ""
-},
-{
-	"uri": "http://blog.thomas.maurice.fr/",
-	"title": "Thomas&#39; blog",
 	"tags": [],
 	"categories": [],
 	"series": [],

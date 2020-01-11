@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>vault on Thomas&#39; blog</title>
+    <title>vault on /var/log/tmaurice</title>
     <link>http://blog.thomas.maurice.fr/categories/vault/</link>
-    <description>Recent content in vault on Thomas&#39; blog</description>
+    <description>Recent content in vault on /var/log/tmaurice</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <managingEditor>thomas@maurice.fr (Thomas)</managingEditor>
