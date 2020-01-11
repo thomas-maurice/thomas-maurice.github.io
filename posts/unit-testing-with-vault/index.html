@@ -970,7 +970,7 @@
 <p>Now, we have several ways of unit testing things, and usually when you talk to external systems the easiest way of doing it is by mocking the system, and writing mocks that will give you a deterministic answer to a given input. That's great and all but in my use case I wanted to be able to talk to a real Vault server, to be in more realistic testing conditions.</p>
 <p>Fortunately, people at <a href="https://hashicorp.com">Hashicorp</a> do things well, and they provide us with tooling that basically enables us to spin up a real (real!!) vault server for us to fuck around and perform all the testing we want, and I'm going to explain you how.</p>
 <h2 id="setting-up-the-stage">Setting up the stage</h2>
-<p>We will assume that we want to unit test a dummy function that will write a secret to Vault, and we want to make sure that the secret is written properly. Le'ts write a simple <code>main.go</code> file that contains our <code>main</code> function, as well as a <code>putSecret</code> function that will store our secret into Vault.</p>
+<p>We will assume that we want to unit test a dummy function that will write a secret to Vault, and we want to make sure that the secret is written properly. Let's write a simple <code>main.go</code> file that contains our <code>main</code> function, as well as a <code>putSecret</code> function that will store our secret into Vault.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -1356,7 +1356,7 @@ ok  	blog.thomas.maurice.fr/vault-test	3.625s	coverage: 25.0% of statements
 <blockquote>
 <p>Holy shit this is slow as fuck, there is now way I am ever using that this is going to slow down my CI mate</p>
 </blockquote>
-<p>Which is fair enough, which is why there is something you can do about it. You can create some <code>mocks.go</code> file that would contain all the Vault initialization code that you can reuse accross multiple tests, something along the lines of:</p>
+<p>Which is fair enough, which is why there is something you can do about it. You can create some <code>mocks.go</code> file that would contain all the Vault initialization code that you can reuse across multiple tests, something along the lines of:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
