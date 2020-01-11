@@ -1501,7 +1501,7 @@ ok  	blog.thomas.maurice.fr/vault-test	3.625s	coverage: 25.0% of statements
 <span class="p">}</span>
 
 <span class="c1">// creates the test server
-</span><span class="c1"></span><span class="kd">func</span> <span class="nf">GetTestVaultServer</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span>  <span class="p">{</span>
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">GetTestVaultServer</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="nx">vaultTest</span> <span class="p">{</span>
     <span class="nx">t</span><span class="p">.</span><span class="nf">Helper</span><span class="p">(</span><span class="p">)</span>
 
 	<span class="nx">cluster</span> <span class="o">:=</span> <span class="nx">vault</span><span class="p">.</span><span class="nf">NewTestCluster</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">vault</span><span class="p">.</span><span class="nx">CoreConfig</span><span class="p">{</span>
@@ -1572,6 +1572,8 @@ ok  	blog.thomas.maurice.fr/vault-test	3.625s	coverage: 25.0% of statements
 <p><strong>Few words of warning</strong>: This assumes that the things you will do to your Vault are without any side effects to other tests, such as RO operations (retrieving tokens and certificates for exeamples) or operations that are restricted to a certain path that belongs to your unit test.</p>
 <h2 id="wrapping-up">Wrapping up</h2>
 <p>I hope that was helpful, happy unit testing.</p>
+<h2 id="credits">Credits</h2>
+<p>Big thanks to <a href="https://twitter.com/daenney">daenney</a> and <a href="https://twitter.com/KDevroede">kdevroede</a> for the review !</p>
 
     </article>
     
@@ -2053,6 +2055,7 @@ document.addEventListener('DOMContentLoaded', function () {
     <li><a href="#pushing-it-further">Pushing it further</a></li>
     <li><a href="#reusing-the-code">Reusing the code</a></li>
     <li><a href="#wrapping-up">Wrapping up</a></li>
+    <li><a href="#credits">Credits</a></li>
   </ul>
 </nav>
   </div>
