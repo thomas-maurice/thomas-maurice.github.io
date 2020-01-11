@@ -965,7 +965,7 @@
       
       <p>Recently I've been dealing with <a href="https://vaultproject.io">Hashicorp's Vault</a> a lot, and I've had to write a bunch of code to interface with it. This post is going to be about my least favourite part of writing code: unit testing what I wrote (as everyone knows, it works on my machine, right ?).</p>
 <h2 id="assumptions">Assumptions</h2>
-<p>This article assumes that you are already familiar with what Vault is and the very basics of how to use it (get/put secrets, login and such). It also assumes that you have some knowledge of the Go programming language.</p>
+<p>This article assumes that you are already familiar with what <a href="https://vaultproject.io">Vault</a> is and the very basics of how to use it (get/put secrets, login and such). It also assumes that you have some knowledge of the Go programming language.</p>
 <h2 id="what-we-want">What we want</h2>
 <p>Now, we have several ways of unit testing things, and usually when you talk to external systems the easiest way of doing it is by mocking the system, and writing mocks that will give you a deterministic answer to a given input. That's great and all but in my use case I wanted to be able to talk to a real Vault server, to be in more realistic testing conditions.</p>
 <p>Fortunately, people at <a href="https://hashicorp.com">Hashicorp</a> do things well, and they provide us with tooling that basically enables us to spin up a real (real!!) vault server for us to fuck around and perform all the testing we want, and I'm going to explain you how.</p>
