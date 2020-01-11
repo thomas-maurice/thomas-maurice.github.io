@@ -338,14 +338,14 @@
   
     var baseurl = null;
     
-    var siteBaseURL = JSON.parse("\"http://thomas.maurice.fr\"");
+    var siteBaseURL = JSON.parse("\"http://blog.thomas.maurice.fr\"");
     var siteBaseChecker = /\/\w+\//i;
     var isSlug = siteBaseChecker.test(siteBaseURL);
     var isThemeSite = location.origin.includes('themes.gohugo.io');
 
     
         if (isThemeSite) {
-          baseurl = "http:\/\/thomas.maurice.fr";
+          baseurl = "http:\/\/blog.thomas.maurice.fr";
         } else {
           if (isSlug) {
             baseurl = location.origin + siteBaseURL.match(siteBaseChecker)[0];
@@ -688,13 +688,13 @@
 
 <meta property="og:site_name" content="Thomas&#39; blog">
 <meta property="og:title" content="Unit Testing With Vault in Go">
-<meta property="og:url" content="http://thomas.maurice.fr/posts/unit-testing-with-vault/">
+<meta property="og:url" content="http://blog.thomas.maurice.fr/posts/unit-testing-with-vault/">
 <meta property="og:type" content="article">
 
 <meta name="generator" content="Hugo 0.62.2" />
 <meta name="msapplication-TileColor" content="#ffffff">
 <meta name="theme-color" content="#ffffff">
-<link rel="canonical" href="http://thomas.maurice.fr/posts/unit-testing-with-vault/">
+<link rel="canonical" href="http://blog.thomas.maurice.fr/posts/unit-testing-with-vault/">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="shortcut icon" href="/favicon.png" type="image/x-icon">
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
@@ -707,17 +707,17 @@
     "headline": "Unit Testing With Vault in Go",
     "datePublished": "2020-01-11T13:52:19Z",
     "dateModified": "2020-01-11T13:52:19Z",
-    "url" : "http://thomas.maurice.fr/posts/unit-testing-with-vault/",
+    "url" : "http://blog.thomas.maurice.fr/posts/unit-testing-with-vault/",
     "description": "Recently I've been dealing with Hashicorp's Vault a lot, and I've had to write a bunch of code to interface with it. This post is going to be about my least favourite …",
     "keywords": ["golang","test","vault","security"],
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "http://thomas.maurice.fr"
+      "@id": "http://blog.thomas.maurice.fr"
     },
     "publisher": {
       "@type": "Organization",
       "name": "Thomas' blog",
-      "url": "http://thomas.maurice.fr"
+      "url": "http://blog.thomas.maurice.fr"
     }
   }
 </script>
@@ -887,14 +887,14 @@
   
   <li >
     
-      <a href="http://thomas.maurice.fr/" class="capitalize">Thomas&#39; blog</a>
+      <a href="http://blog.thomas.maurice.fr/" class="capitalize">Thomas&#39; blog</a>
     
   </li>
   
   
   <li >
     
-      <a href="http://thomas.maurice.fr/posts/" class="capitalize">Posts</a>
+      <a href="http://blog.thomas.maurice.fr/posts/" class="capitalize">Posts</a>
     
   </li>
   
@@ -1651,7 +1651,7 @@ ok  	blog.thomas.maurice.fr/vault-test	3.625s	coverage: 25.0% of statements
     <div class="grow"></div>
 <nav class="pagination-single">
   
-    <a href="http://thomas.maurice.fr/about/" class="pagination-single__left">
+    <a href="http://blog.thomas.maurice.fr/about/" class="pagination-single__left">
       <div class="pagination-single__icon">
         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path fill="currentColor" d="M19 11H7.83l4.88-4.88c.39-.39.39-1.03 0-1.42-.39-.39-1.02-.39-1.41 0l-6.59 6.59c-.39.39-.39 1.02 0 1.41l6.59 6.59c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L7.83 13H19c.55 0 1-.45 1-1s-.45-1-1-1z"/></svg>
       </div>
@@ -2668,7 +2668,7 @@ document.addEventListener('DOMContentLoaded', function () {
             
     
     
-  <a href="http://thomas.maurice.fr/posts/unit-testing-with-vault//index.xml" type="application/rss+xml" title="rss" aria-label="RSS Feed Link">
+  <a href="http://blog.thomas.maurice.fr/posts/unit-testing-with-vault//index.xml" type="application/rss+xml" title="rss" aria-label="RSS Feed Link">
     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><circle fill="currentColor" cx="6.18" cy="17.82" r="2.18"/><path fill="currentColor" d="M5.59 10.23c-.84-.14-1.59.55-1.59 1.4 0 .71.53 1.28 1.23 1.4 2.92.51 5.22 2.82 5.74 5.74.12.7.69 1.23 1.4 1.23.85 0 1.54-.75 1.41-1.59-.68-4.2-3.99-7.51-8.19-8.18zm-.03-5.71C4.73 4.43 4 5.1 4 5.93c0 .73.55 1.33 1.27 1.4 6.01.6 10.79 5.38 11.39 11.39.07.73.67 1.28 1.4 1.28.84 0 1.5-.73 1.42-1.56-.73-7.34-6.57-13.19-13.92-13.92z"/></svg>
   </a>
 
