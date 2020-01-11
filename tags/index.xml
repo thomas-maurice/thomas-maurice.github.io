@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Thomas&#39; blog</title>
+    <link>http://thomas.maurice.fr/tags/</link>
+    <description>Recent content in Tags on Thomas&#39; blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <managingEditor>thomas@maurice.fr (Thomas)</managingEditor>
+    <webMaster>thomas@maurice.fr (Thomas)</webMaster>
+    <copyright>&amp;copy;{year}, All Rights Reserved</copyright>
+    <lastBuildDate>Sat, 11 Jan 2020 13:52:19 +0000</lastBuildDate>
+    
+        <atom:link href="http://thomas.maurice.fr/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+      
+      <item>
+        <title>golang</title>
+        <link>http://thomas.maurice.fr/tags/golang/</link>
+        <pubDate>Sat, 11 Jan 2020 13:52:19 +0000</pubDate>
+        <author>thomas@maurice.fr (Thomas)</author>
+        <guid>http://thomas.maurice.fr/tags/golang/</guid>
+        <description></description>
+      </item>
+      
+      <item>
+        <title>security</title>
+        <link>http://thomas.maurice.fr/tags/security/</link>
+        <pubDate>Sat, 11 Jan 2020 13:52:19 +0000</pubDate>
+        <author>thomas@maurice.fr (Thomas)</author>
+        <guid>http://thomas.maurice.fr/tags/security/</guid>
+        <description></description>
+      </item>
+      
+      <item>
+        <title>test</title>
+        <link>http://thomas.maurice.fr/tags/test/</link>
+        <pubDate>Sat, 11 Jan 2020 13:52:19 +0000</pubDate>
+        <author>thomas@maurice.fr (Thomas)</author>
+        <guid>http://thomas.maurice.fr/tags/test/</guid>
+        <description></description>
+      </item>
+      
+      <item>
+        <title>vault</title>
+        <link>http://thomas.maurice.fr/tags/vault/</link>
+        <pubDate>Sat, 11 Jan 2020 13:52:19 +0000</pubDate>
+        <author>thomas@maurice.fr (Thomas)</author>
+        <guid>http://thomas.maurice.fr/tags/vault/</guid>
+        <description></description>
+      </item>
+      
+    
+  </channel>
+</rss>

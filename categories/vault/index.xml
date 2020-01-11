@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>vault on Thomas&#39; blog</title>
+    <link>http://thomas.maurice.fr/categories/vault/</link>
+    <description>Recent content in vault on Thomas&#39; blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <managingEditor>thomas@maurice.fr (Thomas)</managingEditor>
+    <webMaster>thomas@maurice.fr (Thomas)</webMaster>
+    <copyright>&amp;copy;{year}, All Rights Reserved</copyright>
+    <lastBuildDate>Sat, 11 Jan 2020 13:52:19 +0000</lastBuildDate>
+    
+        <atom:link href="http://thomas.maurice.fr/categories/vault/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+      
+      <item>
+        <title>Unit Testing With Vault in Go</title>
+        <link>http://thomas.maurice.fr/posts/unit-testing-with-vault/</link>
+        <pubDate>Sat, 11 Jan 2020 13:52:19 +0000</pubDate>
+        <author>thomas@maurice.fr (Thomas)</author>
+        <guid>http://thomas.maurice.fr/posts/unit-testing-with-vault/</guid>
+        <description>Recently I&#39;ve been dealing with Hashicorp&#39;s Vault a lot, and I&#39;ve had to write a bunch of code to interface with it. This post is going to be about my least favourite part of writing code: unit testing what I wrote (as everyone knows, it works on my machine, right ?).
+What we want Now, we have several ways of unit testing things, and usually when you talk to external systems the best way of doing it is by mocking the system, and writing mocks that will give you a deterministic answer to a given input.</description>
+      </item>
+      
+    
+  </channel>
+</rss>

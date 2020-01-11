@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>http://thomas.maurice.fr/categories/</loc>
+    <lastmod>2020-01-11T13:52:19+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://thomas.maurice.fr/categories/dev/</loc>
+    <lastmod>2020-01-11T13:52:19+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://thomas.maurice.fr/tags/golang/</loc>
+    <lastmod>2020-01-11T13:52:19+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://thomas.maurice.fr/categories/golang/</loc>
+    <lastmod>2020-01-11T13:52:19+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://thomas.maurice.fr/posts/</loc>
+    <lastmod>2020-01-11T13:52:19+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://thomas.maurice.fr/tags/security/</loc>
+    <lastmod>2020-01-11T13:52:19+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://thomas.maurice.fr/tags/</loc>
+    <lastmod>2020-01-11T13:52:19+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://thomas.maurice.fr/tags/test/</loc>
+    <lastmod>2020-01-11T13:52:19+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://thomas.maurice.fr/</loc>
+    <lastmod>2020-01-11T13:52:19+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://thomas.maurice.fr/posts/unit-testing-with-vault/</loc>
+    <lastmod>2020-01-11T13:52:19+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://thomas.maurice.fr/tags/vault/</loc>
+    <lastmod>2020-01-11T13:52:19+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://thomas.maurice.fr/categories/vault/</loc>
+    <lastmod>2020-01-11T13:52:19+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://thomas.maurice.fr/about/</loc>
+    <lastmod>2020-01-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://thomas.maurice.fr/series/</loc>
+  </url>
+  
+</urlset>
