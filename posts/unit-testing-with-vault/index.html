@@ -1027,27 +1027,27 @@ if (!doNotTrack) {
 <pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
-	<span class="s">&#34;fmt&#34;</span>
+    <span class="s">&#34;fmt&#34;</span>
 
-	<span class="s">&#34;github.com/hashicorp/vault/api&#34;</span>
-	<span class="s">&#34;github.com/sirupsen/logrus&#34;</span>
+    <span class="s">&#34;github.com/hashicorp/vault/api&#34;</span>
+    <span class="s">&#34;github.com/sirupsen/logrus&#34;</span>
 <span class="p">)</span>
 
 <span class="c1">// Write the secret
 </span><span class="c1"></span><span class="kd">func</span> <span class="nf">putSecret</span><span class="p">(</span><span class="nx">client</span> <span class="o">*</span><span class="nx">api</span><span class="p">.</span><span class="nx">Client</span><span class="p">,</span> <span class="nx">secret</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{</span><span class="p">}</span><span class="p">,</span> <span class="nx">secretPath</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
-	<span class="nx">_</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Logical</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nf">Write</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;secret/data/%s&#34;</span><span class="p">,</span> <span class="nx">secretPath</span><span class="p">)</span><span class="p">,</span> <span class="nx">secret</span><span class="p">)</span>
-	<span class="k">return</span> <span class="nx">err</span>
+    <span class="nx">_</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Logical</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nf">Write</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;secret/data/%s&#34;</span><span class="p">,</span> <span class="nx">secretPath</span><span class="p">)</span><span class="p">,</span> <span class="nx">secret</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nx">err</span>
 <span class="p">}</span>
 
 <span class="kd">func</span> <span class="nf">main</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">client</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">api</span><span class="p">.</span><span class="nf">NewClient</span><span class="p">(</span><span class="nx">api</span><span class="p">.</span><span class="nf">DefaultConfig</span><span class="p">(</span><span class="p">)</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">logrus</span><span class="p">.</span><span class="nf">WithError</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="s">&#34;Could not initialise vault client&#34;</span><span class="p">)</span>
-	<span class="p">}</span>
-	<span class="nx">err</span> <span class="p">=</span> <span class="nf">putSecret</span><span class="p">(</span><span class="nx">client</span><span class="p">,</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{</span><span class="p">}</span><span class="p">{</span><span class="s">&#34;foo&#34;</span><span class="p">:</span> <span class="s">&#34;bar&#34;</span><span class="p">}</span><span class="p">,</span> <span class="s">&#34;baz&#34;</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">logrus</span><span class="p">.</span><span class="nf">WithError</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="s">&#34;Could not write secret&#34;</span><span class="p">)</span>
-	<span class="p">}</span>
+    <span class="nx">client</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">api</span><span class="p">.</span><span class="nf">NewClient</span><span class="p">(</span><span class="nx">api</span><span class="p">.</span><span class="nf">DefaultConfig</span><span class="p">(</span><span class="p">)</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">logrus</span><span class="p">.</span><span class="nf">WithError</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="s">&#34;Could not initialise vault client&#34;</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="nx">err</span> <span class="p">=</span> <span class="nf">putSecret</span><span class="p">(</span><span class="nx">client</span><span class="p">,</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{</span><span class="p">}</span><span class="p">{</span><span class="s">&#34;foo&#34;</span><span class="p">:</span> <span class="s">&#34;bar&#34;</span><span class="p">}</span><span class="p">,</span> <span class="s">&#34;baz&#34;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">logrus</span><span class="p">.</span><span class="nf">WithError</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="s">&#34;Could not write secret&#34;</span><span class="p">)</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
@@ -1105,50 +1105,50 @@ if (!doNotTrack) {
 <pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
-	<span class="s">&#34;testing&#34;</span>
+    <span class="s">&#34;testing&#34;</span>
 
-	<span class="nx">vaulthttp</span> <span class="s">&#34;github.com/hashicorp/vault/http&#34;</span>
-	<span class="s">&#34;github.com/hashicorp/vault/vault&#34;</span>
+    <span class="nx">vaulthttp</span> <span class="s">&#34;github.com/hashicorp/vault/http&#34;</span>
+    <span class="s">&#34;github.com/hashicorp/vault/vault&#34;</span>
 <span class="p">)</span>
 
 <span class="kd">const</span> <span class="p">(</span>
-	<span class="nx">testVaultToken</span> <span class="p">=</span> <span class="s">&#34;token&#34;</span> <span class="c1">// This is the root token
+    <span class="nx">testVaultToken</span> <span class="p">=</span> <span class="s">&#34;token&#34;</span> <span class="c1">// This is the root token
 </span><span class="c1"></span><span class="p">)</span>
 
 <span class="kd">func</span> <span class="nf">TestPutSecret</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">cluster</span> <span class="o">:=</span> <span class="nx">vault</span><span class="p">.</span><span class="nf">NewTestCluster</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">vault</span><span class="p">.</span><span class="nx">CoreConfig</span><span class="p">{</span>
-		<span class="nx">DevToken</span><span class="p">:</span> <span class="nx">testVaultToken</span><span class="p">,</span>
-	<span class="p">}</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">vault</span><span class="p">.</span><span class="nx">TestClusterOptions</span><span class="p">{</span>
-		<span class="nx">HandlerFunc</span><span class="p">:</span> <span class="nx">vaulthttp</span><span class="p">.</span><span class="nx">Handler</span><span class="p">,</span>
-	<span class="p">}</span><span class="p">)</span>
-	<span class="nx">cluster</span><span class="p">.</span><span class="nf">Start</span><span class="p">(</span><span class="p">)</span>
-	<span class="k">defer</span> <span class="nx">cluster</span><span class="p">.</span><span class="nf">Cleanup</span><span class="p">(</span><span class="p">)</span>
+    <span class="nx">cluster</span> <span class="o">:=</span> <span class="nx">vault</span><span class="p">.</span><span class="nf">NewTestCluster</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">vault</span><span class="p">.</span><span class="nx">CoreConfig</span><span class="p">{</span>
+        <span class="nx">DevToken</span><span class="p">:</span> <span class="nx">testVaultToken</span><span class="p">,</span>
+    <span class="p">}</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">vault</span><span class="p">.</span><span class="nx">TestClusterOptions</span><span class="p">{</span>
+        <span class="nx">HandlerFunc</span><span class="p">:</span> <span class="nx">vaulthttp</span><span class="p">.</span><span class="nx">Handler</span><span class="p">,</span>
+    <span class="p">}</span><span class="p">)</span>
+    <span class="nx">cluster</span><span class="p">.</span><span class="nf">Start</span><span class="p">(</span><span class="p">)</span>
+    <span class="k">defer</span> <span class="nx">cluster</span><span class="p">.</span><span class="nf">Cleanup</span><span class="p">(</span><span class="p">)</span>
 
-	<span class="nx">core</span> <span class="o">:=</span> <span class="nx">cluster</span><span class="p">.</span><span class="nx">Cores</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">.</span><span class="nx">Core</span>
-	<span class="nx">vault</span><span class="p">.</span><span class="nf">TestWaitActive</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="nx">core</span><span class="p">)</span>
-	<span class="nx">client</span> <span class="o">:=</span> <span class="nx">cluster</span><span class="p">.</span><span class="nx">Cores</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">.</span><span class="nx">Client</span>
+    <span class="nx">core</span> <span class="o">:=</span> <span class="nx">cluster</span><span class="p">.</span><span class="nx">Cores</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">.</span><span class="nx">Core</span>
+    <span class="nx">vault</span><span class="p">.</span><span class="nf">TestWaitActive</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="nx">core</span><span class="p">)</span>
+    <span class="nx">client</span> <span class="o">:=</span> <span class="nx">cluster</span><span class="p">.</span><span class="nx">Cores</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">.</span><span class="nx">Client</span>
 
-	<span class="nx">err</span> <span class="o">:=</span> <span class="nf">putSecret</span><span class="p">(</span><span class="nx">client</span><span class="p">,</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{</span><span class="p">}</span><span class="p">{</span><span class="s">&#34;foo&#34;</span><span class="p">:</span> <span class="s">&#34;bar&#34;</span><span class="p">}</span><span class="p">,</span> <span class="s">&#34;secret&#34;</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-	<span class="p">}</span>
+    <span class="nx">err</span> <span class="o">:=</span> <span class="nf">putSecret</span><span class="p">(</span><span class="nx">client</span><span class="p">,</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{</span><span class="p">}</span><span class="p">{</span><span class="s">&#34;foo&#34;</span><span class="p">:</span> <span class="s">&#34;bar&#34;</span><span class="p">}</span><span class="p">,</span> <span class="s">&#34;secret&#34;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+    <span class="p">}</span>
 
-	<span class="nx">data</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Logical</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nf">Read</span><span class="p">(</span><span class="s">&#34;secret/data/secret&#34;</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-	<span class="p">}</span>
+    <span class="nx">data</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Logical</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nf">Read</span><span class="p">(</span><span class="s">&#34;secret/data/secret&#34;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+    <span class="p">}</span>
 
-	<span class="k">if</span> <span class="nx">secret</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">Data</span><span class="p">[</span><span class="s">&#34;foo&#34;</span><span class="p">]</span><span class="p">.</span><span class="p">(</span><span class="kt">string</span><span class="p">)</span><span class="p">;</span> <span class="nx">ok</span> <span class="p">{</span>
-		<span class="k">if</span> <span class="nx">secret</span> <span class="o">!=</span> <span class="s">&#34;bar&#34;</span> <span class="p">{</span>
-			<span class="nx">t</span><span class="p">.</span><span class="nf">Fatalf</span><span class="p">(</span><span class="s">&#34;Wrong secret returned: %s&#34;</span><span class="p">,</span> <span class="nx">secret</span><span class="p">)</span>
-		<span class="p">}</span>
-	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="s">&#34;Could not get secret&#34;</span><span class="p">)</span>
-	<span class="p">}</span>
+    <span class="k">if</span> <span class="nx">secret</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">Data</span><span class="p">[</span><span class="s">&#34;foo&#34;</span><span class="p">]</span><span class="p">.</span><span class="p">(</span><span class="kt">string</span><span class="p">)</span><span class="p">;</span> <span class="nx">ok</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="nx">secret</span> <span class="o">!=</span> <span class="s">&#34;bar&#34;</span> <span class="p">{</span>
+            <span class="nx">t</span><span class="p">.</span><span class="nf">Fatalf</span><span class="p">(</span><span class="s">&#34;Wrong secret returned: %s&#34;</span><span class="p">,</span> <span class="nx">secret</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="s">&#34;Could not get secret&#34;</span><span class="p">)</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>Now let's check it works</p>
+</div><p>Now let's check it is working</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -1156,7 +1156,7 @@ if (!doNotTrack) {
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash">$ go <span class="nb">test</span> -cover ./...
-ok  	blog.thomas.maurice.fr/vault-test	3.625s	coverage: 25.0% of statements
+ok      blog.thomas.maurice.fr/vault-test    3.625s    coverage: 25.0% of statements
 </code></pre></td></tr></table>
 </div>
 </div><p>Woo! It worked. There is some things to unpack here so let's have a look.</p>
@@ -1167,10 +1167,10 @@ ok  	blog.thomas.maurice.fr/vault-test	3.625s	coverage: 25.0% of statements
 </ul>
 <p>Then is an interesting part. In order to talk to Vault we need a client, and since Vault starts on a random port during the tests, generates its own CA, certificates and so on to listen on HTTPS, we need to retrieve it, which is achieved by just picking a client to one of the nodes of the cluster (yes, it starts in cluster mode!).</p>
 <ul>
-<li>Then we actually use the client to test that out method actually works. Isn't it amazing ?</li>
+<li>Then we actually use the client to test that our method actually works. Isn't it amazing ?</li>
 </ul>
 <h2 id="pushing-it-further">Pushing it further</h2>
-<p>Now, another issue I've had is that I was working with <a href="https://www.vaultproject.io/api/auth/approle/index.html">approles</a>, and I pulled my hair for a while to figure out how to make it work in my tests. It turns out that you have to explicitly tell Vault to load the plugin in order for it to work.</p>
+<p>Now, another issue I've had is that I was working with <a href="https://www.vaultproject.io/api/auth/approle/index.html">approles</a>, and I pulled my hair for a while trying to figure out how to make it work in my tests. It turns out that you have to explicitly tell Vault to load the plugin in order for it to work.</p>
 <p>I am too lazy to patch the <code>main.go</code> to actually <em>use</em> an approle, but I will demonstrate how to enable it into your vault test server, so you can use it. Note that the same pattern applies to pretty much every authentication method you may want to use.</p>
 <p>You will do the following (note the additional <code>CredentialBackends</code> init option):</p>
 <div class="highlight"><div class="chroma">
@@ -1223,50 +1223,50 @@ ok  	blog.thomas.maurice.fr/vault-test	3.625s	coverage: 25.0% of statements
 <pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
-	<span class="s">&#34;testing&#34;</span>
+    <span class="s">&#34;testing&#34;</span>
 
-	<span class="s">&#34;github.com/hashicorp/vault/api&#34;</span>
-	<span class="s">&#34;github.com/hashicorp/vault/builtin/credential/approle&#34;</span>
-	<span class="nx">vaulthttp</span> <span class="s">&#34;github.com/hashicorp/vault/http&#34;</span>
-	<span class="s">&#34;github.com/hashicorp/vault/sdk/logical&#34;</span>
-	<span class="s">&#34;github.com/hashicorp/vault/vault&#34;</span>
+    <span class="s">&#34;github.com/hashicorp/vault/api&#34;</span>
+    <span class="s">&#34;github.com/hashicorp/vault/builtin/credential/approle&#34;</span>
+    <span class="nx">vaulthttp</span> <span class="s">&#34;github.com/hashicorp/vault/http&#34;</span>
+    <span class="s">&#34;github.com/hashicorp/vault/sdk/logical&#34;</span>
+    <span class="s">&#34;github.com/hashicorp/vault/vault&#34;</span>
 <span class="p">)</span>
 
 <span class="kd">const</span> <span class="p">(</span>
-	<span class="nx">testVaultToken</span> <span class="p">=</span> <span class="s">&#34;token&#34;</span> <span class="c1">// This is the root token
+    <span class="nx">testVaultToken</span> <span class="p">=</span> <span class="s">&#34;token&#34;</span> <span class="c1">// This is the root token
 </span><span class="c1"></span><span class="p">)</span>
 
 <span class="kd">func</span> <span class="nf">TestPutSecret</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">cluster</span> <span class="o">:=</span> <span class="nx">vault</span><span class="p">.</span><span class="nf">NewTestCluster</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">vault</span><span class="p">.</span><span class="nx">CoreConfig</span><span class="p">{</span>
-		<span class="nx">DevToken</span><span class="p">:</span> <span class="nx">testVaultToken</span><span class="p">,</span>
-		<span class="nx">CredentialBackends</span><span class="p">:</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="nx">logical</span><span class="p">.</span><span class="nx">Factory</span><span class="p">{</span>
-			<span class="s">&#34;approle&#34;</span><span class="p">:</span> <span class="nx">approle</span><span class="p">.</span><span class="nx">Factory</span><span class="p">,</span>
-		<span class="p">}</span><span class="p">,</span>
-	<span class="p">}</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">vault</span><span class="p">.</span><span class="nx">TestClusterOptions</span><span class="p">{</span>
-		<span class="nx">HandlerFunc</span><span class="p">:</span> <span class="nx">vaulthttp</span><span class="p">.</span><span class="nx">Handler</span><span class="p">,</span>
-	<span class="p">}</span><span class="p">)</span>
-	<span class="nx">cluster</span><span class="p">.</span><span class="nf">Start</span><span class="p">(</span><span class="p">)</span>
-	<span class="k">defer</span> <span class="nx">cluster</span><span class="p">.</span><span class="nf">Cleanup</span><span class="p">(</span><span class="p">)</span>
+    <span class="nx">cluster</span> <span class="o">:=</span> <span class="nx">vault</span><span class="p">.</span><span class="nf">NewTestCluster</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">vault</span><span class="p">.</span><span class="nx">CoreConfig</span><span class="p">{</span>
+        <span class="nx">DevToken</span><span class="p">:</span> <span class="nx">testVaultToken</span><span class="p">,</span>
+        <span class="nx">CredentialBackends</span><span class="p">:</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="nx">logical</span><span class="p">.</span><span class="nx">Factory</span><span class="p">{</span>
+            <span class="s">&#34;approle&#34;</span><span class="p">:</span> <span class="nx">approle</span><span class="p">.</span><span class="nx">Factory</span><span class="p">,</span>
+        <span class="p">}</span><span class="p">,</span>
+    <span class="p">}</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">vault</span><span class="p">.</span><span class="nx">TestClusterOptions</span><span class="p">{</span>
+        <span class="nx">HandlerFunc</span><span class="p">:</span> <span class="nx">vaulthttp</span><span class="p">.</span><span class="nx">Handler</span><span class="p">,</span>
+    <span class="p">}</span><span class="p">)</span>
+    <span class="nx">cluster</span><span class="p">.</span><span class="nf">Start</span><span class="p">(</span><span class="p">)</span>
+    <span class="k">defer</span> <span class="nx">cluster</span><span class="p">.</span><span class="nf">Cleanup</span><span class="p">(</span><span class="p">)</span>
 
-	<span class="nx">core</span> <span class="o">:=</span> <span class="nx">cluster</span><span class="p">.</span><span class="nx">Cores</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">.</span><span class="nx">Core</span>
-	<span class="nx">vault</span><span class="p">.</span><span class="nf">TestWaitActive</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="nx">core</span><span class="p">)</span>
-	<span class="nx">client</span> <span class="o">:=</span> <span class="nx">cluster</span><span class="p">.</span><span class="nx">Cores</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">.</span><span class="nx">Client</span>
+    <span class="nx">core</span> <span class="o">:=</span> <span class="nx">cluster</span><span class="p">.</span><span class="nx">Cores</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">.</span><span class="nx">Core</span>
+    <span class="nx">vault</span><span class="p">.</span><span class="nf">TestWaitActive</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="nx">core</span><span class="p">)</span>
+    <span class="nx">client</span> <span class="o">:=</span> <span class="nx">cluster</span><span class="p">.</span><span class="nx">Cores</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">.</span><span class="nx">Client</span>
 
-	<span class="c1">// Enable approle
-</span><span class="c1"></span>	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Sys</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nf">EnableAuthWithOptions</span><span class="p">(</span><span class="s">&#34;approle&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">api</span><span class="p">.</span><span class="nx">EnableAuthOptions</span><span class="p">{</span>
-		<span class="nx">Type</span><span class="p">:</span> <span class="s">&#34;approle&#34;</span><span class="p">,</span>
-	<span class="p">}</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-	<span class="p">}</span>
+    <span class="c1">// Enable approle
+</span><span class="c1"></span>    <span class="nx">err</span> <span class="o">:=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Sys</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nf">EnableAuthWithOptions</span><span class="p">(</span><span class="s">&#34;approle&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">api</span><span class="p">.</span><span class="nx">EnableAuthOptions</span><span class="p">{</span>
+        <span class="nx">Type</span><span class="p">:</span> <span class="s">&#34;approle&#34;</span><span class="p">,</span>
+    <span class="p">}</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+    <span class="p">}</span>
 
-	<span class="c1">// ... the rest of your unit test
+    <span class="c1">// ... the rest of your unit test
 </span><span class="c1"></span><span class="p">}</span>
 
 </code></pre></td></tr></table>
 </div>
 </div><p>In case you are wondering, the <code>core</code> object above refers to a Vault node of the test cluster.</p>
-<p>This way you can freely create an approle, and some policies why not, to use Vault as you would use it in prod:</p>
+<p>This way you can freely create an approle, and some policies (why not ?!), to use Vault as you would use it in prod:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -1323,45 +1323,45 @@ ok  	blog.thomas.maurice.fr/vault-test	3.625s	coverage: 25.0% of statements
     <span class="c1">// ... Vault initialization as above
 </span><span class="c1"></span>
     <span class="c1">// Create an approle
-</span><span class="c1"></span>	<span class="nx">_</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Logical</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nf">Write</span><span class="p">(</span><span class="s">&#34;auth/approle/role/unittest&#34;</span><span class="p">,</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{</span><span class="p">}</span><span class="p">{</span>
-		<span class="s">&#34;policies&#34;</span><span class="p">:</span> <span class="p">[</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;unittest&#34;</span><span class="p">}</span><span class="p">,</span>
-	<span class="p">}</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span><span class="c1"></span>    <span class="nx">_</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Logical</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nf">Write</span><span class="p">(</span><span class="s">&#34;auth/approle/role/unittest&#34;</span><span class="p">,</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{</span><span class="p">}</span><span class="p">{</span>
+        <span class="s">&#34;policies&#34;</span><span class="p">:</span> <span class="p">[</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;unittest&#34;</span><span class="p">}</span><span class="p">,</span>
+    <span class="p">}</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
     <span class="p">}</span>
 
     <span class="c1">// Gets the role ID, that is basically the &#39;username&#39; used to log into vault
-</span><span class="c1"></span>	<span class="nx">res</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Logical</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nf">Read</span><span class="p">(</span><span class="s">&#34;auth/approle/role/unittest/role-id&#34;</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span><span class="c1"></span>    <span class="nx">res</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Logical</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nf">Read</span><span class="p">(</span><span class="s">&#34;auth/approle/role/unittest/role-id&#34;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
     <span class="p">}</span>
     
     <span class="c1">// Keep the roleID for later use
-</span><span class="c1"></span>	<span class="nx">roleID</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">Data</span><span class="p">[</span><span class="s">&#34;role_id&#34;</span><span class="p">]</span><span class="p">.</span><span class="p">(</span><span class="kt">string</span><span class="p">)</span>
-	<span class="k">if</span> <span class="p">!</span><span class="nx">ok</span> <span class="p">{</span>
-		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="s">&#34;Could not read the approle&#34;</span><span class="p">)</span>
-	<span class="p">}</span>
+</span><span class="c1"></span>    <span class="nx">roleID</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">Data</span><span class="p">[</span><span class="s">&#34;role_id&#34;</span><span class="p">]</span><span class="p">.</span><span class="p">(</span><span class="kt">string</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">!</span><span class="nx">ok</span> <span class="p">{</span>
+        <span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="s">&#34;Could not read the approle&#34;</span><span class="p">)</span>
+    <span class="p">}</span>
     
     <span class="c1">// Create a secretID that is basically the password for the approle
 </span><span class="c1"></span>    <span class="nx">res</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Logical</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nf">Write</span><span class="p">(</span><span class="s">&#34;auth/approle/role/unittest/secret-id&#34;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
     <span class="p">}</span>
     <span class="c1">// Use thre secretID later
-</span><span class="c1"></span>	<span class="nx">secretID</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">Data</span><span class="p">[</span><span class="s">&#34;secret_id&#34;</span><span class="p">]</span><span class="p">.</span><span class="p">(</span><span class="kt">string</span><span class="p">)</span>
-	<span class="k">if</span> <span class="p">!</span><span class="nx">ok</span> <span class="p">{</span>
-		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="s">&#34;Could not generate the secret id&#34;</span><span class="p">)</span>
+</span><span class="c1"></span>    <span class="nx">secretID</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">Data</span><span class="p">[</span><span class="s">&#34;secret_id&#34;</span><span class="p">]</span><span class="p">.</span><span class="p">(</span><span class="kt">string</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">!</span><span class="nx">ok</span> <span class="p">{</span>
+        <span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="s">&#34;Could not generate the secret id&#34;</span><span class="p">)</span>
     <span class="p">}</span>
     
     <span class="c1">// Create a broad policy to allow the approle to do whatever
-</span><span class="c1"></span>	<span class="nx">err</span> <span class="p">=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Sys</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nf">PutPolicy</span><span class="p">(</span><span class="s">&#34;unittest&#34;</span><span class="p">,</span> <span class="s">`</span><span class="s">
-</span><span class="s">	path &#34;*&#34; </span><span class="s">{</span><span class="s">
-</span><span class="s">		capabilities = [&#34;create&#34;, &#34;read&#34;, &#34;list&#34;, &#34;update&#34;, delete]
-</span><span class="s">	}
-</span><span class="s">	</span><span class="s">`</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-	<span class="p">}</span>
+</span><span class="c1"></span>    <span class="nx">err</span> <span class="p">=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Sys</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nf">PutPolicy</span><span class="p">(</span><span class="s">&#34;unittest&#34;</span><span class="p">,</span> <span class="s">`</span><span class="s">
+</span><span class="s">    path &#34;*&#34; </span><span class="s">{</span><span class="s">
+</span><span class="s">        capabilities = [&#34;create&#34;, &#34;read&#34;, &#34;list&#34;, &#34;update&#34;, delete]
+</span><span class="s">    }
+</span><span class="s">    </span><span class="s">`</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
@@ -1374,7 +1374,7 @@ ok  	blog.thomas.maurice.fr/vault-test	3.625s	coverage: 25.0% of statements
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash">$ go <span class="nb">test</span> -cover ./...
-ok  	blog.thomas.maurice.fr/vault-test	3.625s	coverage: 25.0% of statements
+ok      blog.thomas.maurice.fr/vault-test    3.625s    coverage: 25.0% of statements
 </code></pre></td></tr></table>
 </div>
 </div><p>Specifically the <code>3.625s</code> part of it. Right now you might just be shrieking in rage and disappointment like</p>
@@ -1479,84 +1479,84 @@ ok  	blog.thomas.maurice.fr/vault-test	3.625s	coverage: 25.0% of statements
 <pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
-	<span class="s">&#34;testing&#34;</span>
+    <span class="s">&#34;testing&#34;</span>
 
-	<span class="s">&#34;github.com/hashicorp/vault/api&#34;</span>
-	<span class="s">&#34;github.com/hashicorp/vault/builtin/credential/approle&#34;</span>
-	<span class="nx">vaulthttp</span> <span class="s">&#34;github.com/hashicorp/vault/http&#34;</span>
-	<span class="s">&#34;github.com/hashicorp/vault/sdk/logical&#34;</span>
-	<span class="s">&#34;github.com/hashicorp/vault/vault&#34;</span>
+    <span class="s">&#34;github.com/hashicorp/vault/api&#34;</span>
+    <span class="s">&#34;github.com/hashicorp/vault/builtin/credential/approle&#34;</span>
+    <span class="nx">vaulthttp</span> <span class="s">&#34;github.com/hashicorp/vault/http&#34;</span>
+    <span class="s">&#34;github.com/hashicorp/vault/sdk/logical&#34;</span>
+    <span class="s">&#34;github.com/hashicorp/vault/vault&#34;</span>
 <span class="p">)</span>
 
 <span class="kd">const</span> <span class="p">(</span>
-	<span class="c1">// TestVaultToken is the Vault token used for tests
-</span><span class="c1"></span>	<span class="nx">testVaultToken</span> <span class="p">=</span> <span class="s">&#34;unittesttoken&#34;</span>
+    <span class="c1">// TestVaultToken is the Vault token used for tests
+</span><span class="c1"></span>    <span class="nx">testVaultToken</span> <span class="p">=</span> <span class="s">&#34;unittesttoken&#34;</span>
 <span class="p">)</span>
 
 <span class="kd">type</span> <span class="nx">vaultTest</span> <span class="kd">struct</span> <span class="p">{</span>
     <span class="nx">Cluster</span>       <span class="o">*</span><span class="nx">vault</span><span class="p">.</span><span class="nx">TestCluster</span>
-	<span class="nx">Client</span>        <span class="o">*</span><span class="nx">api</span><span class="p">.</span><span class="nx">Client</span>
-	<span class="nx">AppRoleID</span>     <span class="kt">string</span>
-	<span class="nx">AppRoleSecret</span> <span class="kt">string</span>    
+    <span class="nx">Client</span>        <span class="o">*</span><span class="nx">api</span><span class="p">.</span><span class="nx">Client</span>
+    <span class="nx">AppRoleID</span>     <span class="kt">string</span>
+    <span class="nx">AppRoleSecret</span> <span class="kt">string</span>    
 <span class="p">}</span>
 
 <span class="c1">// creates the test server
 </span><span class="c1"></span><span class="kd">func</span> <span class="nf">GetTestVaultServer</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="nx">vaultTest</span> <span class="p">{</span>
     <span class="nx">t</span><span class="p">.</span><span class="nf">Helper</span><span class="p">(</span><span class="p">)</span>
 
-	<span class="nx">cluster</span> <span class="o">:=</span> <span class="nx">vault</span><span class="p">.</span><span class="nf">NewTestCluster</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">vault</span><span class="p">.</span><span class="nx">CoreConfig</span><span class="p">{</span>
-		<span class="nx">DevToken</span><span class="p">:</span> <span class="nx">testVaultToken</span><span class="p">,</span>
-		<span class="nx">CredentialBackends</span><span class="p">:</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="nx">logical</span><span class="p">.</span><span class="nx">Factory</span><span class="p">{</span>
-			<span class="s">&#34;approle&#34;</span><span class="p">:</span> <span class="nx">approle</span><span class="p">.</span><span class="nx">Factory</span><span class="p">,</span>
-		<span class="p">}</span><span class="p">,</span>
-	<span class="p">}</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">vault</span><span class="p">.</span><span class="nx">TestClusterOptions</span><span class="p">{</span>
-		<span class="nx">HandlerFunc</span><span class="p">:</span> <span class="nx">vaulthttp</span><span class="p">.</span><span class="nx">Handler</span><span class="p">,</span>
-	<span class="p">}</span><span class="p">)</span>
-	<span class="nx">cluster</span><span class="p">.</span><span class="nf">Start</span><span class="p">(</span><span class="p">)</span>
+    <span class="nx">cluster</span> <span class="o">:=</span> <span class="nx">vault</span><span class="p">.</span><span class="nf">NewTestCluster</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">vault</span><span class="p">.</span><span class="nx">CoreConfig</span><span class="p">{</span>
+        <span class="nx">DevToken</span><span class="p">:</span> <span class="nx">testVaultToken</span><span class="p">,</span>
+        <span class="nx">CredentialBackends</span><span class="p">:</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="nx">logical</span><span class="p">.</span><span class="nx">Factory</span><span class="p">{</span>
+            <span class="s">&#34;approle&#34;</span><span class="p">:</span> <span class="nx">approle</span><span class="p">.</span><span class="nx">Factory</span><span class="p">,</span>
+        <span class="p">}</span><span class="p">,</span>
+    <span class="p">}</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">vault</span><span class="p">.</span><span class="nx">TestClusterOptions</span><span class="p">{</span>
+        <span class="nx">HandlerFunc</span><span class="p">:</span> <span class="nx">vaulthttp</span><span class="p">.</span><span class="nx">Handler</span><span class="p">,</span>
+    <span class="p">}</span><span class="p">)</span>
+    <span class="nx">cluster</span><span class="p">.</span><span class="nf">Start</span><span class="p">(</span><span class="p">)</span>
 
-	<span class="nx">core</span> <span class="o">:=</span> <span class="nx">cluster</span><span class="p">.</span><span class="nx">Cores</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">.</span><span class="nx">Core</span>
-	<span class="nx">vault</span><span class="p">.</span><span class="nf">TestWaitActive</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="nx">core</span><span class="p">)</span>
+    <span class="nx">core</span> <span class="o">:=</span> <span class="nx">cluster</span><span class="p">.</span><span class="nx">Cores</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">.</span><span class="nx">Core</span>
+    <span class="nx">vault</span><span class="p">.</span><span class="nf">TestWaitActive</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="nx">core</span><span class="p">)</span>
     <span class="nx">client</span> <span class="o">:=</span> <span class="nx">cluster</span><span class="p">.</span><span class="nx">Cores</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">.</span><span class="nx">Client</span>
     
     <span class="c1">// Create an approle
-</span><span class="c1"></span>	<span class="nx">_</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Logical</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nf">Write</span><span class="p">(</span><span class="s">&#34;auth/approle/role/unittest&#34;</span><span class="p">,</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{</span><span class="p">}</span><span class="p">{</span>
-		<span class="s">&#34;policies&#34;</span><span class="p">:</span> <span class="p">[</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;unittest&#34;</span><span class="p">}</span><span class="p">,</span>
-	<span class="p">}</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span><span class="c1"></span>    <span class="nx">_</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Logical</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nf">Write</span><span class="p">(</span><span class="s">&#34;auth/approle/role/unittest&#34;</span><span class="p">,</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{</span><span class="p">}</span><span class="p">{</span>
+        <span class="s">&#34;policies&#34;</span><span class="p">:</span> <span class="p">[</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;unittest&#34;</span><span class="p">}</span><span class="p">,</span>
+    <span class="p">}</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
     <span class="p">}</span>
 
     <span class="c1">// Gets the role ID, that is basically the &#39;username&#39; used to log into vault
-</span><span class="c1"></span>	<span class="nx">res</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Logical</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nf">Read</span><span class="p">(</span><span class="s">&#34;auth/approle/role/unittest/role-id&#34;</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span><span class="c1"></span>    <span class="nx">res</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Logical</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nf">Read</span><span class="p">(</span><span class="s">&#34;auth/approle/role/unittest/role-id&#34;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
     <span class="p">}</span>
     
     <span class="c1">// Keep the roleID for later use
-</span><span class="c1"></span>	<span class="nx">roleID</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">Data</span><span class="p">[</span><span class="s">&#34;role_id&#34;</span><span class="p">]</span><span class="p">.</span><span class="p">(</span><span class="kt">string</span><span class="p">)</span>
-	<span class="k">if</span> <span class="p">!</span><span class="nx">ok</span> <span class="p">{</span>
-		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="s">&#34;Could not read the approle&#34;</span><span class="p">)</span>
-	<span class="p">}</span>
+</span><span class="c1"></span>    <span class="nx">roleID</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">Data</span><span class="p">[</span><span class="s">&#34;role_id&#34;</span><span class="p">]</span><span class="p">.</span><span class="p">(</span><span class="kt">string</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">!</span><span class="nx">ok</span> <span class="p">{</span>
+        <span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="s">&#34;Could not read the approle&#34;</span><span class="p">)</span>
+    <span class="p">}</span>
     
     <span class="c1">// Create a secretID that is basically the password for the approle
 </span><span class="c1"></span>    <span class="nx">res</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Logical</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nf">Write</span><span class="p">(</span><span class="s">&#34;auth/approle/role/unittest/secret-id&#34;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
     <span class="p">}</span>
     <span class="c1">// Use thre secretID later
-</span><span class="c1"></span>	<span class="nx">secretID</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">Data</span><span class="p">[</span><span class="s">&#34;secret_id&#34;</span><span class="p">]</span><span class="p">.</span><span class="p">(</span><span class="kt">string</span><span class="p">)</span>
-	<span class="k">if</span> <span class="p">!</span><span class="nx">ok</span> <span class="p">{</span>
-		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="s">&#34;Could not generate the secret id&#34;</span><span class="p">)</span>
+</span><span class="c1"></span>    <span class="nx">secretID</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">Data</span><span class="p">[</span><span class="s">&#34;secret_id&#34;</span><span class="p">]</span><span class="p">.</span><span class="p">(</span><span class="kt">string</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">!</span><span class="nx">ok</span> <span class="p">{</span>
+        <span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="s">&#34;Could not generate the secret id&#34;</span><span class="p">)</span>
     <span class="p">}</span>
     
     <span class="c1">// Create a broad policy to allow the approle to do whatever
-</span><span class="c1"></span>	<span class="nx">err</span> <span class="p">=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Sys</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nf">PutPolicy</span><span class="p">(</span><span class="s">&#34;unittest&#34;</span><span class="p">,</span> <span class="s">`</span><span class="s">
+</span><span class="c1"></span>    <span class="nx">err</span> <span class="p">=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Sys</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nf">PutPolicy</span><span class="p">(</span><span class="s">&#34;unittest&#34;</span><span class="p">,</span> <span class="s">`</span><span class="s">
 </span><span class="s">        path &#34;*&#34; </span><span class="s">{</span><span class="s">
 </span><span class="s">            capabilities = [&#34;create&#34;, &#34;read&#34;, &#34;list&#34;, &#34;update&#34;, delete]
 </span><span class="s">        }
 </span><span class="s">    </span><span class="s">`</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
     <span class="p">}</span>
     
     <span class="k">return</span> <span class="nx">vaultTest</span><span class="p">{</span>
