@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Unit Testing With Vault in Go – /var/log/tmaurice</title>
+    <title>Authenticate your services with Vault and JWTs – /var/log/tmaurice</title>
     
 
 
@@ -682,19 +682,19 @@
 
     <meta name="description" content="" />
 <meta name="keywords" content="">
-<meta name="created" content="2020-01-11T13:52:19&#43;0000">
-<meta name="modified" content="2020-01-11T13:52:19&#43;0000">
+<meta name="created" content="2020-01-17T18:56:22&#43;0000">
+<meta name="modified" content="2020-01-17T18:56:22&#43;0000">
 
 
 <meta property="og:site_name" content="/var/log/tmaurice">
-<meta property="og:title" content="Unit Testing With Vault in Go">
-<meta property="og:url" content="http://blog.thomas.maurice.fr/posts/unit-testing-with-vault/">
+<meta property="og:title" content="Authenticate your services with Vault and JWTs">
+<meta property="og:url" content="http://blog.thomas.maurice.fr/posts/vault-jwt-authentication/">
 <meta property="og:type" content="article">
 
 <meta name="generator" content="Hugo 0.62.2" />
 <meta name="msapplication-TileColor" content="#ffffff">
 <meta name="theme-color" content="#ffffff">
-<link rel="canonical" href="http://blog.thomas.maurice.fr/posts/unit-testing-with-vault/">
+<link rel="canonical" href="http://blog.thomas.maurice.fr/posts/vault-jwt-authentication/">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="shortcut icon" href="/favicon.png" type="image/x-icon">
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
@@ -704,12 +704,12 @@
   {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "headline": "Unit Testing With Vault in Go",
-    "datePublished": "2020-01-11T13:52:19Z",
-    "dateModified": "2020-01-11T13:52:19Z",
-    "url" : "http://blog.thomas.maurice.fr/posts/unit-testing-with-vault/",
-    "description": "Recently I've been dealing with Hashicorp's Vault a lot, and I've had to write a bunch of code to interface with it. This post is going to be about my least favourite …",
-    "keywords": ["golang","test","vault","security"],
+    "headline": "Authenticate your services with Vault and JWTs",
+    "datePublished": "2020-01-17T18:56:22Z",
+    "dateModified": "2020-01-17T18:56:22Z",
+    "url" : "http://blog.thomas.maurice.fr/posts/vault-jwt-authentication/",
+    "description": "Sometimes, you may want your services to be able to talk to each other in an authenticated manner, and even perform some authorization. This is not easy to do and you …",
+    "keywords": ["golang","vault","security"],
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "http://blog.thomas.maurice.fr"
@@ -925,7 +925,7 @@ if (!doNotTrack) {
   
   <li  class="is-active" >
     
-      <span>Unit Testing With Vault in Go</span>
+      <span>Authenticate your services with Vault and JWTs</span>
     
   </li>
   
@@ -934,11 +934,11 @@ if (!doNotTrack) {
 </nav>
   
   <div class="single">
-    <h2 class="single__title">Unit Testing With Vault in Go</h2>
+    <h2 class="single__title">Authenticate your services with Vault and JWTs</h2>
     <div class="single__meta">
       
 <div class="single__infos">
-  <span class="single__info" title="Written At">📅&nbsp;Jan 11, 2020 </span>  &middot; <span class="single__info" title="Reading Time"> ☕ 9 min read </span>
+  <span class="single__info" title="Written At">📅&nbsp;Jan 17, 2020 </span>  &middot; <span class="single__info" title="Reading Time"> ☕ 7 min read </span>
   <span class="single__info">
     
   </span>
@@ -952,15 +952,6 @@ if (!doNotTrack) {
   <li>
     <a href="/tags/golang" class="single__tag" title="golang">
       #golang
-    </a>
-  </li>
-    
-
-  
-  
-  <li>
-    <a href="/tags/test" class="single__tag" title="test">
-      #test
     </a>
   </li>
     
@@ -987,401 +978,186 @@ if (!doNotTrack) {
     </div>    
     <article class="single__contents">
       
-      <p>Recently I've been dealing with <a href="https://vaultproject.io">Hashicorp's Vault</a> a lot, and I've had to write a bunch of code to interface with it. This post is going to be about my least favourite part of writing code: unit testing what I wrote (as everyone knows, it works on my machine, right ?).</p>
-<h2 id="assumptions">Assumptions</h2>
-<p>This article assumes that you are already familiar with what <a href="https://vaultproject.io">Vault</a> is and the very basics of how to use it (get/put secrets, login and such). It also assumes that you have some knowledge of the Go programming language.</p>
-<h2 id="what-we-want">What we want</h2>
-<p>Now, we have several ways of unit testing things, and usually when you talk to external systems the easiest way of doing it is by mocking the system, and writing mocks that will give you a deterministic answer to a given input. That's great and all but in my use case I wanted to be able to talk to a real Vault server, to be in more realistic testing conditions.</p>
-<p>Fortunately, people at <a href="https://hashicorp.com">Hashicorp</a> do things well, and they provide us with tooling that basically enables us to spin up a real (real!!) vault server for us to fuck around and perform all the testing we want, and I'm going to explain you how.</p>
-<h2 id="setting-up-the-stage">Setting up the stage</h2>
-<p>We will assume that we want to unit test a dummy function that will write a secret to Vault, and we want to make sure that the secret is written properly. Let's write a simple <code>main.go</code> file that contains our <code>main</code> function, as well as a <code>putSecret</code> function that will store our secret into Vault.</p>
+      <p>Sometimes, you may want your services to be able to talk to each other in an authenticated manner, and even perform some authorization. This is not easy to do and you might have scratched your head a bunch about how to do it. In this post I'm going to show you how to do something like this using <a href="https://vaultproject.io">hashicorp's Vault</a>. At the end of this post you'll be able to issue and validate authorization tokens to make sure your services communicate in an authenticated and secure manner.</p>
+<h2 id="what-are-jwts-">What are JWTs ?</h2>
+<p>JWT, or JSON Web Tokens, are tokens that are signed by a central authority that encapsulate authorization information. This website <a href="https://jwt.io/#debugger">can help</a> debugging your tokens.</p>
+<p>A JWT is comprised of 3 parts</p>
+<ul>
+<li>Header</li>
+<li>Payload</li>
+<li>Signature</li>
+</ul>
+<p>The header gives you a bunch of infos about the algorithm used, the <code>key id</code> used to sign the token and so on. The payload is the actual encoded auth data that you care about and the signature is used to validate the token.</p>
+<h2 id="setup-vault">Setup Vault</h2>
+<p>We are going to demonstrate that with a dev vault, so first start a vault server in a separate terminal.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">package</span> <span class="nx">main</span>
-
-<span class="kn">import</span> <span class="p">(</span>
-    <span class="s">&#34;fmt&#34;</span>
-
-    <span class="s">&#34;github.com/hashicorp/vault/api&#34;</span>
-    <span class="s">&#34;github.com/sirupsen/logrus&#34;</span>
-<span class="p">)</span>
-
-<span class="c1">// Write the secret
-</span><span class="c1"></span><span class="kd">func</span> <span class="nf">putSecret</span><span class="p">(</span><span class="nx">client</span> <span class="o">*</span><span class="nx">api</span><span class="p">.</span><span class="nx">Client</span><span class="p">,</span> <span class="nx">secret</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{</span><span class="p">}</span><span class="p">,</span> <span class="nx">secretPath</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
-    <span class="nx">_</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Logical</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nf">Write</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;secret/data/%s&#34;</span><span class="p">,</span> <span class="nx">secretPath</span><span class="p">)</span><span class="p">,</span> <span class="nx">secret</span><span class="p">)</span>
-    <span class="k">return</span> <span class="nx">err</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">main</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">client</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">api</span><span class="p">.</span><span class="nf">NewClient</span><span class="p">(</span><span class="nx">api</span><span class="p">.</span><span class="nf">DefaultConfig</span><span class="p">(</span><span class="p">)</span><span class="p">)</span>
-    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-        <span class="nx">logrus</span><span class="p">.</span><span class="nf">WithError</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="s">&#34;Could not initialise vault client&#34;</span><span class="p">)</span>
-    <span class="p">}</span>
-    <span class="nx">err</span> <span class="p">=</span> <span class="nf">putSecret</span><span class="p">(</span><span class="nx">client</span><span class="p">,</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{</span><span class="p">}</span><span class="p">{</span><span class="s">&#34;foo&#34;</span><span class="p">:</span> <span class="s">&#34;bar&#34;</span><span class="p">}</span><span class="p">,</span> <span class="s">&#34;baz&#34;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-        <span class="nx">logrus</span><span class="p">.</span><span class="nf">WithError</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="s">&#34;Could not write secret&#34;</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ vault server -dev-root-token-id<span class="o">=</span>token -dev
 </code></pre></td></tr></table>
 </div>
-</div><p>This is a fairly simple <code>main.go</code> that will just write a secret to the given path. Now how can we be sure it actually does the job ? We could just compile the program then run it against a local vault, but that just sounds tedious and annoying doesn't it ? Instead how about we use the <code>NewTestCluster</code> function provided by the <code>github.com/hashicorp/vault/vault</code> package ?</p>
-<h2 id="now-lets-write-some-tests">Now let's write some tests</h2>
-<p>You will need a <code>main_test.go</code> file that will look just like that:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">package</span> <span class="nx">main</span>
-
-<span class="kn">import</span> <span class="p">(</span>
-    <span class="s">&#34;testing&#34;</span>
-
-    <span class="nx">vaulthttp</span> <span class="s">&#34;github.com/hashicorp/vault/http&#34;</span>
-    <span class="s">&#34;github.com/hashicorp/vault/vault&#34;</span>
-<span class="p">)</span>
-
-<span class="kd">const</span> <span class="p">(</span>
-    <span class="nx">testVaultToken</span> <span class="p">=</span> <span class="s">&#34;token&#34;</span> <span class="c1">// This is the root token
-</span><span class="c1"></span><span class="p">)</span>
-
-<span class="kd">func</span> <span class="nf">TestPutSecret</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">cluster</span> <span class="o">:=</span> <span class="nx">vault</span><span class="p">.</span><span class="nf">NewTestCluster</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">vault</span><span class="p">.</span><span class="nx">CoreConfig</span><span class="p">{</span>
-        <span class="nx">DevToken</span><span class="p">:</span> <span class="nx">testVaultToken</span><span class="p">,</span>
-    <span class="p">}</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">vault</span><span class="p">.</span><span class="nx">TestClusterOptions</span><span class="p">{</span>
-        <span class="nx">HandlerFunc</span><span class="p">:</span> <span class="nx">vaulthttp</span><span class="p">.</span><span class="nx">Handler</span><span class="p">,</span>
-    <span class="p">}</span><span class="p">)</span>
-    <span class="nx">cluster</span><span class="p">.</span><span class="nf">Start</span><span class="p">(</span><span class="p">)</span>
-    <span class="k">defer</span> <span class="nx">cluster</span><span class="p">.</span><span class="nf">Cleanup</span><span class="p">(</span><span class="p">)</span>
-
-    <span class="nx">core</span> <span class="o">:=</span> <span class="nx">cluster</span><span class="p">.</span><span class="nx">Cores</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">.</span><span class="nx">Core</span>
-    <span class="nx">vault</span><span class="p">.</span><span class="nf">TestWaitActive</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="nx">core</span><span class="p">)</span>
-    <span class="nx">client</span> <span class="o">:=</span> <span class="nx">cluster</span><span class="p">.</span><span class="nx">Cores</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">.</span><span class="nx">Client</span>
-
-    <span class="nx">err</span> <span class="o">:=</span> <span class="nf">putSecret</span><span class="p">(</span><span class="nx">client</span><span class="p">,</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{</span><span class="p">}</span><span class="p">{</span><span class="s">&#34;foo&#34;</span><span class="p">:</span> <span class="s">&#34;bar&#34;</span><span class="p">}</span><span class="p">,</span> <span class="s">&#34;secret&#34;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-        <span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-    <span class="p">}</span>
-
-    <span class="nx">data</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Logical</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nf">Read</span><span class="p">(</span><span class="s">&#34;secret/data/secret&#34;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-        <span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-    <span class="p">}</span>
-
-    <span class="k">if</span> <span class="nx">secret</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">Data</span><span class="p">[</span><span class="s">&#34;foo&#34;</span><span class="p">]</span><span class="p">.</span><span class="p">(</span><span class="kt">string</span><span class="p">)</span><span class="p">;</span> <span class="nx">ok</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="nx">secret</span> <span class="o">!=</span> <span class="s">&#34;bar&#34;</span> <span class="p">{</span>
-            <span class="nx">t</span><span class="p">.</span><span class="nf">Fatalf</span><span class="p">(</span><span class="s">&#34;Wrong secret returned: %s&#34;</span><span class="p">,</span> <span class="nx">secret</span><span class="p">)</span>
-        <span class="p">}</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="s">&#34;Could not get secret&#34;</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>Now let's check it is working</p>
+</div><p>In another terminal</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ go <span class="nb">test</span> -cover ./...
-ok      blog.thomas.maurice.fr/vault-test    3.625s    coverage: 25.0% of statements
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">export</span> <span class="nv">VAULT_ADDR</span><span class="o">=</span>http://localhost:8200
+<span class="nb">export</span> <span class="nv">VAULT_TOKEN</span><span class="o">=</span>token
 </code></pre></td></tr></table>
 </div>
-</div><p>Woo! It worked. There is some things to unpack here so let's have a look.</p>
-<ul>
-<li>First we import all the needed packages</li>
-<li>Then we start a dev <code>cluster</code> with a custom <code>devToken</code> for the unit tests.</li>
-<li>We need to clean that up afterwards so we defer the <code>Cleanup</code> call</li>
-</ul>
-<p>Then is an interesting part. In order to talk to Vault we need a client, and since Vault starts on a random port during the tests, generates its own CA, certificates and so on to listen on HTTPS, we need to retrieve it, which is achieved by just picking a client to one of the nodes of the cluster (yes, it starts in cluster mode!).</p>
-<ul>
-<li>Then we actually use the client to test that our method actually works. Isn't it amazing ?</li>
-</ul>
-<h2 id="pushing-it-further">Pushing it further</h2>
-<p>Now, another issue I've had is that I was working with <a href="https://www.vaultproject.io/api/auth/approle/index.html">approles</a>, and I pulled my hair for a while trying to figure out how to make it work in my tests. It turns out that you have to explicitly tell Vault to load the plugin in order for it to work.</p>
-<p>I am too lazy to patch the <code>main.go</code> to actually <em>use</em> an approle, but I will demonstrate how to enable it into your vault test server, so you can use it. Note that the same pattern applies to pretty much every authentication method you may want to use.</p>
-<p>You will do the following (note the additional <code>CredentialBackends</code> init option):</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">package</span> <span class="nx">main</span>
-
-<span class="kn">import</span> <span class="p">(</span>
-    <span class="s">&#34;testing&#34;</span>
-
-    <span class="s">&#34;github.com/hashicorp/vault/api&#34;</span>
-    <span class="s">&#34;github.com/hashicorp/vault/builtin/credential/approle&#34;</span>
-    <span class="nx">vaulthttp</span> <span class="s">&#34;github.com/hashicorp/vault/http&#34;</span>
-    <span class="s">&#34;github.com/hashicorp/vault/sdk/logical&#34;</span>
-    <span class="s">&#34;github.com/hashicorp/vault/vault&#34;</span>
-<span class="p">)</span>
-
-<span class="kd">const</span> <span class="p">(</span>
-    <span class="nx">testVaultToken</span> <span class="p">=</span> <span class="s">&#34;token&#34;</span> <span class="c1">// This is the root token
-</span><span class="c1"></span><span class="p">)</span>
-
-<span class="kd">func</span> <span class="nf">TestPutSecret</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">cluster</span> <span class="o">:=</span> <span class="nx">vault</span><span class="p">.</span><span class="nf">NewTestCluster</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">vault</span><span class="p">.</span><span class="nx">CoreConfig</span><span class="p">{</span>
-        <span class="nx">DevToken</span><span class="p">:</span> <span class="nx">testVaultToken</span><span class="p">,</span>
-        <span class="nx">CredentialBackends</span><span class="p">:</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="nx">logical</span><span class="p">.</span><span class="nx">Factory</span><span class="p">{</span>
-            <span class="s">&#34;approle&#34;</span><span class="p">:</span> <span class="nx">approle</span><span class="p">.</span><span class="nx">Factory</span><span class="p">,</span>
-        <span class="p">}</span><span class="p">,</span>
-    <span class="p">}</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">vault</span><span class="p">.</span><span class="nx">TestClusterOptions</span><span class="p">{</span>
-        <span class="nx">HandlerFunc</span><span class="p">:</span> <span class="nx">vaulthttp</span><span class="p">.</span><span class="nx">Handler</span><span class="p">,</span>
-    <span class="p">}</span><span class="p">)</span>
-    <span class="nx">cluster</span><span class="p">.</span><span class="nf">Start</span><span class="p">(</span><span class="p">)</span>
-    <span class="k">defer</span> <span class="nx">cluster</span><span class="p">.</span><span class="nf">Cleanup</span><span class="p">(</span><span class="p">)</span>
-
-    <span class="nx">core</span> <span class="o">:=</span> <span class="nx">cluster</span><span class="p">.</span><span class="nx">Cores</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">.</span><span class="nx">Core</span>
-    <span class="nx">vault</span><span class="p">.</span><span class="nf">TestWaitActive</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="nx">core</span><span class="p">)</span>
-    <span class="nx">client</span> <span class="o">:=</span> <span class="nx">cluster</span><span class="p">.</span><span class="nx">Cores</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">.</span><span class="nx">Client</span>
-
-    <span class="c1">// Enable approle
-</span><span class="c1"></span>    <span class="nx">err</span> <span class="o">:=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Sys</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nf">EnableAuthWithOptions</span><span class="p">(</span><span class="s">&#34;approle&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">api</span><span class="p">.</span><span class="nx">EnableAuthOptions</span><span class="p">{</span>
-        <span class="nx">Type</span><span class="p">:</span> <span class="s">&#34;approle&#34;</span><span class="p">,</span>
-    <span class="p">}</span><span class="p">)</span>
-    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-        <span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-    <span class="p">}</span>
-
-    <span class="c1">// ... the rest of your unit test
-</span><span class="c1"></span><span class="p">}</span>
-
-</code></pre></td></tr></table>
-</div>
-</div><p>In case you are wondering, the <code>core</code> object above refers to a Vault node of the test cluster.</p>
-<p>This way you can freely create an approle, and some policies (why not ?!), to use Vault as you would use it in prod:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-golang" data-lang="golang">
-<span class="c1">// ..... The imports and shit
-</span><span class="c1"></span><span class="kd">func</span> <span class="nf">TestMyTest</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// ... Vault initialization as above
-</span><span class="c1"></span>
-    <span class="c1">// Create an approle
-</span><span class="c1"></span>    <span class="nx">_</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Logical</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nf">Write</span><span class="p">(</span><span class="s">&#34;auth/approle/role/unittest&#34;</span><span class="p">,</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{</span><span class="p">}</span><span class="p">{</span>
-        <span class="s">&#34;policies&#34;</span><span class="p">:</span> <span class="p">[</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;unittest&#34;</span><span class="p">}</span><span class="p">,</span>
-    <span class="p">}</span><span class="p">)</span>
-    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-        <span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-    <span class="p">}</span>
-
-    <span class="c1">// Gets the role ID, that is basically the &#39;username&#39; used to log into vault
-</span><span class="c1"></span>    <span class="nx">res</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Logical</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nf">Read</span><span class="p">(</span><span class="s">&#34;auth/approle/role/unittest/role-id&#34;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-        <span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-    <span class="p">}</span>
-    
-    <span class="c1">// Keep the roleID for later use
-</span><span class="c1"></span>    <span class="nx">roleID</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">Data</span><span class="p">[</span><span class="s">&#34;role_id&#34;</span><span class="p">]</span><span class="p">.</span><span class="p">(</span><span class="kt">string</span><span class="p">)</span>
-    <span class="k">if</span> <span class="p">!</span><span class="nx">ok</span> <span class="p">{</span>
-        <span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="s">&#34;Could not read the approle&#34;</span><span class="p">)</span>
-    <span class="p">}</span>
-    
-    <span class="c1">// Create a secretID that is basically the password for the approle
-</span><span class="c1"></span>    <span class="nx">res</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Logical</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nf">Write</span><span class="p">(</span><span class="s">&#34;auth/approle/role/unittest/secret-id&#34;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
-    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-        <span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-    <span class="p">}</span>
-    <span class="c1">// Use thre secretID later
-</span><span class="c1"></span>    <span class="nx">secretID</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">Data</span><span class="p">[</span><span class="s">&#34;secret_id&#34;</span><span class="p">]</span><span class="p">.</span><span class="p">(</span><span class="kt">string</span><span class="p">)</span>
-    <span class="k">if</span> <span class="p">!</span><span class="nx">ok</span> <span class="p">{</span>
-        <span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="s">&#34;Could not generate the secret id&#34;</span><span class="p">)</span>
-    <span class="p">}</span>
-    
-    <span class="c1">// Create a broad policy to allow the approle to do whatever
-</span><span class="c1"></span>    <span class="nx">err</span> <span class="p">=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Sys</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nf">PutPolicy</span><span class="p">(</span><span class="s">&#34;unittest&#34;</span><span class="p">,</span> <span class="s">`</span><span class="s">
-</span><span class="s">    path &#34;*&#34; </span><span class="s">{</span><span class="s">
-</span><span class="s">        capabilities = [&#34;create&#34;, &#34;read&#34;, &#34;list&#34;, &#34;update&#34;, delete]
-</span><span class="s">    }
-</span><span class="s">    </span><span class="s">`</span><span class="p">)</span>
-    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-        <span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="reusing-the-code">Reusing the code</h2>
-<p>If you have been paying attention to what I spent a few hours writing, something should have struck you, and that thing is there:</p>
+</div><h3 id="create-a-vault-policy">Create a Vault policy</h3>
+<p>We will need to create a policy to allow the account (that we will create right after) to perform some basic operations on Vault. For the purpose of this article we are going to create a read only policy on the whole Vault. You obviously do not want to do that in an actual production environment.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ go <span class="nb">test</span> -cover ./...
-ok      blog.thomas.maurice.fr/vault-test    3.625s    coverage: 25.0% of statements
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">echo</span> <span class="s2">&#34;path \&#34;*\&#34; {capabilities = [\&#34;read\&#34;]}&#34;</span> <span class="p">|</span> vault policy write <span class="nb">readonly</span> -
+Success! Uploaded policy: <span class="nb">readonly</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>Specifically the <code>3.625s</code> part of it. Right now you might just be shrieking in rage and disappointment like</p>
-<blockquote>
-<p>Holy shit this is slow as fuck, there is now way I am ever using that this is going to slow down my CI mate</p>
-</blockquote>
-<p>Which is fair enough, which is why there is something you can do about it. You can create some <code>mocks.go</code> file that would contain all the Vault initialization code that you can reuse across multiple tests, something along the lines of:</p>
+</div><h3 id="create-the-oidc-issuer">Create the OIDC issuer</h3>
+<p>To create the OIDC issuer, do</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ vault write identity/issuer/config <span class="nv">issuer</span><span class="o">=</span>http://localhost:8200
+</code></pre></td></tr></table>
+</div>
+</div><p>This will be used to populate the <code>issuer</code> field of your tokens.</p>
+<p>You will need then to create a <a href="https://www.vaultproject.io/api/secret/identity/tokens.html#create-a-named-key">key</a> to sign your tokens:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ vault write identity/oidc/key/key <span class="nv">algorithm</span><span class="o">=</span>ES256 <span class="nv">allowed_client_ids</span><span class="o">=</span><span class="s1">&#39;*&#39;</span>
+Success! Data written to: identity/oidc/key/key
+</code></pre></td></tr></table>
+</div>
+</div><p>Alright now we had a key that will sign our tokens. Note that in a real production environment you will need to have a key per environment (dev/staging/prod and so on) and will need to individually allow client ID (which we talk about later) to be signed by your key.</p>
+<p>You then need to create something called a <code>role</code> in Vault. Which will map to the app you want to authenticate against. In this example we will assunme that our app is called <code>demo</code>, you will have to create it as follows (so it is signed with the <code>key</code> created above):</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ vault write identity/oidc/role/demo <span class="nv">name</span><span class="o">=</span>demo <span class="nv">key</span><span class="o">=</span>key
+Success! Data written to: identity/oidc/role/demo
+</code></pre></td></tr></table>
+</div>
+</div><p>Good! No we need to create a user to authenticate.</p>
+<h3 id="create-the-approle">Create the AppRole</h3>
+<p>An <a href="https://www.vaultproject.io/docs/auth/approle.html">AppRole</a> is a Vault authentication backend. You can see it as something similar to a username/password authentication, but intended for services instead of actual human users.</p>
+<p>Enable the <code>approle</code> authentication backend:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ vault auth <span class="nb">enable</span> approle
+Success! Enabled approle auth method at: approle/
+</code></pre></td></tr></table>
+</div>
+</div><p>Now create the actual <code>approle</code>, it will be called <code>demo-approle</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ vault write auth/approle/role/demo-approle <span class="nv">role_name</span><span class="o">=</span>demo-approle <span class="nv">policies</span><span class="o">=</span><span class="nb">readonly</span>
+Success! Data written to: auth/approle/role/demo-approle
+</code></pre></td></tr></table>
+</div>
+</div><p>Then you will need to get two pieces of information, the <code>roleid</code> and the <code>secretid</code> for the approle. These are the equivalent of the username and the password to authenticate yourself.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ <span class="nv">secret_id</span><span class="o">=</span><span class="k">$(</span>vault write -force -format<span class="o">=</span>json auth/approle/role/demo-approle/secret-id <span class="p">|</span> jq -r .data.secret_id<span class="k">)</span>
+$ <span class="nv">role_id</span><span class="o">=</span><span class="k">$(</span>vault <span class="nb">read</span> -format<span class="o">=</span>json auth/approle/role/demo-approle/role-id <span class="p">|</span> jq -r .data.role_id<span class="k">)</span>
+$ <span class="nb">echo</span> <span class="nv">$role_id</span> <span class="nv">$secret_id</span>
+ca9f0470-8d1f-4464-2635-25f02b9407d7 f91a7c31-dc06-2b24-20fd-e9f5867c32a8
+</code></pre></td></tr></table>
+</div>
+</div><p>Your values will be different.</p>
+<h3 id="create-the-entity-and-map-it-to-the-approle">Create the entity and map it to the AppRole</h3>
+<p>Now that we have created the approle, we need to map it to an internal Vault <code>entity</code>, you need to do that because several <code>entities</code> can be mapped to various authentication backends, like <code>userpass</code> or if you use something like Google or what not. So first, create the entity and save it for later:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">entity_id</span><span class="o">=</span><span class="k">$(</span>vault write -format<span class="o">=</span>json identity/entity <span class="nv">name</span><span class="o">=</span>demo <span class="p">|</span>jq .data.id -r<span class="k">)</span>
+$ <span class="nb">echo</span> <span class="nv">$entity_id</span>
+c957656f-0872-766c-3517-83b787672f84
+</code></pre></td></tr></table>
+</div>
+</div><p>Now you finally need to create an <code>entity alias</code> to make the link between the <code>entity</code> and the <code>approle</code> authentication backend (that is tedious I know but bear with me i swear it is worth it). Retrieve the <code>accessor</code>, which is the internal Vault reference to your approle authentication backend:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ <span class="nv">accessor</span><span class="o">=</span><span class="k">$(</span>vault auth list -format<span class="o">=</span>json <span class="p">|</span> grep <span class="s1">&#39;auth_approle&#39;</span> <span class="p">|</span> tr -d <span class="s2">&#34; &#34;</span> <span class="p">|</span> tr -d , <span class="p">|</span> cut -d <span class="s2">&#34;:&#34;</span> -f <span class="m">2</span> <span class="p">|</span> tr -d <span class="se">\&#34;</span><span class="k">)</span>
+$ <span class="nb">echo</span> <span class="nv">$accessor</span>
+auth_approle_91098819
+</code></pre></td></tr></table>
+</div>
+</div><p>Now finally (<code>y e s   f i n a l l y</code>) create the alias:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ vault write identity/entity-alias <span class="nv">name</span><span class="o">=</span>demo <span class="nv">canonical_id</span><span class="o">=</span><span class="nv">$entity_id</span> <span class="nv">mount_accessor</span><span class="o">=</span><span class="nv">$accessor</span>
+Key             Value
+---             -----
+canonical_id    c957656f-0872-766c-3517-83b787672f84
+id              a2d067d6-229b-6580-d714-35a01ba62864
+</code></pre></td></tr></table>
+</div>
+</div><p>Aight. Everything is setup now.</p>
+<h3 id="log-in-as-the-approle">Log in as the AppRole</h3>
+<p>Now all you need to do is to log into Vault using the approle, then issue a token:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ <span class="nv">token</span><span class="o">=</span><span class="k">$(</span>vault write -format<span class="o">=</span>json auth/approle/login <span class="nv">role_id</span><span class="o">=</span><span class="nv">$role_id</span> <span class="nv">secret_id</span><span class="o">=</span><span class="nv">$secret_id</span> <span class="p">|</span> jq -r .auth.client_token<span class="k">)</span>
+$ <span class="nb">export</span> <span class="nv">VAULT_TOKEN</span><span class="o">=</span><span class="nv">$token</span>
+$ <span class="nb">echo</span> <span class="nv">$token</span>
+s.ohsNR1DIo6sVr8gG8hsRsk1Y
+</code></pre></td></tr></table>
+</div>
+</div><p>You are now logged into Vault as your approle ! Check it by running:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -1404,176 +1180,145 @@ ok      blog.thomas.maurice.fr/vault-test    3.625s    coverage: 25.0% of statem
 </span><span class="lnt">18
 </span><span class="lnt">19
 </span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span><span class="lnt">52
-</span><span class="lnt">53
-</span><span class="lnt">54
-</span><span class="lnt">55
-</span><span class="lnt">56
-</span><span class="lnt">57
-</span><span class="lnt">58
-</span><span class="lnt">59
-</span><span class="lnt">60
-</span><span class="lnt">61
-</span><span class="lnt">62
-</span><span class="lnt">63
-</span><span class="lnt">64
-</span><span class="lnt">65
-</span><span class="lnt">66
-</span><span class="lnt">67
-</span><span class="lnt">68
-</span><span class="lnt">69
-</span><span class="lnt">70
-</span><span class="lnt">71
-</span><span class="lnt">72
-</span><span class="lnt">73
-</span><span class="lnt">74
-</span><span class="lnt">75
-</span><span class="lnt">76
-</span><span class="lnt">77
-</span><span class="lnt">78
-</span><span class="lnt">79
-</span><span class="lnt">80
-</span><span class="lnt">81
-</span><span class="lnt">82
-</span><span class="lnt">83
-</span><span class="lnt">84
-</span><span class="lnt">85
-</span><span class="lnt">86
-</span><span class="lnt">87
-</span><span class="lnt">88
-</span><span class="lnt">89
-</span><span class="lnt">90
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">package</span> <span class="nx">main</span>
-
-<span class="kn">import</span> <span class="p">(</span>
-    <span class="s">&#34;testing&#34;</span>
-
-    <span class="s">&#34;github.com/hashicorp/vault/api&#34;</span>
-    <span class="s">&#34;github.com/hashicorp/vault/builtin/credential/approle&#34;</span>
-    <span class="nx">vaulthttp</span> <span class="s">&#34;github.com/hashicorp/vault/http&#34;</span>
-    <span class="s">&#34;github.com/hashicorp/vault/sdk/logical&#34;</span>
-    <span class="s">&#34;github.com/hashicorp/vault/vault&#34;</span>
-<span class="p">)</span>
-
-<span class="kd">const</span> <span class="p">(</span>
-    <span class="c1">// TestVaultToken is the Vault token used for tests
-</span><span class="c1"></span>    <span class="nx">testVaultToken</span> <span class="p">=</span> <span class="s">&#34;unittesttoken&#34;</span>
-<span class="p">)</span>
-
-<span class="kd">type</span> <span class="nx">vaultTest</span> <span class="kd">struct</span> <span class="p">{</span>
-    <span class="nx">Cluster</span>       <span class="o">*</span><span class="nx">vault</span><span class="p">.</span><span class="nx">TestCluster</span>
-    <span class="nx">Client</span>        <span class="o">*</span><span class="nx">api</span><span class="p">.</span><span class="nx">Client</span>
-    <span class="nx">AppRoleID</span>     <span class="kt">string</span>
-    <span class="nx">AppRoleSecret</span> <span class="kt">string</span>    
-<span class="p">}</span>
-
-<span class="c1">// creates the test server
-</span><span class="c1"></span><span class="kd">func</span> <span class="nf">GetTestVaultServer</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="nx">vaultTest</span> <span class="p">{</span>
-    <span class="nx">t</span><span class="p">.</span><span class="nf">Helper</span><span class="p">(</span><span class="p">)</span>
-
-    <span class="nx">cluster</span> <span class="o">:=</span> <span class="nx">vault</span><span class="p">.</span><span class="nf">NewTestCluster</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">vault</span><span class="p">.</span><span class="nx">CoreConfig</span><span class="p">{</span>
-        <span class="nx">DevToken</span><span class="p">:</span> <span class="nx">testVaultToken</span><span class="p">,</span>
-        <span class="nx">CredentialBackends</span><span class="p">:</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="nx">logical</span><span class="p">.</span><span class="nx">Factory</span><span class="p">{</span>
-            <span class="s">&#34;approle&#34;</span><span class="p">:</span> <span class="nx">approle</span><span class="p">.</span><span class="nx">Factory</span><span class="p">,</span>
-        <span class="p">}</span><span class="p">,</span>
-    <span class="p">}</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">vault</span><span class="p">.</span><span class="nx">TestClusterOptions</span><span class="p">{</span>
-        <span class="nx">HandlerFunc</span><span class="p">:</span> <span class="nx">vaulthttp</span><span class="p">.</span><span class="nx">Handler</span><span class="p">,</span>
-    <span class="p">}</span><span class="p">)</span>
-    <span class="nx">cluster</span><span class="p">.</span><span class="nf">Start</span><span class="p">(</span><span class="p">)</span>
-
-    <span class="nx">core</span> <span class="o">:=</span> <span class="nx">cluster</span><span class="p">.</span><span class="nx">Cores</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">.</span><span class="nx">Core</span>
-    <span class="nx">vault</span><span class="p">.</span><span class="nf">TestWaitActive</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="nx">core</span><span class="p">)</span>
-    <span class="nx">client</span> <span class="o">:=</span> <span class="nx">cluster</span><span class="p">.</span><span class="nx">Cores</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">.</span><span class="nx">Client</span>
-    
-    <span class="c1">// Create an approle
-</span><span class="c1"></span>    <span class="nx">_</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Logical</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nf">Write</span><span class="p">(</span><span class="s">&#34;auth/approle/role/unittest&#34;</span><span class="p">,</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{</span><span class="p">}</span><span class="p">{</span>
-        <span class="s">&#34;policies&#34;</span><span class="p">:</span> <span class="p">[</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;unittest&#34;</span><span class="p">}</span><span class="p">,</span>
-    <span class="p">}</span><span class="p">)</span>
-    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-        <span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-    <span class="p">}</span>
-
-    <span class="c1">// Gets the role ID, that is basically the &#39;username&#39; used to log into vault
-</span><span class="c1"></span>    <span class="nx">res</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Logical</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nf">Read</span><span class="p">(</span><span class="s">&#34;auth/approle/role/unittest/role-id&#34;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-        <span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-    <span class="p">}</span>
-    
-    <span class="c1">// Keep the roleID for later use
-</span><span class="c1"></span>    <span class="nx">roleID</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">Data</span><span class="p">[</span><span class="s">&#34;role_id&#34;</span><span class="p">]</span><span class="p">.</span><span class="p">(</span><span class="kt">string</span><span class="p">)</span>
-    <span class="k">if</span> <span class="p">!</span><span class="nx">ok</span> <span class="p">{</span>
-        <span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="s">&#34;Could not read the approle&#34;</span><span class="p">)</span>
-    <span class="p">}</span>
-    
-    <span class="c1">// Create a secretID that is basically the password for the approle
-</span><span class="c1"></span>    <span class="nx">res</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Logical</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nf">Write</span><span class="p">(</span><span class="s">&#34;auth/approle/role/unittest/secret-id&#34;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
-    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-        <span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-    <span class="p">}</span>
-    <span class="c1">// Use thre secretID later
-</span><span class="c1"></span>    <span class="nx">secretID</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">Data</span><span class="p">[</span><span class="s">&#34;secret_id&#34;</span><span class="p">]</span><span class="p">.</span><span class="p">(</span><span class="kt">string</span><span class="p">)</span>
-    <span class="k">if</span> <span class="p">!</span><span class="nx">ok</span> <span class="p">{</span>
-        <span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="s">&#34;Could not generate the secret id&#34;</span><span class="p">)</span>
-    <span class="p">}</span>
-    
-    <span class="c1">// Create a broad policy to allow the approle to do whatever
-</span><span class="c1"></span>    <span class="nx">err</span> <span class="p">=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Sys</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nf">PutPolicy</span><span class="p">(</span><span class="s">&#34;unittest&#34;</span><span class="p">,</span> <span class="s">`</span><span class="s">
-</span><span class="s">        path &#34;*&#34; </span><span class="s">{</span><span class="s">
-</span><span class="s">            capabilities = [&#34;create&#34;, &#34;read&#34;, &#34;list&#34;, &#34;update&#34;, delete]
-</span><span class="s">        }
-</span><span class="s">    </span><span class="s">`</span><span class="p">)</span>
-    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-        <span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-    <span class="p">}</span>
-    
-    <span class="k">return</span> <span class="nx">vaultTest</span><span class="p">{</span>
-        <span class="nx">Cluster</span><span class="p">:</span> <span class="nx">cluster</span><span class="p">,</span>
-        <span class="nx">Client</span><span class="p">:</span> <span class="nx">client</span><span class="p">,</span>
-        <span class="nx">AppRoleID</span><span class="p">:</span> <span class="nx">roleID</span><span class="p">,</span>
-        <span class="nx">AppRolESecret</span><span class="p">:</span> <span class="nx">secretID</span><span class="p">,</span>
-    <span class="p">}</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash">vault token lookup 
+Key                 Value
+---                 -----
+accessor            Tc6riT70kLnepiW3CC0rEkBj
+creation_time       <span class="m">1579287446</span>
+creation_ttl        768h
+display_name        approle
+entity_id           f1be740b-8b4f-4369-a019-bc6ef3f8e963
+expire_time         2020-02-18T18:57:26.707866969Z
+explicit_max_ttl    0s
+id                  s.ohsNR1DIo6sVr8gG8hsRsk1Y
+issue_time          2020-01-17T18:57:26.707866723Z
+meta                map<span class="o">[</span>role_name:demo-approle<span class="o">]</span>
+num_uses            <span class="m">0</span>
+orphan              <span class="nb">true</span>
+path                auth/approle/login
+policies            <span class="o">[</span>default readonly<span class="o">]</span>
+renewable           <span class="nb">true</span>
+ttl                 767h58m57s
+<span class="nb">type</span>                service
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="issue-a-token">Issue a token</h3>
+<p>Finally you can issue a token:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ vault <span class="nb">read</span> identity/oidc/token/demo
+Key          Value
+---          -----
+client_id    waqwjTM57B7ANxhw7CketPy1WJ
+token        eyJhbGciOiJFUzI1NiIsImtpZCI6Ijk2MmNiZTk3LWYzY2EtMTVjMy0wNDJkLTYxZTQzMWMxOTRlMCJ9.eyJhdWQiOiJ3YXF3alRNNTdCN0FOeGh3N0NrZXRQeTFXSiIsImV4cCI6MTU3OTM3NDAwOCwiaWF0IjoxNTc5Mjg3NjA4LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgyMDAvdjEvaWRlbnRpdHkvb2lkYyIsIm5hbWVzcGFjZSI6InJvb3QiLCJzdWIiOiJmMWJlNzQwYi04YjRmLTQzNjktYTAxOS1iYzZlZjNmOGU5NjMifQ.OSVQHaIS9kgzdckNgsneDorR7BzE9i6JajOsBKIoByGuSMd5MTyPcu4nwv9GGAgips_mMk9dYTzckCGDcR8gXQ
+ttl          24h
+</code></pre></td></tr></table>
+</div>
+</div><p>You can now use this token to identify to a service !</p>
+<p>Let's unpack the token a bit using the <a href="https://jwt.io/#debugger">debugger</a>. The headers read</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+  <span class="nt">&#34;alg&#34;</span><span class="p">:</span> <span class="s2">&#34;ES256&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;kid&#34;</span><span class="p">:</span> <span class="s2">&#34;962cbe97-f3ca-15c3-042d-61e431c194e0&#34;</span>
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>The only thing now is that it's on you to call <code>testVault.Cluster.Cleanup()</code> whenever you are done.</p>
-<p><strong>Few words of warning</strong>: This assumes that the things you will do to your Vault are without any side effects to other tests, such as RO operations (retrieving tokens and certificates for exeamples) or operations that are restricted to a certain path that belongs to your unit test.</p>
-<h2 id="wrapping-up">Wrapping up</h2>
-<p>I hope that was helpful, happy unit testing.</p>
-<h2 id="credits">Credits</h2>
-<p>Big thanks to <a href="https://twitter.com/daenney">daenney</a> and <a href="https://twitter.com/KDevroede">kdevroede</a> for the review !</p>
+</div><p>The is not much about it, it specifies the signature algorithm used and the <code>key id</code> used to sign the token, more on that later.</p>
+<p>The body of the token reads the following:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+  <span class="nt">&#34;aud&#34;</span><span class="p">:</span> <span class="s2">&#34;waqwjTM57B7ANxhw7CketPy1WJ&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;exp&#34;</span><span class="p">:</span> <span class="mi">1579374008</span><span class="p">,</span>
+  <span class="nt">&#34;iat&#34;</span><span class="p">:</span> <span class="mi">1579287608</span><span class="p">,</span>
+  <span class="nt">&#34;iss&#34;</span><span class="p">:</span> <span class="s2">&#34;http://localhost:8200/v1/identity/oidc&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;namespace&#34;</span><span class="p">:</span> <span class="s2">&#34;root&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;sub&#34;</span><span class="p">:</span> <span class="s2">&#34;f1be740b-8b4f-4369-a019-bc6ef3f8e963&#34;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Here you have a bunch of infos about the identity of the token bearer:</p>
+<ul>
+<li><code>exp</code> is the expiration time of the token</li>
+<li><code>iat</code> is the issuance time</li>
+<li><code>iss</code> is the issuer</li>
+<li><code>aud</code> is the intended audience of the token, namely the <code>demo</code> OIDC role you created above</li>
+<li><code>sub</code> is the <code>subject</code> of the token, namely the identity of the bearer. If you pay attention, this is the same UUID as the one referenced in the <code>entity_id</code> field of the <code>vault token lookup</code> command.</li>
+</ul>
+<p>You can now identify who's token you are looking at !</p>
+<p>If you use Vault, you can also add more custom fields, such as group membership and other arbitrary things, more info on that <a href="https://www.vaultproject.io/docs/secrets/identity/index.html#token-contents-and-templates">here</a>.</p>
+<h2 id="verifying-the-tokens">Verifying the tokens</h2>
+<p>Now you need to be able to verify the tokens. I will not expand on how to do the authorization, that's your logic, and your problem, same for the expiration and issuer verification. However you need to be able to verify the signature of the token to establish that the token:</p>
+<ul>
+<li>Comes from whom it says it comes from</li>
+<li>Is signed by a key owned by whom it says it comes from</li>
+</ul>
+<p>Vault exposes an unauthenticated endpoint that allows you to retrieve the public part of the signing keys used for the tokens, which you can access the following way</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ curl localhost:8200/v1/identity/oidc/.well-known/keys<span class="p">|</span> jq .
+<span class="o">{</span>
+  <span class="s2">&#34;keys&#34;</span>: <span class="o">[</span>
+    <span class="o">{</span>
+      <span class="s2">&#34;use&#34;</span>: <span class="s2">&#34;sig&#34;</span>,
+      <span class="s2">&#34;kty&#34;</span>: <span class="s2">&#34;EC&#34;</span>,
+      <span class="s2">&#34;kid&#34;</span>: <span class="s2">&#34;962cbe97-f3ca-15c3-042d-61e431c194e0&#34;</span>,
+      <span class="s2">&#34;crv&#34;</span>: <span class="s2">&#34;P-256&#34;</span>,
+      <span class="s2">&#34;alg&#34;</span>: <span class="s2">&#34;ES256&#34;</span>,
+      <span class="s2">&#34;x&#34;</span>: <span class="s2">&#34;Ui3tAkTBb-dudDOyCyIQCfNz_1xG7ByoyJJwrEhBUFw&#34;</span>,
+      <span class="s2">&#34;y&#34;</span>: <span class="s2">&#34;mj68rHTcy121ojJCjHJ88uRCgNF0CF90nPfHGu-YnwI&#34;</span>
+    <span class="o">}</span>
+  <span class="o">]</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>If you pay attention and fluently speak UUID, you will obviously notice that <code>962cbe97-f3ca-15c3-042d-61e431c194e0</code> is the <code>kid</code> present in the header of the token we have previously issued.</p>
+<p>This way you can verify that the signature is valid. Note that Vault implements the <a href="https://swagger.io/docs/specification/authentication/openid-connect-discovery/">openID discovery protocol</a> which can give you access to even more information.</p>
+<h2 id="wrap-up">Wrap up</h2>
+<p>I hope that will be useful to you to use Vault as an OIDC provider for your services ! :)</p>
 
     </article>
     
@@ -1677,25 +1422,33 @@ ok      blog.thomas.maurice.fr/vault-test    3.625s    coverage: 25.0% of statem
     <section class="related">
     
     
+    <h1 class="related__title">
+      <hr class="hr-dots"/>
+      <div>
+        See Also
+      </div>
+      <hr class="hr-dots"/>
+    </h1>
+    <ul class="related-ul">
+        
+        <li>
+          <a href="/posts/unit-testing-with-vault/" class="related__link">Unit Testing With Vault in Go</a>
+        </li>
+        
+    </ul>
+    
   </section>
     <div class="grow"></div>
 <nav class="pagination-single">
   
-    <a href="http://blog.thomas.maurice.fr/about/" class="pagination-single__left">
+    <a href="http://blog.thomas.maurice.fr/posts/unit-testing-with-vault/" class="pagination-single__left">
       <div class="pagination-single__icon">
         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path fill="currentColor" d="M19 11H7.83l4.88-4.88c.39-.39.39-1.03 0-1.42-.39-.39-1.02-.39-1.41 0l-6.59 6.59c-.39.39-.39 1.02 0 1.41l6.59 6.59c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L7.83 13H19c.55 0 1-.45 1-1s-.45-1-1-1z"/></svg>
       </div>
-      <div class="pagination-single__left-title">About</div>      
+      <div class="pagination-single__left-title">Unit Testing With Vault in Go</div>      
     </a>
   
   <div class="grow"></div>
-  
-    <a href="http://blog.thomas.maurice.fr/posts/vault-jwt-authentication/" class="pagination-single__right">      
-      <div class="pagination-single__right-title">Authenticate your services with Vault and JWTs</div>
-      <div class="pagination-single__icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path fill="currentColor" d="M5 13h11.17l-4.88 4.88c-.39.39-.39 1.03 0 1.42.39.39 1.02.39 1.41 0l6.59-6.59c.39-.39.39-1.02 0-1.41l-6.58-6.6c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41L16.17 11H5c-.55 0-1 .45-1 1s.45 1 1 1z"/></svg>
-      </div>
-    </a>
   
 </nav>
     
@@ -2055,14 +1808,19 @@ document.addEventListener('DOMContentLoaded', function () {
   <div class="toc ">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#assumptions">Assumptions</a></li>
-    <li><a href="#what-we-want">What we want</a></li>
-    <li><a href="#setting-up-the-stage">Setting up the stage</a></li>
-    <li><a href="#now-lets-write-some-tests">Now let's write some tests</a></li>
-    <li><a href="#pushing-it-further">Pushing it further</a></li>
-    <li><a href="#reusing-the-code">Reusing the code</a></li>
-    <li><a href="#wrapping-up">Wrapping up</a></li>
-    <li><a href="#credits">Credits</a></li>
+    <li><a href="#what-are-jwts-">What are JWTs ?</a></li>
+    <li><a href="#setup-vault">Setup Vault</a>
+      <ul>
+        <li><a href="#create-a-vault-policy">Create a Vault policy</a></li>
+        <li><a href="#create-the-oidc-issuer">Create the OIDC issuer</a></li>
+        <li><a href="#create-the-approle">Create the AppRole</a></li>
+        <li><a href="#create-the-entity-and-map-it-to-the-approle">Create the entity and map it to the AppRole</a></li>
+        <li><a href="#log-in-as-the-approle">Log in as the AppRole</a></li>
+        <li><a href="#issue-a-token">Issue a token</a></li>
+      </ul>
+    </li>
+    <li><a href="#verifying-the-tokens">Verifying the tokens</a></li>
+    <li><a href="#wrap-up">Wrap up</a></li>
   </ul>
 </nav>
   </div>
@@ -2707,7 +2465,7 @@ document.addEventListener('DOMContentLoaded', function () {
             
     
     
-  <a href="http://blog.thomas.maurice.fr/posts/unit-testing-with-vault//index.xml" type="application/rss+xml" title="rss" aria-label="RSS Feed Link">
+  <a href="http://blog.thomas.maurice.fr/posts/vault-jwt-authentication//index.xml" type="application/rss+xml" title="rss" aria-label="RSS Feed Link">
     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><circle fill="currentColor" cx="6.18" cy="17.82" r="2.18"/><path fill="currentColor" d="M5.59 10.23c-.84-.14-1.59.55-1.59 1.4 0 .71.53 1.28 1.23 1.4 2.92.51 5.22 2.82 5.74 5.74.12.7.69 1.23 1.4 1.23.85 0 1.54-.75 1.41-1.59-.68-4.2-3.99-7.51-8.19-8.18zm-.03-5.71C4.73 4.43 4 5.1 4 5.93c0 .73.55 1.33 1.27 1.4 6.01.6 10.79 5.38 11.39 11.39.07.73.67 1.28 1.4 1.28.84 0 1.5-.73 1.42-1.56-.73-7.34-6.57-13.19-13.92-13.92z"/></svg>
   </a>
 

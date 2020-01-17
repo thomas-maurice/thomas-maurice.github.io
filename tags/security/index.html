@@ -683,8 +683,8 @@
     <link rel="alternate" type="application/rss&#43;xml" title="RSS" href="http://blog.thomas.maurice.fr/tags/security/index.xml">
 <meta name="description" content="" />
 <meta name="keywords" content="">
-<meta name="created" content="2020-01-11T13:52:19&#43;0000">
-<meta name="modified" content="2020-01-11T13:52:19&#43;0000">
+<meta name="created" content="2020-01-17T18:56:22&#43;0000">
+<meta name="modified" content="2020-01-17T18:56:22&#43;0000">
 
 
 <meta property="og:site_name" content="/var/log/tmaurice">
@@ -946,6 +946,35 @@ if (!doNotTrack) {
     
     
     <div class="summary-classic__image-wrapper">
+      <a href="http://blog.thomas.maurice.fr/posts/vault-jwt-authentication/">
+        <img data-src="/images/logos/vault.png" alt="logos/vault.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='24pt' height='24pt' viewBox='0 0 24 24' version='1.1'%3E%3Cg id='surface1035795'%3E%3Cpath style=' stroke:none;fill-rule:nonzero;fill:rgb(80%25,80%25,80%25);fill-opacity:1;' d='M 4 4 C 2.90625 4 2 4.90625 2 6 L 2 18 C 2 19.09375 2.90625 20 4 20 L 20 20 C 21.09375 20 22 19.09375 22 18 L 22 6 C 22 4.90625 21.09375 4 20 4 Z M 4 6 L 20 6 L 20 18 L 4 18 Z M 4 6 '/%3E%3C/g%3E%3C/svg%3E%0A" class="lazyload summary-classic__image" />
+      </a>
+    </div>
+    
+    <div class="summary-classic__content">
+      <header>
+        <h5 class="title h5"><a href='http://blog.thomas.maurice.fr/posts/vault-jwt-authentication/'> Authenticate your services with Vault and JWTs</a> </h5>
+        <h6 class="subtitle caption"><span title="Written At">📅 Jan 17, 2020 </span>  <span title="Reading Time"> &middot; ☕ 7 min read </span></h6>
+      </header>
+      <div>
+        <div class="summary-classic__text p2">
+          
+          Sometimes, you may want your services to be able to talk to each other in an authenticated manner, and even perform some authorization. This is not easy to do and you might have scratched your head a bunch about how to do it. In this post I'm going to show you how to do something like this using hashicorp's Vault. At the end of this post you'll be able to issue and validate authorization tokens to make sure your services communicate in an authenticated and secure manner.
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+</article>
+
+      
+      
+  <article class="summary-classic">
+  <div class="summary-classic__flex-box">
+    
+    
+    <div class="summary-classic__image-wrapper">
       <a href="http://blog.thomas.maurice.fr/posts/unit-testing-with-vault/">
         <img data-src="/images/logos/vault.png" alt="logos/vault.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='24pt' height='24pt' viewBox='0 0 24 24' version='1.1'%3E%3Cg id='surface1035795'%3E%3Cpath style=' stroke:none;fill-rule:nonzero;fill:rgb(80%25,80%25,80%25);fill-opacity:1;' d='M 4 4 C 2.90625 4 2 4.90625 2 6 L 2 18 C 2 19.09375 2.90625 20 4 20 L 20 20 C 21.09375 20 22 19.09375 22 18 L 22 6 C 22 4.90625 21.09375 4 20 4 Z M 4 6 L 20 6 L 20 18 L 4 18 Z M 4 6 '/%3E%3C/g%3E%3C/svg%3E%0A" class="lazyload summary-classic__image" />
       </a>
@@ -999,6 +1028,13 @@ Assumptions This article assumes that you are already familiar with what Vault i
     
     
     <section class="sidebar-recent">
+        <a href="/posts/vault-jwt-authentication/" class="sidebar-recent__title p1">Authenticate your services with Vault and JWTs</a>
+        <ul class="sidebar-recent__ul">
+            
+        </ul>
+    </section>
+    
+    <section class="sidebar-recent">
         <a href="/posts/unit-testing-with-vault/" class="sidebar-recent__title p1">Unit Testing With Vault in Go</a>
         <ul class="sidebar-recent__ul">
             
@@ -1026,7 +1062,7 @@ Assumptions This article assumes that you are already familiar with what Vault i
                         golang
                     </span>
                     <span class="taxo__num">
-                        1
+                        2
                     </span>
                 </a>
             </span>
@@ -1039,7 +1075,7 @@ Assumptions This article assumes that you are already familiar with what Vault i
                         security
                     </span>
                     <span class="taxo__num">
-                        1
+                        2
                     </span>
                 </a>
             </span>
@@ -1065,7 +1101,7 @@ Assumptions This article assumes that you are already familiar with what Vault i
                         vault
                     </span>
                     <span class="taxo__num">
-                        1
+                        2
                     </span>
                 </a>
             </span>
@@ -1103,6 +1139,19 @@ Assumptions This article assumes that you are already familiar with what Vault i
                         golang
                     </span>
                     <span class="taxo__num">
+                        2
+                    </span>
+                </a>
+            </span>
+        
+        
+        
+            <span class="tag">
+                <a href="/categories/security/" class="is-categories taxo__link">
+                    <span class="taxo__text">
+                        security
+                    </span>
+                    <span class="taxo__num">
                         1
                     </span>
                 </a>
@@ -1116,7 +1165,7 @@ Assumptions This article assumes that you are already familiar with what Vault i
                         vault
                     </span>
                     <span class="taxo__num">
-                        1
+                        2
                     </span>
                 </a>
             </span>

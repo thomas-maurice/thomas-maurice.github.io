@@ -4,41 +4,61 @@
   
   <url>
     <loc>http://blog.thomas.maurice.fr/</loc>
-    <lastmod>2020-01-11T13:52:19+00:00</lastmod>
+    <lastmod>2020-01-17T18:56:22+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.thomas.maurice.fr/posts/vault-jwt-authentication/</loc>
+    <lastmod>2020-01-17T18:56:22+00:00</lastmod>
   </url>
   
   <url>
     <loc>http://blog.thomas.maurice.fr/categories/</loc>
-    <lastmod>2020-01-11T13:52:19+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.thomas.maurice.fr/categories/dev/</loc>
-    <lastmod>2020-01-11T13:52:19+00:00</lastmod>
+    <lastmod>2020-01-17T18:56:22+00:00</lastmod>
   </url>
   
   <url>
     <loc>http://blog.thomas.maurice.fr/tags/golang/</loc>
-    <lastmod>2020-01-11T13:52:19+00:00</lastmod>
+    <lastmod>2020-01-17T18:56:22+00:00</lastmod>
   </url>
   
   <url>
     <loc>http://blog.thomas.maurice.fr/categories/golang/</loc>
-    <lastmod>2020-01-11T13:52:19+00:00</lastmod>
+    <lastmod>2020-01-17T18:56:22+00:00</lastmod>
   </url>
   
   <url>
     <loc>http://blog.thomas.maurice.fr/posts/</loc>
-    <lastmod>2020-01-11T13:52:19+00:00</lastmod>
+    <lastmod>2020-01-17T18:56:22+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.thomas.maurice.fr/categories/security/</loc>
+    <lastmod>2020-01-17T18:56:22+00:00</lastmod>
   </url>
   
   <url>
     <loc>http://blog.thomas.maurice.fr/tags/security/</loc>
-    <lastmod>2020-01-11T13:52:19+00:00</lastmod>
+    <lastmod>2020-01-17T18:56:22+00:00</lastmod>
   </url>
   
   <url>
     <loc>http://blog.thomas.maurice.fr/tags/</loc>
+    <lastmod>2020-01-17T18:56:22+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.thomas.maurice.fr/tags/vault/</loc>
+    <lastmod>2020-01-17T18:56:22+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.thomas.maurice.fr/categories/vault/</loc>
+    <lastmod>2020-01-17T18:56:22+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.thomas.maurice.fr/categories/dev/</loc>
     <lastmod>2020-01-11T13:52:19+00:00</lastmod>
   </url>
   
@@ -49,16 +69,6 @@
   
   <url>
     <loc>http://blog.thomas.maurice.fr/posts/unit-testing-with-vault/</loc>
-    <lastmod>2020-01-11T13:52:19+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.thomas.maurice.fr/tags/vault/</loc>
-    <lastmod>2020-01-11T13:52:19+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.thomas.maurice.fr/categories/vault/</loc>
     <lastmod>2020-01-11T13:52:19+00:00</lastmod>
   </url>
   

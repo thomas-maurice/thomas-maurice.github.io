@@ -9,7 +9,7 @@
     <managingEditor>thomas@maurice.fr (Thomas)</managingEditor>
     <webMaster>thomas@maurice.fr (Thomas)</webMaster>
     <copyright>&amp;copy;{year}, All Rights Reserved</copyright>
-    <lastBuildDate>Sat, 11 Jan 2020 13:52:19 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 17 Jan 2020 18:56:22 +0000</lastBuildDate>
     
         <atom:link href="http://blog.thomas.maurice.fr/categories/index.xml" rel="self" type="application/rss+xml" />
     
@@ -17,29 +17,38 @@
     
       
       <item>
-        <title>dev</title>
-        <link>http://blog.thomas.maurice.fr/categories/dev/</link>
-        <pubDate>Sat, 11 Jan 2020 13:52:19 +0000</pubDate>
-        <author>thomas@maurice.fr (Thomas)</author>
-        <guid>http://blog.thomas.maurice.fr/categories/dev/</guid>
-        <description></description>
-      </item>
-      
-      <item>
         <title>golang</title>
         <link>http://blog.thomas.maurice.fr/categories/golang/</link>
-        <pubDate>Sat, 11 Jan 2020 13:52:19 +0000</pubDate>
+        <pubDate>Fri, 17 Jan 2020 18:56:22 +0000</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         <guid>http://blog.thomas.maurice.fr/categories/golang/</guid>
         <description></description>
       </item>
       
       <item>
+        <title>security</title>
+        <link>http://blog.thomas.maurice.fr/categories/security/</link>
+        <pubDate>Fri, 17 Jan 2020 18:56:22 +0000</pubDate>
+        <author>thomas@maurice.fr (Thomas)</author>
+        <guid>http://blog.thomas.maurice.fr/categories/security/</guid>
+        <description></description>
+      </item>
+      
+      <item>
         <title>vault</title>
         <link>http://blog.thomas.maurice.fr/categories/vault/</link>
-        <pubDate>Sat, 11 Jan 2020 13:52:19 +0000</pubDate>
+        <pubDate>Fri, 17 Jan 2020 18:56:22 +0000</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         <guid>http://blog.thomas.maurice.fr/categories/vault/</guid>
+        <description></description>
+      </item>
+      
+      <item>
+        <title>dev</title>
+        <link>http://blog.thomas.maurice.fr/categories/dev/</link>
+        <pubDate>Sat, 11 Jan 2020 13:52:19 +0000</pubDate>
+        <author>thomas@maurice.fr (Thomas)</author>
+        <guid>http://blog.thomas.maurice.fr/categories/dev/</guid>
         <description></description>
       </item>
       
