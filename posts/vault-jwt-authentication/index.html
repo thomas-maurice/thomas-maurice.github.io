@@ -1044,7 +1044,7 @@ Success! Data written to: identity/oidc/key/key
 </code></pre></td></tr></table>
 </div>
 </div><p>Alright now we had a key that will sign our tokens. Note that in a real production environment you will need to have a key per environment (dev/staging/prod and so on) and will need to individually allow client ID (which we talk about later) to be signed by your key.</p>
-<p>You then need to create something called a <code>role</code> in Vault. Which will map to the app you want to authenticate against. In this example we will assunme that our app is called <code>demo</code>, you will have to create it as follows (so it is signed with the <code>key</code> created above):</p>
+<p>You then need to create something called a <code>role</code> in Vault. Which will map to the app you want to authenticate against. In this example we will assume that our app is called <code>demo</code>, you will have to create it as follows (so it is signed with the <code>key</code> created above):</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
