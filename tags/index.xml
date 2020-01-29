@@ -9,7 +9,7 @@
     <managingEditor>thomas@maurice.fr (Thomas)</managingEditor>
     <webMaster>thomas@maurice.fr (Thomas)</webMaster>
     <copyright>&amp;copy;{year}, All Rights Reserved</copyright>
-    <lastBuildDate>Fri, 17 Jan 2020 18:56:22 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 29 Jan 2020 19:40:22 +0000</lastBuildDate>
     
         <atom:link href="http://blog.thomas.maurice.fr/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -17,20 +17,65 @@
     
       
       <item>
-        <title>golang</title>
-        <link>http://blog.thomas.maurice.fr/tags/golang/</link>
-        <pubDate>Fri, 17 Jan 2020 18:56:22 +0000</pubDate>
+        <title>debian</title>
+        <link>http://blog.thomas.maurice.fr/tags/debian/</link>
+        <pubDate>Wed, 29 Jan 2020 19:40:22 +0000</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
-        <guid>http://blog.thomas.maurice.fr/tags/golang/</guid>
+        <guid>http://blog.thomas.maurice.fr/tags/debian/</guid>
+        <description></description>
+      </item>
+      
+      <item>
+        <title>linux</title>
+        <link>http://blog.thomas.maurice.fr/tags/linux/</link>
+        <pubDate>Wed, 29 Jan 2020 19:40:22 +0000</pubDate>
+        <author>thomas@maurice.fr (Thomas)</author>
+        <guid>http://blog.thomas.maurice.fr/tags/linux/</guid>
+        <description></description>
+      </item>
+      
+      <item>
+        <title>networking</title>
+        <link>http://blog.thomas.maurice.fr/tags/networking/</link>
+        <pubDate>Wed, 29 Jan 2020 19:40:22 +0000</pubDate>
+        <author>thomas@maurice.fr (Thomas)</author>
+        <guid>http://blog.thomas.maurice.fr/tags/networking/</guid>
+        <description></description>
+      </item>
+      
+      <item>
+        <title>router</title>
+        <link>http://blog.thomas.maurice.fr/tags/router/</link>
+        <pubDate>Wed, 29 Jan 2020 19:40:22 +0000</pubDate>
+        <author>thomas@maurice.fr (Thomas)</author>
+        <guid>http://blog.thomas.maurice.fr/tags/router/</guid>
         <description></description>
       </item>
       
       <item>
         <title>security</title>
         <link>http://blog.thomas.maurice.fr/tags/security/</link>
-        <pubDate>Fri, 17 Jan 2020 18:56:22 +0000</pubDate>
+        <pubDate>Wed, 29 Jan 2020 19:40:22 +0000</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         <guid>http://blog.thomas.maurice.fr/tags/security/</guid>
+        <description></description>
+      </item>
+      
+      <item>
+        <title>wireguard</title>
+        <link>http://blog.thomas.maurice.fr/tags/wireguard/</link>
+        <pubDate>Wed, 29 Jan 2020 19:40:22 +0000</pubDate>
+        <author>thomas@maurice.fr (Thomas)</author>
+        <guid>http://blog.thomas.maurice.fr/tags/wireguard/</guid>
+        <description></description>
+      </item>
+      
+      <item>
+        <title>golang</title>
+        <link>http://blog.thomas.maurice.fr/tags/golang/</link>
+        <pubDate>Fri, 17 Jan 2020 18:56:22 +0000</pubDate>
+        <author>thomas@maurice.fr (Thomas)</author>
+        <guid>http://blog.thomas.maurice.fr/tags/golang/</guid>
         <description></description>
       </item>
       

@@ -9,12 +9,22 @@
     <managingEditor>thomas@maurice.fr (Thomas)</managingEditor>
     <webMaster>thomas@maurice.fr (Thomas)</webMaster>
     <copyright>&amp;copy;{year}, All Rights Reserved</copyright>
-    <lastBuildDate>Fri, 17 Jan 2020 18:56:22 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 29 Jan 2020 19:40:22 +0000</lastBuildDate>
     
         <atom:link href="http://blog.thomas.maurice.fr/tags/security/index.xml" rel="self" type="application/rss+xml" />
     
     
     
+      
+      <item>
+        <title>Make Your Own Travel Router With A NanoPi And Armbian</title>
+        <link>http://blog.thomas.maurice.fr/posts/make-your-own-travel-router/</link>
+        <pubDate>Wed, 29 Jan 2020 19:40:22 +0000</pubDate>
+        <author>thomas@maurice.fr (Thomas)</author>
+        <guid>http://blog.thomas.maurice.fr/posts/make-your-own-travel-router/</guid>
+        <description>When you travel, you may sometimes want to be able to access some resources that are present on your flat&#39;s network, make your traffic go through a VPN or what not because you don&#39;t trust the network you are in (wether it is a hotel/coffee shop or what not). This blogpost is going to explain how you can build a nice travel router for when you travel around.
+What we are going to achieve I&#39;ll show you how you can build a small armbian-based router that enables you you:</description>
+      </item>
       
       <item>
         <title>Authenticate your services with Vault and JWTs</title>
