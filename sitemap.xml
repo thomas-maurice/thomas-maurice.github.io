@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
@@ -13,17 +13,12 @@
   </url>
   
   <url>
-    <loc>http://blog.thomas.maurice.fr/categories/debian/</loc>
-    <lastmod>2020-01-29T19:40:22+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.thomas.maurice.fr/tags/debian/</loc>
     <lastmod>2020-01-29T19:40:22+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.thomas.maurice.fr/categories/linux/</loc>
+    <loc>http://blog.thomas.maurice.fr/categories/debian/</loc>
     <lastmod>2020-01-29T19:40:22+00:00</lastmod>
   </url>
   
@@ -33,17 +28,22 @@
   </url>
   
   <url>
+    <loc>http://blog.thomas.maurice.fr/categories/linux/</loc>
+    <lastmod>2020-01-29T19:40:22+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.thomas.maurice.fr/posts/make-your-own-travel-router/</loc>
     <lastmod>2020-01-29T19:40:22+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.thomas.maurice.fr/categories/networking/</loc>
+    <loc>http://blog.thomas.maurice.fr/tags/networking/</loc>
     <lastmod>2020-01-29T19:40:22+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.thomas.maurice.fr/tags/networking/</loc>
+    <loc>http://blog.thomas.maurice.fr/categories/networking/</loc>
     <lastmod>2020-01-29T19:40:22+00:00</lastmod>
   </url>
   
@@ -83,12 +83,12 @@
   </url>
   
   <url>
-    <loc>http://blog.thomas.maurice.fr/categories/golang/</loc>
+    <loc>http://blog.thomas.maurice.fr/tags/golang/</loc>
     <lastmod>2020-01-17T18:56:22+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.thomas.maurice.fr/tags/golang/</loc>
+    <loc>http://blog.thomas.maurice.fr/categories/golang/</loc>
     <lastmod>2020-01-17T18:56:22+00:00</lastmod>
   </url>
   

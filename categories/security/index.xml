@@ -22,8 +22,8 @@
         <pubDate>Wed, 29 Jan 2020 19:40:22 +0000</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         <guid>http://blog.thomas.maurice.fr/posts/make-your-own-travel-router/</guid>
-        <description>When you travel, you may sometimes want to be able to access some resources that are present on your flat&#39;s network, make your traffic go through a VPN or what not because you don&#39;t trust the network you are in (wether it is a hotel/coffee shop or what not). This blogpost is going to explain how you can build a nice travel router for when you travel around.
-What we are going to achieve I&#39;ll show you how you can build a small armbian-based router that enables you you:</description>
+        <description>When you travel, you may sometimes want to be able to access some resources that are present on your flat&amp;rsquo;s network, make your traffic go through a VPN or what not because you don&amp;rsquo;t trust the network you are in (wether it is a hotel/coffee shop or what not). This blogpost is going to explain how you can build a nice travel router for when you travel around.
+What we are going to achieve I&amp;rsquo;ll show you how you can build a small armbian-based router that enables you you:</description>
       </item>
       
       <item>
@@ -32,7 +32,7 @@ What we are going to achieve I&#39;ll show you how you can build a small armbian
         <pubDate>Fri, 17 Jan 2020 18:56:22 +0000</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         <guid>http://blog.thomas.maurice.fr/posts/vault-jwt-authentication/</guid>
-        <description>Sometimes, you may want your services to be able to talk to each other in an authenticated manner, and even perform some authorization. This is not easy to do and you might have scratched your head a bunch about how to do it. In this post I&#39;m going to show you how to do something like this using hashicorp&#39;s Vault. At the end of this post you&#39;ll be able to issue and validate authorization tokens to make sure your services communicate in an authenticated and secure manner.</description>
+        <description>Sometimes, you may want your services to be able to talk to each other in an authenticated manner, and even perform some authorization. This is not easy to do and you might have scratched your head a bunch about how to do it. In this post I&amp;rsquo;m going to show you how to do something like this using hashicorp&amp;rsquo;s Vault. At the end of this post you&amp;rsquo;ll be able to issue and validate authorization tokens to make sure your services communicate in an authenticated and secure manner.</description>
       </item>
       
     
