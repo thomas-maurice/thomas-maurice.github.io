@@ -9,12 +9,23 @@
     <managingEditor>thomas@maurice.fr (Thomas)</managingEditor>
     <webMaster>thomas@maurice.fr (Thomas)</webMaster>
     <copyright>&amp;copy;{year}, All Rights Reserved</copyright>
-    <lastBuildDate>Wed, 29 Jan 2020 19:40:22 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 29 Aug 2020 11:02:50 +0000</lastBuildDate>
     
         <atom:link href="http://blog.thomas.maurice.fr/index.xml" rel="self" type="application/rss+xml" />
     
     
     
+      
+      <item>
+        <title>Network namespaces in Linux</title>
+        <link>http://blog.thomas.maurice.fr/posts/network-namespaces-in-linux/</link>
+        <pubDate>Sat, 29 Aug 2020 11:02:50 +0000</pubDate>
+        <author>thomas@maurice.fr (Thomas)</author>
+        <guid>http://blog.thomas.maurice.fr/posts/network-namespaces-in-linux/</guid>
+        <description>This post is a cheatsheet for myself in case I need to fuck around with network namespaces again.
+NB: most of the commands should be ran as root.
+Create a new netns 1 2 3 4  $ ip netns add testns # Check it works $ ip netns ls testns   Exec a command inside a netns 1 2 3  $ ip netns exec testns ip link show 1: lo: &amp;lt;LOOPBACK&amp;gt; mtu 65536 qdisc noop state DOWN mode DEFAULT group default qlen 1000 link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00   Connect the namespace from the outside Choose what we want to make as a network setup We want the following:</description>
+      </item>
       
       <item>
         <title>Make Your Own Travel Router With A NanoPi And Armbian</title>

@@ -9,7 +9,7 @@
     <managingEditor>thomas@maurice.fr (Thomas)</managingEditor>
     <webMaster>thomas@maurice.fr (Thomas)</webMaster>
     <copyright>&amp;copy;{year}, All Rights Reserved</copyright>
-    <lastBuildDate>Wed, 29 Jan 2020 19:40:22 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 29 Aug 2020 11:02:50 +0000</lastBuildDate>
     
         <atom:link href="http://blog.thomas.maurice.fr/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -17,29 +17,47 @@
     
       
       <item>
-        <title>debian</title>
-        <link>http://blog.thomas.maurice.fr/tags/debian/</link>
-        <pubDate>Wed, 29 Jan 2020 19:40:22 +0000</pubDate>
+        <title>kernel</title>
+        <link>http://blog.thomas.maurice.fr/tags/kernel/</link>
+        <pubDate>Sat, 29 Aug 2020 11:02:50 +0000</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
-        <guid>http://blog.thomas.maurice.fr/tags/debian/</guid>
+        <guid>http://blog.thomas.maurice.fr/tags/kernel/</guid>
         <description></description>
       </item>
       
       <item>
         <title>linux</title>
         <link>http://blog.thomas.maurice.fr/tags/linux/</link>
-        <pubDate>Wed, 29 Jan 2020 19:40:22 +0000</pubDate>
+        <pubDate>Sat, 29 Aug 2020 11:02:50 +0000</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         <guid>http://blog.thomas.maurice.fr/tags/linux/</guid>
         <description></description>
       </item>
       
       <item>
+        <title>namespaces</title>
+        <link>http://blog.thomas.maurice.fr/tags/namespaces/</link>
+        <pubDate>Sat, 29 Aug 2020 11:02:50 +0000</pubDate>
+        <author>thomas@maurice.fr (Thomas)</author>
+        <guid>http://blog.thomas.maurice.fr/tags/namespaces/</guid>
+        <description></description>
+      </item>
+      
+      <item>
         <title>networking</title>
         <link>http://blog.thomas.maurice.fr/tags/networking/</link>
-        <pubDate>Wed, 29 Jan 2020 19:40:22 +0000</pubDate>
+        <pubDate>Sat, 29 Aug 2020 11:02:50 +0000</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         <guid>http://blog.thomas.maurice.fr/tags/networking/</guid>
+        <description></description>
+      </item>
+      
+      <item>
+        <title>debian</title>
+        <link>http://blog.thomas.maurice.fr/tags/debian/</link>
+        <pubDate>Wed, 29 Jan 2020 19:40:22 +0000</pubDate>
+        <author>thomas@maurice.fr (Thomas)</author>
+        <guid>http://blog.thomas.maurice.fr/tags/debian/</guid>
         <description></description>
       </item>
       
