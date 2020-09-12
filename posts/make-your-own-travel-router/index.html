@@ -938,7 +938,7 @@ if (!doNotTrack) {
     <div class="single__meta">
       
 <div class="single__infos">
-  <span class="single__info" title="Written At">📅&nbsp;Jan 29, 2020 </span>  &middot; <span class="single__info" title="Reading Time"> ☕ 10 min read </span>
+  <span class="single__info" title="Written At">📅&nbsp;Jan 29, 2020 </span>  &middot; <span class="single__info" title="Reading Time"> ☕ 11 min read </span>
   <span class="single__info">
     
   </span>
@@ -1099,7 +1099,29 @@ net.ipv6.conf.default.disable_ipv6=1
 <h3 id="setting-up-the-wireguard-tunnel">Setting up the wireguard tunnel</h3>
 <p>I won&rsquo;t expand on how to setup a wireguard tunnel here, I refet you to this <a href="https://blog.balthazar-rouberol.com/how-to-setup-a-personal-wireguard-vpn">excellent article</a> by <a href="https://twitter.com/brouberol">brouberol</a></p>
 <p>At the end of it you should end up with a <code>wg0</code> interface. You can create as many as you want, if you want to add a <code>wg1</code> interface that would allow you to connect to your home network for instance.</p>
-<h3 id="create-a-custom-routing-table">Create a custom routing table</h3>
+<p>Here for reference is my own <code>/etc/wireguard/wg0.conf</code></p>
+<pre><code>[Interface]
+PrivateKey = [REDACTED]
+ListenPort = 5555
+SaveConfig = false
+Address = 192.168.11.10/32
+Table = 42
+
+[Peer]
+PublicKey = [REDACTED]
+AllowedIPs = 0.0.0.0/0
+Endpoint = [REDACTED]:5555
+</code></pre><p>Note that the <code>Table = 42</code> parameter is super important since otherwise Wireguard is going to interfere with your other routing tables and rules, which you do not want. The <code>42</code> number is arbitrary you can pick whatever you want as long as it matches the routing table number you assign to the <code>vpn</code> routing table that you will create in the next section.</p>
+<p>Start the interface now</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ systemctl start wg-quick@wg0
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="create-a-custom-routing-table">Create a custom routing table</h3>
 <p>We need a custom routing table for the VPN only network, this will allow us to make sure that the traffic on this network is routed accordingly to this table, to avoid it going out unencrypted through <code>eth0</code> and leaking to potential curious eyes. Alter the <code>/etc/iproute2/rt_tables</code> file as follows:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1142,12 +1164,18 @@ net.ipv6.conf.default.disable_ipv6=1
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash">$ cat /etc/network/interfaces.d/lan0
@@ -1156,6 +1184,12 @@ iface lan0 inet static
         address 10.69.0.1
         netmask 255.255.255.0
         bridge_ports eth1
+        <span class="c1"># Optionally you can force the lan0 trafic to be routed through the main routing table</span>
+        <span class="c1"># this can be useful if you have a setup with several routing tables depending on the</span>
+        <span class="c1"># input interface. In this setup it is optional but I&#39;ll leave it for reference</span>
+
+        <span class="c1">#post-up /sbin/ip rule add iif lan0 lookup main priority 999</span>
+        <span class="c1">#down /sbin/ip rule del iif lan0 lookup main priority 999 || true</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Here we setup <code>lan0</code> as the master for <code>eth1</code>, and assign the range <code>10.69.0.1/24</code>. Next up the <code>vpn0</code> interface:</p>
@@ -1173,7 +1207,6 @@ iface lan0 inet static
 </span><span class="lnt">10
 </span><span class="lnt">11
 </span><span class="lnt">12
-</span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash">$ cat /etc/network/interfaces.d/vpn0
@@ -1183,7 +1216,6 @@ iface vpn0 inet static
         netmask 255.255.255.0
         bridge_ports none
         pre-up ip link add <span class="nv">$IFACE</span> <span class="nb">type</span> bridge
-        post-up /sbin/ip route add default dev wg0 table vpn
         post-up /sbin/ip rule add iif vpn0 lookup vpn priority <span class="m">1000</span>
         post-up /sbin/ip rule add iif vpn0 blackhole priority <span class="m">1001</span>
         down /sbin/ip route del default dev wg0 table vpn <span class="o">||</span> <span class="nb">true</span>
@@ -1522,6 +1554,7 @@ forward-zone:
 </span><span class="lnt">59
 </span><span class="lnt">60
 </span><span class="lnt">61
+</span><span class="lnt">62
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash">*filter
@@ -1552,7 +1585,7 @@ COMMIT
 
 <span class="c1"># NAT rules</span>
 *nat
--A POSTROUTING -s 10.60.0.0/24 -o eth0 -j MASQUERADE -m comment --comment <span class="s2">&#34;LAN masquerade&#34;</span>
+-A POSTROUTING -s 10.69.0.0/24 -o eth0 -j MASQUERADE -m comment --comment <span class="s2">&#34;LAN masquerade&#34;</span>
 -A POSTROUTING -s 10.69.1.0/24 -o wg0 -j MASQUERADE -m comment --comment <span class="s2">&#34;VPN masquerade&#34;</span>
 COMMIT
 
@@ -1580,6 +1613,7 @@ COMMIT
 :FORWARD ACCEPT
 :OUTPUT ACCEPT
 COMMIT
+
 <span class="c1"># Default policies</span>
 *filter
 -A INPUT -j DROP
