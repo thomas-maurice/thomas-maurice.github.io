@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>Tags on /var/log/tmaurice</title>
-    <link>http://blog.thomas.maurice.fr/tags/</link>
+    <link>https://blog.thomas.maurice.fr/tags/</link>
     <description>Recent content in Tags on /var/log/tmaurice</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
@@ -16,17 +16,17 @@
     <copyright>&amp;copy;{year}, All Rights Reserved</copyright>
     <lastBuildDate>Sat, 29 Aug 2020 11:02:50 +0000</lastBuildDate>
     
-        <atom:link href="http://blog.thomas.maurice.fr/tags/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://blog.thomas.maurice.fr/tags/index.xml" rel="self" type="application/rss+xml" />
     
 
       
       <item>
         <title>kernel</title>
-        <link>http://blog.thomas.maurice.fr/tags/kernel/</link>
+        <link>https://blog.thomas.maurice.fr/tags/kernel/</link>
         <pubDate>Sat, 29 Aug 2020 11:02:50 +0000</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         
-        <guid>http://blog.thomas.maurice.fr/tags/kernel/</guid>
+        <guid>https://blog.thomas.maurice.fr/tags/kernel/</guid>
         <description></description>
         
         <dc:creator>Thomas</dc:creator>
@@ -40,11 +40,11 @@
       
       <item>
         <title>linux</title>
-        <link>http://blog.thomas.maurice.fr/tags/linux/</link>
+        <link>https://blog.thomas.maurice.fr/tags/linux/</link>
         <pubDate>Sat, 29 Aug 2020 11:02:50 +0000</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         
-        <guid>http://blog.thomas.maurice.fr/tags/linux/</guid>
+        <guid>https://blog.thomas.maurice.fr/tags/linux/</guid>
         <description></description>
         
         <dc:creator>Thomas</dc:creator>
@@ -58,11 +58,11 @@
       
       <item>
         <title>namespaces</title>
-        <link>http://blog.thomas.maurice.fr/tags/namespaces/</link>
+        <link>https://blog.thomas.maurice.fr/tags/namespaces/</link>
         <pubDate>Sat, 29 Aug 2020 11:02:50 +0000</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         
-        <guid>http://blog.thomas.maurice.fr/tags/namespaces/</guid>
+        <guid>https://blog.thomas.maurice.fr/tags/namespaces/</guid>
         <description></description>
         
         <dc:creator>Thomas</dc:creator>
@@ -76,11 +76,11 @@
       
       <item>
         <title>networking</title>
-        <link>http://blog.thomas.maurice.fr/tags/networking/</link>
+        <link>https://blog.thomas.maurice.fr/tags/networking/</link>
         <pubDate>Sat, 29 Aug 2020 11:02:50 +0000</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         
-        <guid>http://blog.thomas.maurice.fr/tags/networking/</guid>
+        <guid>https://blog.thomas.maurice.fr/tags/networking/</guid>
         <description></description>
         
         <dc:creator>Thomas</dc:creator>
@@ -94,11 +94,11 @@
       
       <item>
         <title>debian</title>
-        <link>http://blog.thomas.maurice.fr/tags/debian/</link>
+        <link>https://blog.thomas.maurice.fr/tags/debian/</link>
         <pubDate>Wed, 29 Jan 2020 19:40:22 +0000</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         
-        <guid>http://blog.thomas.maurice.fr/tags/debian/</guid>
+        <guid>https://blog.thomas.maurice.fr/tags/debian/</guid>
         <description></description>
         
         <dc:creator>Thomas</dc:creator>
@@ -112,11 +112,11 @@
       
       <item>
         <title>router</title>
-        <link>http://blog.thomas.maurice.fr/tags/router/</link>
+        <link>https://blog.thomas.maurice.fr/tags/router/</link>
         <pubDate>Wed, 29 Jan 2020 19:40:22 +0000</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         
-        <guid>http://blog.thomas.maurice.fr/tags/router/</guid>
+        <guid>https://blog.thomas.maurice.fr/tags/router/</guid>
         <description></description>
         
         <dc:creator>Thomas</dc:creator>
@@ -130,11 +130,11 @@
       
       <item>
         <title>security</title>
-        <link>http://blog.thomas.maurice.fr/tags/security/</link>
+        <link>https://blog.thomas.maurice.fr/tags/security/</link>
         <pubDate>Wed, 29 Jan 2020 19:40:22 +0000</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         
-        <guid>http://blog.thomas.maurice.fr/tags/security/</guid>
+        <guid>https://blog.thomas.maurice.fr/tags/security/</guid>
         <description></description>
         
         <dc:creator>Thomas</dc:creator>
@@ -148,11 +148,11 @@
       
       <item>
         <title>wireguard</title>
-        <link>http://blog.thomas.maurice.fr/tags/wireguard/</link>
+        <link>https://blog.thomas.maurice.fr/tags/wireguard/</link>
         <pubDate>Wed, 29 Jan 2020 19:40:22 +0000</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         
-        <guid>http://blog.thomas.maurice.fr/tags/wireguard/</guid>
+        <guid>https://blog.thomas.maurice.fr/tags/wireguard/</guid>
         <description></description>
         
         <dc:creator>Thomas</dc:creator>
@@ -166,11 +166,11 @@
       
       <item>
         <title>golang</title>
-        <link>http://blog.thomas.maurice.fr/tags/golang/</link>
+        <link>https://blog.thomas.maurice.fr/tags/golang/</link>
         <pubDate>Fri, 17 Jan 2020 18:56:22 +0000</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         
-        <guid>http://blog.thomas.maurice.fr/tags/golang/</guid>
+        <guid>https://blog.thomas.maurice.fr/tags/golang/</guid>
         <description></description>
         
         <dc:creator>Thomas</dc:creator>
@@ -184,11 +184,11 @@
       
       <item>
         <title>vault</title>
-        <link>http://blog.thomas.maurice.fr/tags/vault/</link>
+        <link>https://blog.thomas.maurice.fr/tags/vault/</link>
         <pubDate>Fri, 17 Jan 2020 18:56:22 +0000</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         
-        <guid>http://blog.thomas.maurice.fr/tags/vault/</guid>
+        <guid>https://blog.thomas.maurice.fr/tags/vault/</guid>
         <description></description>
         
         <dc:creator>Thomas</dc:creator>
@@ -202,11 +202,11 @@
       
       <item>
         <title>test</title>
-        <link>http://blog.thomas.maurice.fr/tags/test/</link>
+        <link>https://blog.thomas.maurice.fr/tags/test/</link>
         <pubDate>Sat, 11 Jan 2020 13:52:19 +0000</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         
-        <guid>http://blog.thomas.maurice.fr/tags/test/</guid>
+        <guid>https://blog.thomas.maurice.fr/tags/test/</guid>
         <description></description>
         
         <dc:creator>Thomas</dc:creator>

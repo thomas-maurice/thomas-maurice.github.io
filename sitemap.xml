@@ -2,93 +2,93 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://blog.thomas.maurice.fr/</loc>
+    <loc>https://blog.thomas.maurice.fr/</loc>
     <lastmod>2020-08-29T11:02:50+00:00</lastmod>
   </url><url>
-    <loc>http://blog.thomas.maurice.fr/categories/</loc>
+    <loc>https://blog.thomas.maurice.fr/categories/</loc>
     <lastmod>2020-08-29T11:02:50+00:00</lastmod>
   </url><url>
-    <loc>http://blog.thomas.maurice.fr/tags/kernel/</loc>
+    <loc>https://blog.thomas.maurice.fr/tags/kernel/</loc>
     <lastmod>2020-08-29T11:02:50+00:00</lastmod>
   </url><url>
-    <loc>http://blog.thomas.maurice.fr/categories/kernel/</loc>
+    <loc>https://blog.thomas.maurice.fr/categories/kernel/</loc>
     <lastmod>2020-08-29T11:02:50+00:00</lastmod>
   </url><url>
-    <loc>http://blog.thomas.maurice.fr/tags/linux/</loc>
+    <loc>https://blog.thomas.maurice.fr/tags/linux/</loc>
     <lastmod>2020-08-29T11:02:50+00:00</lastmod>
   </url><url>
-    <loc>http://blog.thomas.maurice.fr/categories/linux/</loc>
+    <loc>https://blog.thomas.maurice.fr/categories/linux/</loc>
     <lastmod>2020-08-29T11:02:50+00:00</lastmod>
   </url><url>
-    <loc>http://blog.thomas.maurice.fr/tags/namespaces/</loc>
+    <loc>https://blog.thomas.maurice.fr/tags/namespaces/</loc>
     <lastmod>2020-08-29T11:02:50+00:00</lastmod>
   </url><url>
-    <loc>http://blog.thomas.maurice.fr/categories/namespaces/</loc>
+    <loc>https://blog.thomas.maurice.fr/categories/namespaces/</loc>
     <lastmod>2020-08-29T11:02:50+00:00</lastmod>
   </url><url>
-    <loc>http://blog.thomas.maurice.fr/posts/network-namespaces-in-linux/</loc>
+    <loc>https://blog.thomas.maurice.fr/posts/network-namespaces-in-linux/</loc>
     <lastmod>2020-08-29T11:02:50+00:00</lastmod>
   </url><url>
-    <loc>http://blog.thomas.maurice.fr/tags/networking/</loc>
+    <loc>https://blog.thomas.maurice.fr/tags/networking/</loc>
     <lastmod>2020-08-29T11:02:50+00:00</lastmod>
   </url><url>
-    <loc>http://blog.thomas.maurice.fr/categories/networking/</loc>
+    <loc>https://blog.thomas.maurice.fr/categories/networking/</loc>
     <lastmod>2020-08-29T11:02:50+00:00</lastmod>
   </url><url>
-    <loc>http://blog.thomas.maurice.fr/posts/</loc>
+    <loc>https://blog.thomas.maurice.fr/posts/</loc>
     <lastmod>2020-08-29T11:02:50+00:00</lastmod>
   </url><url>
-    <loc>http://blog.thomas.maurice.fr/tags/</loc>
+    <loc>https://blog.thomas.maurice.fr/tags/</loc>
     <lastmod>2020-08-29T11:02:50+00:00</lastmod>
   </url><url>
-    <loc>http://blog.thomas.maurice.fr/tags/debian/</loc>
+    <loc>https://blog.thomas.maurice.fr/tags/debian/</loc>
     <lastmod>2020-01-29T19:40:22+00:00</lastmod>
   </url><url>
-    <loc>http://blog.thomas.maurice.fr/categories/debian/</loc>
+    <loc>https://blog.thomas.maurice.fr/categories/debian/</loc>
     <lastmod>2020-01-29T19:40:22+00:00</lastmod>
   </url><url>
-    <loc>http://blog.thomas.maurice.fr/posts/make-your-own-travel-router/</loc>
+    <loc>https://blog.thomas.maurice.fr/posts/make-your-own-travel-router/</loc>
     <lastmod>2020-01-29T19:40:22+00:00</lastmod>
   </url><url>
-    <loc>http://blog.thomas.maurice.fr/tags/router/</loc>
+    <loc>https://blog.thomas.maurice.fr/tags/router/</loc>
     <lastmod>2020-01-29T19:40:22+00:00</lastmod>
   </url><url>
-    <loc>http://blog.thomas.maurice.fr/tags/security/</loc>
+    <loc>https://blog.thomas.maurice.fr/tags/security/</loc>
     <lastmod>2020-01-29T19:40:22+00:00</lastmod>
   </url><url>
-    <loc>http://blog.thomas.maurice.fr/categories/security/</loc>
+    <loc>https://blog.thomas.maurice.fr/categories/security/</loc>
     <lastmod>2020-01-29T19:40:22+00:00</lastmod>
   </url><url>
-    <loc>http://blog.thomas.maurice.fr/tags/wireguard/</loc>
+    <loc>https://blog.thomas.maurice.fr/tags/wireguard/</loc>
     <lastmod>2020-01-29T19:40:22+00:00</lastmod>
   </url><url>
-    <loc>http://blog.thomas.maurice.fr/posts/vault-jwt-authentication/</loc>
+    <loc>https://blog.thomas.maurice.fr/posts/vault-jwt-authentication/</loc>
     <lastmod>2020-01-17T18:56:22+00:00</lastmod>
   </url><url>
-    <loc>http://blog.thomas.maurice.fr/tags/golang/</loc>
+    <loc>https://blog.thomas.maurice.fr/tags/golang/</loc>
     <lastmod>2020-01-17T18:56:22+00:00</lastmod>
   </url><url>
-    <loc>http://blog.thomas.maurice.fr/categories/golang/</loc>
+    <loc>https://blog.thomas.maurice.fr/categories/golang/</loc>
     <lastmod>2020-01-17T18:56:22+00:00</lastmod>
   </url><url>
-    <loc>http://blog.thomas.maurice.fr/tags/vault/</loc>
+    <loc>https://blog.thomas.maurice.fr/tags/vault/</loc>
     <lastmod>2020-01-17T18:56:22+00:00</lastmod>
   </url><url>
-    <loc>http://blog.thomas.maurice.fr/categories/vault/</loc>
+    <loc>https://blog.thomas.maurice.fr/categories/vault/</loc>
     <lastmod>2020-01-17T18:56:22+00:00</lastmod>
   </url><url>
-    <loc>http://blog.thomas.maurice.fr/categories/dev/</loc>
+    <loc>https://blog.thomas.maurice.fr/categories/dev/</loc>
     <lastmod>2020-01-11T13:52:19+00:00</lastmod>
   </url><url>
-    <loc>http://blog.thomas.maurice.fr/tags/test/</loc>
+    <loc>https://blog.thomas.maurice.fr/tags/test/</loc>
     <lastmod>2020-01-11T13:52:19+00:00</lastmod>
   </url><url>
-    <loc>http://blog.thomas.maurice.fr/posts/unit-testing-with-vault/</loc>
+    <loc>https://blog.thomas.maurice.fr/posts/unit-testing-with-vault/</loc>
     <lastmod>2020-01-11T13:52:19+00:00</lastmod>
   </url><url>
-    <loc>http://blog.thomas.maurice.fr/about/</loc>
+    <loc>https://blog.thomas.maurice.fr/about/</loc>
     <lastmod>2020-01-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://blog.thomas.maurice.fr/series/</loc>
+    <loc>https://blog.thomas.maurice.fr/series/</loc>
   </url>
 </urlset>

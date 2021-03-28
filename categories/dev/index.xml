@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>dev on /var/log/tmaurice</title>
-    <link>http://blog.thomas.maurice.fr/categories/dev/</link>
+    <link>https://blog.thomas.maurice.fr/categories/dev/</link>
     <description>Recent content in dev on /var/log/tmaurice</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
@@ -16,22 +16,22 @@
     <copyright>&amp;copy;{year}, All Rights Reserved</copyright>
     <lastBuildDate>Sat, 11 Jan 2020 13:52:19 +0000</lastBuildDate>
     
-        <atom:link href="http://blog.thomas.maurice.fr/categories/dev/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://blog.thomas.maurice.fr/categories/dev/index.xml" rel="self" type="application/rss+xml" />
     
 
       
       <item>
         <title>Unit Testing With Vault in Go</title>
-        <link>http://blog.thomas.maurice.fr/posts/unit-testing-with-vault/</link>
+        <link>https://blog.thomas.maurice.fr/posts/unit-testing-with-vault/</link>
         <pubDate>Sat, 11 Jan 2020 13:52:19 +0000</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         <atom:modified>Sat, 11 Jan 2020 13:52:19 +0000</atom:modified>
-        <guid>http://blog.thomas.maurice.fr/posts/unit-testing-with-vault/</guid>
+        <guid>https://blog.thomas.maurice.fr/posts/unit-testing-with-vault/</guid>
         <description>Recently I&amp;rsquo;ve been dealing with Hashicorp&amp;rsquo;s Vault a lot, and I&amp;rsquo;ve had to write a bunch of code to interface with it. This post is going to be about my least favourite part of writing code: unit testing what I wrote (as everyone knows, it works on my machine, right ?).
 Assumptions This article assumes that you are already familiar with what Vault is and the very basics of how to use it (get/put secrets, login and such).</description>
         
         <dc:creator>Thomas</dc:creator>
-        <media:content url="http://blog.thomas.maurice.frimages/logos/vault.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://blog.thomas.maurice.frimages/logos/vault.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         

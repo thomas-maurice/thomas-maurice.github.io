@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>kernel on /var/log/tmaurice</title>
-    <link>http://blog.thomas.maurice.fr/categories/kernel/</link>
+    <link>https://blog.thomas.maurice.fr/categories/kernel/</link>
     <description>Recent content in kernel on /var/log/tmaurice</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
@@ -16,23 +16,23 @@
     <copyright>&amp;copy;{year}, All Rights Reserved</copyright>
     <lastBuildDate>Sat, 29 Aug 2020 11:02:50 +0000</lastBuildDate>
     
-        <atom:link href="http://blog.thomas.maurice.fr/categories/kernel/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://blog.thomas.maurice.fr/categories/kernel/index.xml" rel="self" type="application/rss+xml" />
     
 
       
       <item>
         <title>Network namespaces in Linux</title>
-        <link>http://blog.thomas.maurice.fr/posts/network-namespaces-in-linux/</link>
+        <link>https://blog.thomas.maurice.fr/posts/network-namespaces-in-linux/</link>
         <pubDate>Sat, 29 Aug 2020 11:02:50 +0000</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         <atom:modified>Sat, 29 Aug 2020 11:02:50 +0000</atom:modified>
-        <guid>http://blog.thomas.maurice.fr/posts/network-namespaces-in-linux/</guid>
+        <guid>https://blog.thomas.maurice.fr/posts/network-namespaces-in-linux/</guid>
         <description>This post is a cheatsheet for myself in case I need to fuck around with network namespaces again.
 NB: most of the commands should be ran as root.
 Create a new netns 1 2 3 4  $ ip netns add testns # Check it works $ ip netns ls testns   Exec a command inside a netns 1 2 3  $ ip netns exec testns ip link show 1: lo: &amp;lt;LOOPBACK&amp;gt; mtu 65536 qdisc noop state DOWN mode DEFAULT group default qlen 1000 link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00   Connect the namespace from the outside Choose what we want to make as a network setup We want the following:</description>
         
         <dc:creator>Thomas</dc:creator>
-        <media:content url="http://blog.thomas.maurice.frimages/logos/tux.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://blog.thomas.maurice.frimages/logos/tux.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         

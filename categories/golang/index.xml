@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>golang on /var/log/tmaurice</title>
-    <link>http://blog.thomas.maurice.fr/categories/golang/</link>
+    <link>https://blog.thomas.maurice.fr/categories/golang/</link>
     <description>Recent content in golang on /var/log/tmaurice</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
@@ -16,21 +16,21 @@
     <copyright>&amp;copy;{year}, All Rights Reserved</copyright>
     <lastBuildDate>Fri, 17 Jan 2020 18:56:22 +0000</lastBuildDate>
     
-        <atom:link href="http://blog.thomas.maurice.fr/categories/golang/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://blog.thomas.maurice.fr/categories/golang/index.xml" rel="self" type="application/rss+xml" />
     
 
       
       <item>
         <title>Authenticate your services with Vault and JWTs</title>
-        <link>http://blog.thomas.maurice.fr/posts/vault-jwt-authentication/</link>
+        <link>https://blog.thomas.maurice.fr/posts/vault-jwt-authentication/</link>
         <pubDate>Fri, 17 Jan 2020 18:56:22 +0000</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         <atom:modified>Fri, 17 Jan 2020 18:56:22 +0000</atom:modified>
-        <guid>http://blog.thomas.maurice.fr/posts/vault-jwt-authentication/</guid>
+        <guid>https://blog.thomas.maurice.fr/posts/vault-jwt-authentication/</guid>
         <description>Sometimes, you may want your services to be able to talk to each other in an authenticated manner, and even perform some authorization. This is not easy to do and you might have scratched your head a bunch about how to do it. In this post I&amp;rsquo;m going to show you how to do something like this using hashicorp&amp;rsquo;s Vault. At the end of this post you&amp;rsquo;ll be able to issue and validate authorization tokens to make sure your services communicate in an authenticated and secure manner.</description>
         
         <dc:creator>Thomas</dc:creator>
-        <media:content url="http://blog.thomas.maurice.frimages/logos/vault.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://blog.thomas.maurice.frimages/logos/vault.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -68,16 +68,16 @@
       
       <item>
         <title>Unit Testing With Vault in Go</title>
-        <link>http://blog.thomas.maurice.fr/posts/unit-testing-with-vault/</link>
+        <link>https://blog.thomas.maurice.fr/posts/unit-testing-with-vault/</link>
         <pubDate>Sat, 11 Jan 2020 13:52:19 +0000</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         <atom:modified>Sat, 11 Jan 2020 13:52:19 +0000</atom:modified>
-        <guid>http://blog.thomas.maurice.fr/posts/unit-testing-with-vault/</guid>
+        <guid>https://blog.thomas.maurice.fr/posts/unit-testing-with-vault/</guid>
         <description>Recently I&amp;rsquo;ve been dealing with Hashicorp&amp;rsquo;s Vault a lot, and I&amp;rsquo;ve had to write a bunch of code to interface with it. This post is going to be about my least favourite part of writing code: unit testing what I wrote (as everyone knows, it works on my machine, right ?).
 Assumptions This article assumes that you are already familiar with what Vault is and the very basics of how to use it (get/put secrets, login and such).</description>
         
         <dc:creator>Thomas</dc:creator>
-        <media:content url="http://blog.thomas.maurice.frimages/logos/vault.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://blog.thomas.maurice.frimages/logos/vault.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         

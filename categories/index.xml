@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>Categories on /var/log/tmaurice</title>
-    <link>http://blog.thomas.maurice.fr/categories/</link>
+    <link>https://blog.thomas.maurice.fr/categories/</link>
     <description>Recent content in Categories on /var/log/tmaurice</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
@@ -16,17 +16,17 @@
     <copyright>&amp;copy;{year}, All Rights Reserved</copyright>
     <lastBuildDate>Sat, 29 Aug 2020 11:02:50 +0000</lastBuildDate>
     
-        <atom:link href="http://blog.thomas.maurice.fr/categories/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://blog.thomas.maurice.fr/categories/index.xml" rel="self" type="application/rss+xml" />
     
 
       
       <item>
         <title>kernel</title>
-        <link>http://blog.thomas.maurice.fr/categories/kernel/</link>
+        <link>https://blog.thomas.maurice.fr/categories/kernel/</link>
         <pubDate>Sat, 29 Aug 2020 11:02:50 +0000</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         
-        <guid>http://blog.thomas.maurice.fr/categories/kernel/</guid>
+        <guid>https://blog.thomas.maurice.fr/categories/kernel/</guid>
         <description></description>
         
         <dc:creator>Thomas</dc:creator>
@@ -40,11 +40,11 @@
       
       <item>
         <title>linux</title>
-        <link>http://blog.thomas.maurice.fr/categories/linux/</link>
+        <link>https://blog.thomas.maurice.fr/categories/linux/</link>
         <pubDate>Sat, 29 Aug 2020 11:02:50 +0000</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         
-        <guid>http://blog.thomas.maurice.fr/categories/linux/</guid>
+        <guid>https://blog.thomas.maurice.fr/categories/linux/</guid>
         <description></description>
         
         <dc:creator>Thomas</dc:creator>
@@ -58,11 +58,11 @@
       
       <item>
         <title>namespaces</title>
-        <link>http://blog.thomas.maurice.fr/categories/namespaces/</link>
+        <link>https://blog.thomas.maurice.fr/categories/namespaces/</link>
         <pubDate>Sat, 29 Aug 2020 11:02:50 +0000</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         
-        <guid>http://blog.thomas.maurice.fr/categories/namespaces/</guid>
+        <guid>https://blog.thomas.maurice.fr/categories/namespaces/</guid>
         <description></description>
         
         <dc:creator>Thomas</dc:creator>
@@ -76,11 +76,11 @@
       
       <item>
         <title>networking</title>
-        <link>http://blog.thomas.maurice.fr/categories/networking/</link>
+        <link>https://blog.thomas.maurice.fr/categories/networking/</link>
         <pubDate>Sat, 29 Aug 2020 11:02:50 +0000</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         
-        <guid>http://blog.thomas.maurice.fr/categories/networking/</guid>
+        <guid>https://blog.thomas.maurice.fr/categories/networking/</guid>
         <description></description>
         
         <dc:creator>Thomas</dc:creator>
@@ -94,11 +94,11 @@
       
       <item>
         <title>debian</title>
-        <link>http://blog.thomas.maurice.fr/categories/debian/</link>
+        <link>https://blog.thomas.maurice.fr/categories/debian/</link>
         <pubDate>Wed, 29 Jan 2020 19:40:22 +0000</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         
-        <guid>http://blog.thomas.maurice.fr/categories/debian/</guid>
+        <guid>https://blog.thomas.maurice.fr/categories/debian/</guid>
         <description></description>
         
         <dc:creator>Thomas</dc:creator>
@@ -112,11 +112,11 @@
       
       <item>
         <title>security</title>
-        <link>http://blog.thomas.maurice.fr/categories/security/</link>
+        <link>https://blog.thomas.maurice.fr/categories/security/</link>
         <pubDate>Wed, 29 Jan 2020 19:40:22 +0000</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         
-        <guid>http://blog.thomas.maurice.fr/categories/security/</guid>
+        <guid>https://blog.thomas.maurice.fr/categories/security/</guid>
         <description></description>
         
         <dc:creator>Thomas</dc:creator>
@@ -130,11 +130,11 @@
       
       <item>
         <title>golang</title>
-        <link>http://blog.thomas.maurice.fr/categories/golang/</link>
+        <link>https://blog.thomas.maurice.fr/categories/golang/</link>
         <pubDate>Fri, 17 Jan 2020 18:56:22 +0000</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         
-        <guid>http://blog.thomas.maurice.fr/categories/golang/</guid>
+        <guid>https://blog.thomas.maurice.fr/categories/golang/</guid>
         <description></description>
         
         <dc:creator>Thomas</dc:creator>
@@ -148,11 +148,11 @@
       
       <item>
         <title>vault</title>
-        <link>http://blog.thomas.maurice.fr/categories/vault/</link>
+        <link>https://blog.thomas.maurice.fr/categories/vault/</link>
         <pubDate>Fri, 17 Jan 2020 18:56:22 +0000</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         
-        <guid>http://blog.thomas.maurice.fr/categories/vault/</guid>
+        <guid>https://blog.thomas.maurice.fr/categories/vault/</guid>
         <description></description>
         
         <dc:creator>Thomas</dc:creator>
@@ -166,11 +166,11 @@
       
       <item>
         <title>dev</title>
-        <link>http://blog.thomas.maurice.fr/categories/dev/</link>
+        <link>https://blog.thomas.maurice.fr/categories/dev/</link>
         <pubDate>Sat, 11 Jan 2020 13:52:19 +0000</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         
-        <guid>http://blog.thomas.maurice.fr/categories/dev/</guid>
+        <guid>https://blog.thomas.maurice.fr/categories/dev/</guid>
         <description></description>
         
         <dc:creator>Thomas</dc:creator>
