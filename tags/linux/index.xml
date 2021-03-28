@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>linux on /var/log/tmaurice</title>
     <link>http://blog.thomas.maurice.fr/tags/linux/</link>
@@ -13,18 +18,62 @@
     
         <atom:link href="http://blog.thomas.maurice.fr/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    
+
       
       <item>
         <title>Network namespaces in Linux</title>
         <link>http://blog.thomas.maurice.fr/posts/network-namespaces-in-linux/</link>
         <pubDate>Sat, 29 Aug 2020 11:02:50 +0000</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
+        <atom:modified>Sat, 29 Aug 2020 11:02:50 +0000</atom:modified>
         <guid>http://blog.thomas.maurice.fr/posts/network-namespaces-in-linux/</guid>
         <description>This post is a cheatsheet for myself in case I need to fuck around with network namespaces again.
 NB: most of the commands should be ran as root.
 Create a new netns 1 2 3 4  $ ip netns add testns # Check it works $ ip netns ls testns   Exec a command inside a netns 1 2 3  $ ip netns exec testns ip link show 1: lo: &amp;lt;LOOPBACK&amp;gt; mtu 65536 qdisc noop state DOWN mode DEFAULT group default qlen 1000 link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00   Connect the namespace from the outside Choose what we want to make as a network setup We want the following:</description>
+        
+        <dc:creator>Thomas</dc:creator>
+        <media:content url="http://blog.thomas.maurice.frimages/logos/tux.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        
+        
+          
+            
+              <category>linux</category>
+            
+          
+            
+              <category>networking</category>
+            
+          
+            
+              <category>kernel</category>
+            
+          
+            
+              <category>namespaces</category>
+            
+          
+        
+        
+          
+            
+              <category>linux</category>
+            
+          
+            
+              <category>networking</category>
+            
+          
+            
+              <category>kernel</category>
+            
+          
+            
+              <category>namespaces</category>
+            
+          
+        
+        
       </item>
       
       <item>
@@ -32,10 +81,64 @@ Create a new netns 1 2 3 4  $ ip netns add testns # Check it works $ ip netns ls
         <link>http://blog.thomas.maurice.fr/posts/make-your-own-travel-router/</link>
         <pubDate>Wed, 29 Jan 2020 19:40:22 +0000</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
+        <atom:modified>Wed, 29 Jan 2020 19:40:22 +0000</atom:modified>
         <guid>http://blog.thomas.maurice.fr/posts/make-your-own-travel-router/</guid>
         <description>When you travel, you may sometimes want to be able to access some resources that are present on your flat&amp;rsquo;s network, make your traffic go through a VPN or what not because you don&amp;rsquo;t trust the network you are in (wether it is a hotel/coffee shop or what not). This blogpost is going to explain how you can build a nice travel router for when you travel around, so no one steals your nudes or snoops on the sketchy p0rn you watch.</description>
+        
+        <dc:creator>Thomas</dc:creator>
+        <media:content url="http://blog.thomas.maurice.frimages/logos/armbian.jpg" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        
+        
+          
+            
+              <category>security</category>
+            
+          
+            
+              <category>networking</category>
+            
+          
+            
+              <category>router</category>
+            
+          
+            
+              <category>wireguard</category>
+            
+          
+            
+              <category>debian</category>
+            
+          
+            
+              <category>linux</category>
+            
+          
+        
+        
+          
+            
+              <category>security</category>
+            
+          
+            
+              <category>debian</category>
+            
+          
+            
+              <category>networking</category>
+            
+          
+            
+              <category>linux</category>
+            
+          
+        
+        
       </item>
       
+
     
   </channel>
 </rss>
