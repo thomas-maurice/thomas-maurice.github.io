@@ -663,6 +663,12 @@
     
     var enableSearch = JSON.parse("true");
     
+    var searchDistance = JSON.parse("null");
+    
+    var searchThreshold = JSON.parse("null");
+    
+    var searchContent = JSON.parse("null");
+    
     var enableSearchHighlight = JSON.parse("true");
     
     var searchResultPosition = JSON.parse("\"main\"");
@@ -686,12 +692,13 @@
         xhr.onload = function () {
           if (xhr.status === 200) {
             fuse = new Fuse(JSON.parse(xhr.response.toString('utf-8')), {
-              keys: sectionType.includes('publication') ? ['title', 'abstract'] : ['title', 'description', 'content'],
+              keys: sectionType.includes('publication') ? ['title', 'abstract'] : 
+                searchContent ? ['title', 'description', 'content'] : ['title', 'description'],
               includeMatches: enableSearchHighlight,
               shouldSort: true, 
-              threshold: 0.4, 
+              threshold: searchThreshold ? searchThreshold : 0.4, 
               location: 0, 
-              distance: 100, 
+              distance: searchDistance ? searchDistance : 100, 
               maxPatternLength: 32,
               minMatchCharLength: 1,
               isCaseSensitive: false, 
@@ -715,7 +722,7 @@
       var a = document.createElement('a');
       a.innerHTML = obj.item.title;
       a.setAttribute('class', 'search-result__item--title');
-      a.setAttribute('href', obj.item.permalink);
+      a.setAttribute('href', obj.item.uri);
 
       var descDiv = document.createElement('div');
       descDiv.setAttribute('class', 'search-result__item--desc');
@@ -1315,7 +1322,8 @@
     }
   
   });
-</script>    
+</script>
+    
     
 
 
@@ -1356,7 +1364,7 @@ and do not trust the person or entity providing you internet !
 ">
   
 
-<meta name="generator" content="Hugo 0.82.0" />
+<meta name="generator" content="Hugo 0.87.0" />
 <meta name="msapplication-TileColor" content="#fff">
 
 <meta name="theme-color" content="#fff">
@@ -1730,13 +1738,13 @@ net.ipv6.conf.default.disable_ipv6=1
 </code></pre><h3 id="install-a-few-packets">Install a few packets</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ apt-get install -y <span class="se">\
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ apt-get install -y <span class="se">\
 </span><span class="se"></span>    bridge-utils <span class="se">\
 </span><span class="se"></span>    wireguard-tools <span class="se">\
 </span><span class="se"></span>    tcpdump
@@ -1745,17 +1753,17 @@ net.ipv6.conf.default.disable_ipv6=1
 </div><h3 id="reboot">Reboot</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ reboot
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ reboot
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="setting-up-the-network-interfaces">Setting up the network interfaces</h2>
 <p>So if you look at what you have right now, you should see the following</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1770,7 +1778,7 @@ net.ipv6.conf.default.disable_ipv6=1
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">root swagmachine ~ <span class="c1"># ip l</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">root swagmachine ~ <span class="c1"># ip l</span>
 1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu <span class="m">65536</span> qdisc noqueue state UNKNOWN mode DEFAULT group default qlen <span class="m">1000</span>
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
 2: dummy0: &lt;BROADCAST,NOARP&gt; mtu <span class="m">1500</span> qdisc noop state DOWN mode DEFAULT group default qlen <span class="m">1000</span>
@@ -1811,17 +1819,17 @@ Endpoint = [REDACTED]:5555
 <p>Start the interface now</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ systemctl start wg-quick@wg0
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ systemctl start wg-quick@wg0
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="create-a-custom-routing-table">Create a custom routing table</h3>
 <p>We need a custom routing table for the VPN only network, this will allow us to make sure that the traffic on this network is routed accordingly to this table, to avoid it going out unencrypted through <code>eth0</code> and leaking to potential curious eyes. Alter the <code>/etc/iproute2/rt_tables</code> file as follows:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1836,7 +1844,7 @@ Endpoint = [REDACTED]:5555
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ cat /etc/iproute2/rt_tables
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ cat /etc/iproute2/rt_tables
 <span class="c1">#</span>
 <span class="c1"># reserved values</span>
 <span class="c1">#</span>
@@ -1860,7 +1868,7 @@ Endpoint = [REDACTED]:5555
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1874,7 +1882,7 @@ Endpoint = [REDACTED]:5555
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ cat /etc/network/interfaces.d/lan0
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ cat /etc/network/interfaces.d/lan0
 auto lan0
 iface lan0 inet static
         address 10.69.0.1
@@ -1891,7 +1899,7 @@ iface lan0 inet static
 </div><p>Here we setup <code>lan0</code> as the master for <code>eth1</code>, and assign the range <code>10.69.0.1/24</code>. Next up the <code>vpn0</code> interface:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1905,7 +1913,7 @@ iface lan0 inet static
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ cat /etc/network/interfaces.d/vpn0
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ cat /etc/network/interfaces.d/vpn0
 auto vpn0
 iface vpn0 inet static
         address 10.69.1.1
@@ -1930,11 +1938,11 @@ iface vpn0 inet static
 <p>You may now bring the interfaces up</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># ifup vpn0</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># ifup vpn0</span>
 <span class="c1"># ifup lan0</span>
 </code></pre></td></tr></table>
 </div>
@@ -1942,16 +1950,16 @@ iface vpn0 inet static
 <p>Install <code>hostapd</code> if it is not already present</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">apt-get install hostapd
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">apt-get install hostapd
 </code></pre></td></tr></table>
 </div>
 </div><p>And now create the two networks, the LAN:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1968,7 +1976,7 @@ iface vpn0 inet static
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ cat /etc/hostapd-lan.conf
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ cat /etc/hostapd-lan.conf
 <span class="nv">interface</span><span class="o">=</span>wlan1
 <span class="nv">hw_mode</span><span class="o">=</span>g
 <span class="nv">ieee80211n</span><span class="o">=</span><span class="m">1</span>
@@ -1988,7 +1996,7 @@ iface vpn0 inet static
 </div><p>And the VPN</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2012,7 +2020,7 @@ iface vpn0 inet static
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ cat /etc/hostapd-vpn.conf 
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ cat /etc/hostapd-vpn.conf 
 <span class="nv">interface</span><span class="o">=</span>wlan0
 <span class="nv">hw_mode</span><span class="o">=</span>g
 <span class="nv">channel</span><span class="o">=</span><span class="m">5</span>
@@ -2040,7 +2048,7 @@ iface vpn0 inet static
 <p>Then edit the default <code>hostapd</code> arguments to make sure these 2 config files are loaded:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2053,7 +2061,7 @@ iface vpn0 inet static
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># cat /etc/default/hostapd</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># cat /etc/default/hostapd</span>
 <span class="c1"># Defaults for hostapd initscript</span>
 <span class="c1">#</span>
 <span class="c1"># See /usr/share/doc/hostapd/README.Debian for information about alternative</span>
@@ -2069,10 +2077,10 @@ iface vpn0 inet static
 </div><p>Then restart the service</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># systemctl restart hostapd</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># systemctl restart hostapd</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>You should now see your 2 SSID announced.</p>
@@ -2080,7 +2088,7 @@ iface vpn0 inet static
 <p>We use <code>dnsmasq</code> for DHCP, it should be installed by default. Setup the following configuration file and restart the service:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2094,7 +2102,7 @@ iface vpn0 inet static
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">cat /etc/dnsmasq.conf
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">cat /etc/dnsmasq.conf
 <span class="nv">interface</span><span class="o">=</span>vpn0
 listen-address<span class="o">=</span>10.69.0.1,10.69.1.1
 <span class="nv">server</span><span class="o">=</span>6,10.69.0.1
@@ -2114,7 +2122,7 @@ dhcp-option<span class="o">=</span>interface:lan0,6,10.69.0.1
 <p>We will now setup <code>unbound</code> as a DNS resolver, update the config and restart the service</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2139,7 +2147,7 @@ dhcp-option<span class="o">=</span>interface:lan0,6,10.69.0.1
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">include: <span class="s2">&#34;/etc/unbound/unbound.conf.d/*.conf&#34;</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">include: <span class="s2">&#34;/etc/unbound/unbound.conf.d/*.conf&#34;</span>
 
 server:
   verbosity: <span class="m">1</span>
@@ -2169,19 +2177,19 @@ forward-zone:
 <p>It has the annoying habbit to change <code>/etc/resolve.conf</code>, just edit the file to make it look like</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">nameserver 127.0.0.1
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">nameserver 127.0.0.1
 </code></pre></td></tr></table>
 </div>
 </div><p>Then</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># chattr +i /etc/resolv.conf</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># chattr +i /etc/resolv.conf</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>This will ensure that no one can modify the file.</p>
@@ -2189,7 +2197,7 @@ forward-zone:
 <p>You now need to setup the iptables rules to allow everything to work, edit the <code>/etc/iptables.ipv4.nat</code> file (this will only work on armbian):</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2253,7 +2261,7 @@ forward-zone:
 </span><span class="lnt">62
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">*filter
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">*filter
 
 -A INPUT -i lo -j ACCEPT -m comment --comment <span class="s2">&#34;Allow local traffic&#34;</span>
 

@@ -663,6 +663,12 @@
     
     var enableSearch = JSON.parse("true");
     
+    var searchDistance = JSON.parse("null");
+    
+    var searchThreshold = JSON.parse("null");
+    
+    var searchContent = JSON.parse("null");
+    
     var enableSearchHighlight = JSON.parse("true");
     
     var searchResultPosition = JSON.parse("\"main\"");
@@ -686,12 +692,13 @@
         xhr.onload = function () {
           if (xhr.status === 200) {
             fuse = new Fuse(JSON.parse(xhr.response.toString('utf-8')), {
-              keys: sectionType.includes('publication') ? ['title', 'abstract'] : ['title', 'description', 'content'],
+              keys: sectionType.includes('publication') ? ['title', 'abstract'] : 
+                searchContent ? ['title', 'description', 'content'] : ['title', 'description'],
               includeMatches: enableSearchHighlight,
               shouldSort: true, 
-              threshold: 0.4, 
+              threshold: searchThreshold ? searchThreshold : 0.4, 
               location: 0, 
-              distance: 100, 
+              distance: searchDistance ? searchDistance : 100, 
               maxPatternLength: 32,
               minMatchCharLength: 1,
               isCaseSensitive: false, 
@@ -715,7 +722,7 @@
       var a = document.createElement('a');
       a.innerHTML = obj.item.title;
       a.setAttribute('class', 'search-result__item--title');
-      a.setAttribute('href', obj.item.permalink);
+      a.setAttribute('href', obj.item.uri);
 
       var descDiv = document.createElement('div');
       descDiv.setAttribute('class', 'search-result__item--desc');
@@ -1315,7 +1322,8 @@
     }
   
   });
-</script>    
+</script>
+    
     
 
 
@@ -1350,7 +1358,7 @@
     <meta property="twitter:description" content="/var/log/tmaurice">
   
 
-<meta name="generator" content="Hugo 0.82.0" />
+<meta name="generator" content="Hugo 0.87.0" />
 <meta name="msapplication-TileColor" content="#fff">
 
 <meta name="theme-color" content="#fff">
@@ -1703,20 +1711,20 @@ if (!doNotTrack) {
 <p>We are going to demonstrate that with a dev vault, so first start a vault server in a separate terminal.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ vault server -dev-root-token-id<span class="o">=</span>token -dev
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ vault server -dev-root-token-id<span class="o">=</span>token -dev
 </code></pre></td></tr></table>
 </div>
 </div><p>In another terminal</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">export</span> <span class="nv">VAULT_ADDR</span><span class="o">=</span>http://localhost:8200
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">export</span> <span class="nv">VAULT_ADDR</span><span class="o">=</span>http://localhost:8200
 <span class="nb">export</span> <span class="nv">VAULT_TOKEN</span><span class="o">=</span>token
 </code></pre></td></tr></table>
 </div>
@@ -1724,11 +1732,11 @@ if (!doNotTrack) {
 <p>We will need to create a policy to allow the account (that we will create right after) to perform some basic operations on Vault. For the purpose of this article we are going to create a read only policy on the whole Vault. You obviously do not want to do that in an actual production environment.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">echo</span> <span class="s2">&#34;path \&#34;*\&#34; {capabilities = [\&#34;read\&#34;]}&#34;</span> <span class="p">|</span> vault policy write <span class="nb">readonly</span> -
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">echo</span> <span class="s2">&#34;path \&#34;*\&#34; {capabilities = [\&#34;read\&#34;]}&#34;</span> <span class="p">|</span> vault policy write <span class="nb">readonly</span> -
 Success! Uploaded policy: <span class="nb">readonly</span>
 </code></pre></td></tr></table>
 </div>
@@ -1736,21 +1744,21 @@ Success! Uploaded policy: <span class="nb">readonly</span>
 <p>To create the OIDC issuer, do</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ vault write identity/issuer/config <span class="nv">issuer</span><span class="o">=</span>http://localhost:8200
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ vault write identity/issuer/config <span class="nv">issuer</span><span class="o">=</span>http://localhost:8200
 </code></pre></td></tr></table>
 </div>
 </div><p>This will be used to populate the <code>issuer</code> field of your tokens.</p>
 <p>You will need then to create a <a href="https://www.vaultproject.io/api/secret/identity/tokens.html#create-a-named-key">key</a> to sign your tokens:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ vault write identity/oidc/key/key <span class="nv">algorithm</span><span class="o">=</span>ES256 <span class="nv">allowed_client_ids</span><span class="o">=</span><span class="s1">&#39;*&#39;</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ vault write identity/oidc/key/key <span class="nv">algorithm</span><span class="o">=</span>ES256 <span class="nv">allowed_client_ids</span><span class="o">=</span><span class="s1">&#39;*&#39;</span>
 Success! Data written to: identity/oidc/key/key
 </code></pre></td></tr></table>
 </div>
@@ -1758,11 +1766,11 @@ Success! Data written to: identity/oidc/key/key
 <p>You then need to create something called a <code>role</code> in Vault. Which will map to the app you want to authenticate against. In this example we will assume that our app is called <code>demo</code>, you will have to create it as follows (so it is signed with the <code>key</code> created above):</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ vault write identity/oidc/role/demo <span class="nv">name</span><span class="o">=</span>demo <span class="nv">key</span><span class="o">=</span>key
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ vault write identity/oidc/role/demo <span class="nv">name</span><span class="o">=</span>demo <span class="nv">key</span><span class="o">=</span>key
 Success! Data written to: identity/oidc/role/demo
 </code></pre></td></tr></table>
 </div>
@@ -1772,35 +1780,35 @@ Success! Data written to: identity/oidc/role/demo
 <p>Enable the <code>approle</code> authentication backend:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ vault auth <span class="nb">enable</span> approle
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ vault auth <span class="nb">enable</span> approle
 Success! Enabled approle auth method at: approle/
 </code></pre></td></tr></table>
 </div>
 </div><p>Now create the actual <code>approle</code>, it will be called <code>demo-approle</code>:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ vault write auth/approle/role/demo-approle <span class="nv">role_name</span><span class="o">=</span>demo-approle <span class="nv">policies</span><span class="o">=</span><span class="nb">readonly</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ vault write auth/approle/role/demo-approle <span class="nv">role_name</span><span class="o">=</span>demo-approle <span class="nv">policies</span><span class="o">=</span><span class="nb">readonly</span>
 Success! Data written to: auth/approle/role/demo-approle
 </code></pre></td></tr></table>
 </div>
 </div><p>Then you will need to get two pieces of information, the <code>roleid</code> and the <code>secretid</code> for the approle. These are the equivalent of the username and the password to authenticate yourself.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ <span class="nv">secret_id</span><span class="o">=</span><span class="k">$(</span>vault write -force -format<span class="o">=</span>json auth/approle/role/demo-approle/secret-id <span class="p">|</span> jq -r .data.secret_id<span class="k">)</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ <span class="nv">secret_id</span><span class="o">=</span><span class="k">$(</span>vault write -force -format<span class="o">=</span>json auth/approle/role/demo-approle/secret-id <span class="p">|</span> jq -r .data.secret_id<span class="k">)</span>
 $ <span class="nv">role_id</span><span class="o">=</span><span class="k">$(</span>vault <span class="nb">read</span> -format<span class="o">=</span>json auth/approle/role/demo-approle/role-id <span class="p">|</span> jq -r .data.role_id<span class="k">)</span>
 $ <span class="nb">echo</span> <span class="nv">$role_id</span> <span class="nv">$secret_id</span>
 ca9f0470-8d1f-4464-2635-25f02b9407d7 f91a7c31-dc06-2b24-20fd-e9f5867c32a8
@@ -1811,12 +1819,12 @@ ca9f0470-8d1f-4464-2635-25f02b9407d7 f91a7c31-dc06-2b24-20fd-e9f5867c32a8
 <p>Now that we have created the approle, we need to map it to an internal Vault <code>entity</code>, you need to do that because several <code>entities</code> can be mapped to various authentication backends, like <code>userpass</code> or if you use something like Google or what not. So first, create the entity and save it for later:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">entity_id</span><span class="o">=</span><span class="k">$(</span>vault write -format<span class="o">=</span>json identity/entity <span class="nv">name</span><span class="o">=</span>demo <span class="p">|</span>jq .data.id -r<span class="k">)</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">entity_id</span><span class="o">=</span><span class="k">$(</span>vault write -format<span class="o">=</span>json identity/entity <span class="nv">name</span><span class="o">=</span>demo <span class="p">|</span>jq .data.id -r<span class="k">)</span>
 $ <span class="nb">echo</span> <span class="nv">$entity_id</span>
 c957656f-0872-766c-3517-83b787672f84
 </code></pre></td></tr></table>
@@ -1824,12 +1832,12 @@ c957656f-0872-766c-3517-83b787672f84
 </div><p>Now you finally need to create an <code>entity alias</code> to make the link between the <code>entity</code> and the <code>approle</code> authentication backend (that is tedious I know but bear with me i swear it is worth it). Retrieve the <code>accessor</code>, which is the internal Vault reference to your approle authentication backend:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ <span class="nv">accessor</span><span class="o">=</span><span class="k">$(</span>vault auth list -format<span class="o">=</span>json <span class="p">|</span> grep <span class="s1">&#39;auth_approle&#39;</span> <span class="p">|</span> tr -d <span class="s2">&#34; &#34;</span> <span class="p">|</span> tr -d , <span class="p">|</span> cut -d <span class="s2">&#34;:&#34;</span> -f <span class="m">2</span> <span class="p">|</span> tr -d <span class="se">\&#34;</span><span class="k">)</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ <span class="nv">accessor</span><span class="o">=</span><span class="k">$(</span>vault auth list -format<span class="o">=</span>json <span class="p">|</span> grep <span class="s1">&#39;auth_approle&#39;</span> <span class="p">|</span> tr -d <span class="s2">&#34; &#34;</span> <span class="p">|</span> tr -d , <span class="p">|</span> cut -d <span class="s2">&#34;:&#34;</span> -f <span class="m">2</span> <span class="p">|</span> tr -d <span class="se">\&#34;</span><span class="k">)</span>
 $ <span class="nb">echo</span> <span class="nv">$accessor</span>
 auth_approle_91098819
 </code></pre></td></tr></table>
@@ -1837,14 +1845,14 @@ auth_approle_91098819
 </div><p>Now finally (<code>y e s   f i n a l l y</code>) create the alias:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ vault write identity/entity-alias <span class="nv">name</span><span class="o">=</span>demo <span class="nv">canonical_id</span><span class="o">=</span><span class="nv">$entity_id</span> <span class="nv">mount_accessor</span><span class="o">=</span><span class="nv">$accessor</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ vault write identity/entity-alias <span class="nv">name</span><span class="o">=</span>demo <span class="nv">canonical_id</span><span class="o">=</span><span class="nv">$entity_id</span> <span class="nv">mount_accessor</span><span class="o">=</span><span class="nv">$accessor</span>
 Key             Value
 ---             -----
 canonical_id    c957656f-0872-766c-3517-83b787672f84
@@ -1856,13 +1864,13 @@ id              a2d067d6-229b-6580-d714-35a01ba62864
 <p>Now all you need to do is to log into Vault using the approle, then issue a token:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ <span class="nv">token</span><span class="o">=</span><span class="k">$(</span>vault write -format<span class="o">=</span>json auth/approle/login <span class="nv">role_id</span><span class="o">=</span><span class="nv">$role_id</span> <span class="nv">secret_id</span><span class="o">=</span><span class="nv">$secret_id</span> <span class="p">|</span> jq -r .auth.client_token<span class="k">)</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ <span class="nv">token</span><span class="o">=</span><span class="k">$(</span>vault write -format<span class="o">=</span>json auth/approle/login <span class="nv">role_id</span><span class="o">=</span><span class="nv">$role_id</span> <span class="nv">secret_id</span><span class="o">=</span><span class="nv">$secret_id</span> <span class="p">|</span> jq -r .auth.client_token<span class="k">)</span>
 $ <span class="nb">export</span> <span class="nv">VAULT_TOKEN</span><span class="o">=</span><span class="nv">$token</span>
 $ <span class="nb">echo</span> <span class="nv">$token</span>
 s.ohsNR1DIo6sVr8gG8hsRsk1Y
@@ -1871,7 +1879,7 @@ s.ohsNR1DIo6sVr8gG8hsRsk1Y
 </div><p>You are now logged into Vault as your approle ! Check it by running:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1893,7 +1901,7 @@ s.ohsNR1DIo6sVr8gG8hsRsk1Y
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">vault token lookup 
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">vault token lookup 
 Key                 Value
 ---                 -----
 accessor            Tc6riT70kLnepiW3CC0rEkBj
@@ -1919,7 +1927,7 @@ ttl                 767h58m57s
 <p>Finally you can issue a token:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1927,7 +1935,7 @@ ttl                 767h58m57s
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ vault <span class="nb">read</span> identity/oidc/token/demo
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ vault <span class="nb">read</span> identity/oidc/token/demo
 Key          Value
 ---          -----
 client_id    waqwjTM57B7ANxhw7CketPy1WJ
@@ -1939,13 +1947,13 @@ ttl          24h
 <p>Let&rsquo;s unpack the token a bit using the <a href="https://jwt.io/#debugger">debugger</a>. The headers read</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
   <span class="nt">&#34;alg&#34;</span><span class="p">:</span> <span class="s2">&#34;ES256&#34;</span><span class="p">,</span>
   <span class="nt">&#34;kid&#34;</span><span class="p">:</span> <span class="s2">&#34;962cbe97-f3ca-15c3-042d-61e431c194e0&#34;</span>
 <span class="p">}</span>
@@ -1955,7 +1963,7 @@ ttl          24h
 <p>The body of the token reads the following:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1965,7 +1973,7 @@ ttl          24h
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
   <span class="nt">&#34;aud&#34;</span><span class="p">:</span> <span class="s2">&#34;waqwjTM57B7ANxhw7CketPy1WJ&#34;</span><span class="p">,</span>
   <span class="nt">&#34;exp&#34;</span><span class="p">:</span> <span class="mi">1579374008</span><span class="p">,</span>
   <span class="nt">&#34;iat&#34;</span><span class="p">:</span> <span class="mi">1579287608</span><span class="p">,</span>
@@ -1994,7 +2002,7 @@ ttl          24h
 <p>Vault exposes an unauthenticated endpoint that allows you to retrieve the public part of the signing keys used for the tokens, which you can access the following way</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2010,7 +2018,7 @@ ttl          24h
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ curl localhost:8200/v1/identity/oidc/.well-known/keys<span class="p">|</span> jq .
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ curl localhost:8200/v1/identity/oidc/.well-known/keys<span class="p">|</span> jq .
 <span class="o">{</span>
   <span class="s2">&#34;keys&#34;</span>: <span class="o">[</span>
     <span class="o">{</span>

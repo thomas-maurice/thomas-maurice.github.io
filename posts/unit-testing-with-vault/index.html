@@ -663,6 +663,12 @@
     
     var enableSearch = JSON.parse("true");
     
+    var searchDistance = JSON.parse("null");
+    
+    var searchThreshold = JSON.parse("null");
+    
+    var searchContent = JSON.parse("null");
+    
     var enableSearchHighlight = JSON.parse("true");
     
     var searchResultPosition = JSON.parse("\"main\"");
@@ -686,12 +692,13 @@
         xhr.onload = function () {
           if (xhr.status === 200) {
             fuse = new Fuse(JSON.parse(xhr.response.toString('utf-8')), {
-              keys: sectionType.includes('publication') ? ['title', 'abstract'] : ['title', 'description', 'content'],
+              keys: sectionType.includes('publication') ? ['title', 'abstract'] : 
+                searchContent ? ['title', 'description', 'content'] : ['title', 'description'],
               includeMatches: enableSearchHighlight,
               shouldSort: true, 
-              threshold: 0.4, 
+              threshold: searchThreshold ? searchThreshold : 0.4, 
               location: 0, 
-              distance: 100, 
+              distance: searchDistance ? searchDistance : 100, 
               maxPatternLength: 32,
               minMatchCharLength: 1,
               isCaseSensitive: false, 
@@ -715,7 +722,7 @@
       var a = document.createElement('a');
       a.innerHTML = obj.item.title;
       a.setAttribute('class', 'search-result__item--title');
-      a.setAttribute('href', obj.item.permalink);
+      a.setAttribute('href', obj.item.uri);
 
       var descDiv = document.createElement('div');
       descDiv.setAttribute('class', 'search-result__item--desc');
@@ -1315,7 +1322,8 @@
     }
   
   });
-</script>    
+</script>
+    
     
 
 
@@ -1323,7 +1331,9 @@
 
 
     
-<meta name="description" content="/var/log/tmaurice" />
+<meta name="description" content="Everything you have always wanted to know about how to use Hashicorp Vault
+in your unit tests, but were too afraid to ask.
+" />
 
 
 <meta name="keywords" content="golang,test,vault,security">
@@ -1339,7 +1349,9 @@
 <meta property="og:title" content="Unit Testing With Vault in Go">
 <meta property="og:url" content="https://blog.thomas.maurice.fr/posts/unit-testing-with-vault/">
 <meta property="og:type" content="article">
-<meta property="og:description" content="/var/log/tmaurice">
+<meta property="og:description" content="Everything you have always wanted to know about how to use Hashicorp Vault
+in your unit tests, but were too afraid to ask.
+">
 
   
     <meta property="og:image" content="https://blog.thomas.maurice.fr/images/logos/vault.png">
@@ -1347,10 +1359,12 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:app:name:iphone" content="/var/log/tmaurice">
     <meta property="twitter:title" content="Unit Testing With Vault in Go">
-    <meta property="twitter:description" content="/var/log/tmaurice">
+    <meta property="twitter:description" content="Everything you have always wanted to know about how to use Hashicorp Vault
+in your unit tests, but were too afraid to ask.
+">
   
 
-<meta name="generator" content="Hugo 0.82.0" />
+<meta name="generator" content="Hugo 0.87.0" />
 <meta name="msapplication-TileColor" content="#fff">
 
 <meta name="theme-color" content="#fff">
@@ -1389,7 +1403,7 @@
     "datePublished": "2020-01-11T13:52:19Z",
     "dateModified": "2020-01-11T13:52:19Z",
     "url" : "https://blog.thomas.maurice.fr/posts/unit-testing-with-vault/",
-    "description": "Recently I\u0026rsquo;ve been dealing with Hashicorp\u0026rsquo;s Vault a lot, and I\u0026rsquo;ve had to write a bunch of code to interface with it. This post is going to be about my …",
+    "description": "Everything you have always wanted to know about how to use Hashicorp Vault\nin your unit tests, but were too afraid to ask.\n",
     "keywords": ["golang","test","vault","security"],
     "image" : "https://blog.thomas.maurice.fr/images/logos/vault.png",
     "mainEntityOfPage": {
@@ -1691,7 +1705,7 @@ if (!doNotTrack) {
     </div>
     <article class="single__contents" data-dir="ltr" data-ani="true">
       
-      <p>Recently I&rsquo;ve been dealing with <a href="https://vaultproject.io">Hashicorp&rsquo;s Vault</a> a lot, and I&rsquo;ve had to write a bunch of code to interface with it. This post is going to be about my least favourite part of writing code: unit testing what I wrote (as everyone knows, it works on my machine, right ?).</p>
+      <p>Recently I&rsquo;ve been dealing with <a href="https://vaultproject.io">Hashicorp Vault</a> a lot, and I&rsquo;ve had to write a bunch of code to interface with it. This post is going to be about my least favourite part of writing code: unit testing what I wrote (as everyone knows, it works on my machine, right ?).</p>
 <h2 id="assumptions">Assumptions</h2>
 <p>This article assumes that you are already familiar with what <a href="https://vaultproject.io">Vault</a> is and the very basics of how to use it (get/put secrets, login and such). It also assumes that you have some knowledge of the Go programming language.</p>
 <h2 id="what-we-want">What we want</h2>
@@ -1701,7 +1715,7 @@ if (!doNotTrack) {
 <p>We will assume that we want to unit test a dummy function that will write a secret to Vault, and we want to make sure that the secret is written properly. Let&rsquo;s write a simple <code>main.go</code> file that contains our <code>main</code> function, as well as a <code>putSecret</code> function that will store our secret into Vault.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1728,7 +1742,7 @@ if (!doNotTrack) {
 </span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">package</span> <span class="nx">main</span>
+<pre tabindex="0" class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
     <span class="s">&#34;fmt&#34;</span>
@@ -1760,7 +1774,7 @@ if (!doNotTrack) {
 <p>You will need a <code>main_test.go</code> file that will look just like that:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1806,7 +1820,7 @@ if (!doNotTrack) {
 </span><span class="lnt">44
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">package</span> <span class="nx">main</span>
+<pre tabindex="0" class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
     <span class="s">&#34;testing&#34;</span>
@@ -1855,11 +1869,11 @@ if (!doNotTrack) {
 </div><p>Now let&rsquo;s check it is working</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ go <span class="nb">test</span> -cover ./...
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ go <span class="nb">test</span> -cover ./...
 ok      blog.thomas.maurice.fr/vault-test    3.625s    coverage: 25.0% of statements
 </code></pre></td></tr></table>
 </div>
@@ -1879,7 +1893,7 @@ ok      blog.thomas.maurice.fr/vault-test    3.625s    coverage: 25.0% of statem
 <p>You will do the following (note the additional <code>CredentialBackends</code> init option):</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1924,7 +1938,7 @@ ok      blog.thomas.maurice.fr/vault-test    3.625s    coverage: 25.0% of statem
 </span><span class="lnt">43
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">package</span> <span class="nx">main</span>
+<pre tabindex="0" class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
     <span class="s">&#34;testing&#34;</span>
@@ -1973,7 +1987,7 @@ ok      blog.thomas.maurice.fr/vault-test    3.625s    coverage: 25.0% of statem
 <p>This way you can freely create an approle, and some policies (why not ?!), to use Vault as you would use it in prod:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2021,7 +2035,7 @@ ok      blog.thomas.maurice.fr/vault-test    3.625s    coverage: 25.0% of statem
 </span><span class="lnt">46
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-golang" data-lang="golang">
+<pre tabindex="0" class="chroma"><code class="language-golang" data-lang="golang">
 <span class="c1">// ..... The imports and shit
 </span><span class="c1"></span><span class="kd">func</span> <span class="nf">TestMyTest</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ... Vault initialization as above
@@ -2073,11 +2087,11 @@ ok      blog.thomas.maurice.fr/vault-test    3.625s    coverage: 25.0% of statem
 <p>If you have been paying attention to what I spent a few hours writing, something should have struck you, and that thing is there:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ go <span class="nb">test</span> -cover ./...
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ go <span class="nb">test</span> -cover ./...
 ok      blog.thomas.maurice.fr/vault-test    3.625s    coverage: 25.0% of statements
 </code></pre></td></tr></table>
 </div>
@@ -2088,7 +2102,7 @@ ok      blog.thomas.maurice.fr/vault-test    3.625s    coverage: 25.0% of statem
 <p>Which is fair enough, which is why there is something you can do about it. You can create some <code>mocks.go</code> file that would contain all the Vault initialization code that you can reuse across multiple tests, something along the lines of:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2180,7 +2194,7 @@ ok      blog.thomas.maurice.fr/vault-test    3.625s    coverage: 25.0% of statem
 </span><span class="lnt">90
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">package</span> <span class="nx">main</span>
+<pre tabindex="0" class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
     <span class="s">&#34;testing&#34;</span>

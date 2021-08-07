@@ -663,6 +663,12 @@
     
     var enableSearch = JSON.parse("true");
     
+    var searchDistance = JSON.parse("null");
+    
+    var searchThreshold = JSON.parse("null");
+    
+    var searchContent = JSON.parse("null");
+    
     var enableSearchHighlight = JSON.parse("true");
     
     var searchResultPosition = JSON.parse("\"main\"");
@@ -686,12 +692,13 @@
         xhr.onload = function () {
           if (xhr.status === 200) {
             fuse = new Fuse(JSON.parse(xhr.response.toString('utf-8')), {
-              keys: sectionType.includes('publication') ? ['title', 'abstract'] : ['title', 'description', 'content'],
+              keys: sectionType.includes('publication') ? ['title', 'abstract'] : 
+                searchContent ? ['title', 'description', 'content'] : ['title', 'description'],
               includeMatches: enableSearchHighlight,
               shouldSort: true, 
-              threshold: 0.4, 
+              threshold: searchThreshold ? searchThreshold : 0.4, 
               location: 0, 
-              distance: 100, 
+              distance: searchDistance ? searchDistance : 100, 
               maxPatternLength: 32,
               minMatchCharLength: 1,
               isCaseSensitive: false, 
@@ -715,7 +722,7 @@
       var a = document.createElement('a');
       a.innerHTML = obj.item.title;
       a.setAttribute('class', 'search-result__item--title');
-      a.setAttribute('href', obj.item.permalink);
+      a.setAttribute('href', obj.item.uri);
 
       var descDiv = document.createElement('div');
       descDiv.setAttribute('class', 'search-result__item--desc');
@@ -1315,7 +1322,8 @@
     }
   
   });
-</script>    
+</script>
+    
     
 
 
@@ -1353,7 +1361,7 @@
 ">
   
 
-<meta name="generator" content="Hugo 0.82.0" />
+<meta name="generator" content="Hugo 0.87.0" />
 <meta name="msapplication-TileColor" content="#fff">
 
 <meta name="theme-color" content="#fff">
@@ -1699,13 +1707,13 @@ if (!doNotTrack) {
 <h2 id="create-a-new-netns">Create a new netns</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ ip netns add testns
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ ip netns add testns
 <span class="c1"># Check it works</span>
 $ ip netns ls
 testns
@@ -1714,12 +1722,12 @@ testns
 </div><h2 id="exec-a-command-inside-a-netns">Exec a command inside a netns</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ ip netns <span class="nb">exec</span> testns ip link show
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ ip netns <span class="nb">exec</span> testns ip link show
 1: lo: &lt;LOOPBACK&gt; mtu <span class="m">65536</span> qdisc noop state DOWN mode DEFAULT group default qlen <span class="m">1000</span>
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
 </code></pre></td></tr></table>
@@ -1737,12 +1745,12 @@ testns
 <p>First let&rsquo;s create the network interfaces we need, we want to have a bridge and a veth pair.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ ip link add br-netns <span class="nb">type</span> bridge
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ ip link add br-netns <span class="nb">type</span> bridge
 <span class="c1"># Create a veth pair with one of the interfaces in out netns</span>
 $ ip link add veth0 <span class="nb">type</span> veth peer name veth1 netns testns
 </code></pre></td></tr></table>
@@ -1750,41 +1758,41 @@ $ ip link add veth0 <span class="nb">type</span> veth peer name veth1 netns test
 </div><p>Now set veth0&rsquo;s master as the bridge</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ ip link <span class="nb">set</span> master br-netns dev veth0
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ ip link <span class="nb">set</span> master br-netns dev veth0
 </code></pre></td></tr></table>
 </div>
 </div><p>Setup the bridge address</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ ip address add 10.69.69.1/24 dev br-netns
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ ip address add 10.69.69.1/24 dev br-netns
 </code></pre></td></tr></table>
 </div>
 </div><p>Make the bridge and veth up</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ ip link <span class="nb">set</span> up dev br-netns
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ ip link <span class="nb">set</span> up dev br-netns
 $ ip link <span class="nb">set</span> up dev veth0
 </code></pre></td></tr></table>
 </div>
 </div><p>Finally setup iptables</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ iptables -I FORWARD -i br-netns -o enx0050b6f2bc54 -j ACCEPT
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ iptables -I FORWARD -i br-netns -o enx0050b6f2bc54 -j ACCEPT
 $ iptables -I FORWARD -o br-netns -i enx0050b6f2bc54 -j ACCEPT
 $ iptables -t nat -I POSTROUTING -s 10.69.69.0/24 -j MASQUERADE
 </code></pre></td></tr></table>
@@ -1793,36 +1801,36 @@ $ iptables -t nat -I POSTROUTING -s 10.69.69.0/24 -j MASQUERADE
 <p>Let us enter the namespace</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ ip netns <span class="nb">exec</span> testns bash
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ ip netns <span class="nb">exec</span> testns bash
 </code></pre></td></tr></table>
 </div>
 </div><p>Configure the interface&rsquo;s address and turn it on</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ ip address add 10.69.69.2/24 dev veth1
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ ip address add 10.69.69.2/24 dev veth1
 $ ip link <span class="nb">set</span> up dev veth1
 </code></pre></td></tr></table>
 </div>
 </div><p>Set the default route</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ ip route add default via 10.69.69.1
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ ip route add default via 10.69.69.1
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="check-it-works">Check it works</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1840,7 +1848,7 @@ $ ip link <span class="nb">set</span> up dev veth1
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ ping 8.8.8.8 -c <span class="m">10</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ ping 8.8.8.8 -c <span class="m">10</span>
 PING 8.8.8.8 <span class="o">(</span>8.8.8.8<span class="o">)</span> 56<span class="o">(</span>84<span class="o">)</span> bytes of data.
 <span class="m">64</span> bytes from 8.8.8.8: <span class="nv">icmp_seq</span><span class="o">=</span><span class="m">1</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">115</span> <span class="nv">time</span><span class="o">=</span>14.4 ms
 <span class="m">64</span> bytes from 8.8.8.8: <span class="nv">icmp_seq</span><span class="o">=</span><span class="m">2</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">115</span> <span class="nv">time</span><span class="o">=</span>12.9 ms

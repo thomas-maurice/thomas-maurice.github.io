@@ -13,7 +13,7 @@
     <language>en</language>
     <managingEditor>thomas@maurice.fr (Thomas)</managingEditor>
     <webMaster>thomas@maurice.fr (Thomas)</webMaster>
-    <copyright>&amp;copy;{year}, All Rights Reserved</copyright>
+    <copyright>©2021, All Rights Reserved</copyright>
     <lastBuildDate>Fri, 17 Jan 2020 18:56:22 +0000</lastBuildDate>
     
         <atom:link href="https://blog.thomas.maurice.fr/categories/golang/index.xml" rel="self" type="application/rss+xml" />
@@ -73,7 +73,7 @@
         <author>thomas@maurice.fr (Thomas)</author>
         <atom:modified>Sat, 11 Jan 2020 13:52:19 +0000</atom:modified>
         <guid>https://blog.thomas.maurice.fr/posts/unit-testing-with-vault/</guid>
-        <description>Recently I&amp;rsquo;ve been dealing with Hashicorp&amp;rsquo;s Vault a lot, and I&amp;rsquo;ve had to write a bunch of code to interface with it. This post is going to be about my least favourite part of writing code: unit testing what I wrote (as everyone knows, it works on my machine, right ?).
+        <description>Recently I&amp;rsquo;ve been dealing with Hashicorp Vault a lot, and I&amp;rsquo;ve had to write a bunch of code to interface with it. This post is going to be about my least favourite part of writing code: unit testing what I wrote (as everyone knows, it works on my machine, right ?).
 Assumptions This article assumes that you are already familiar with what Vault is and the very basics of how to use it (get/put secrets, login and such).</description>
         
         <dc:creator>Thomas</dc:creator>
