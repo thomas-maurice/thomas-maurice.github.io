@@ -14,11 +14,74 @@
     <managingEditor>thomas@maurice.fr (Thomas)</managingEditor>
     <webMaster>thomas@maurice.fr (Thomas)</webMaster>
     <copyright>©2021, All Rights Reserved</copyright>
-    <lastBuildDate>Sat, 29 Aug 2020 11:02:50 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 07 Aug 2021 13:06:36 +0100</lastBuildDate>
     
         <atom:link href="https://blog.thomas.maurice.fr/tags/namespaces/index.xml" rel="self" type="application/rss+xml" />
     
 
+      
+      <item>
+        <title>Some VXLAN stuff so I don&#39;t forget how it works</title>
+        <link>https://blog.thomas.maurice.fr/posts/some-vxlan-stuff-so-i-dont-forget/</link>
+        <pubDate>Sat, 07 Aug 2021 13:06:36 +0100</pubDate>
+        <author>thomas@maurice.fr (Thomas)</author>
+        <atom:modified>Sat, 07 Aug 2021 13:06:36 +0100</atom:modified>
+        <guid>https://blog.thomas.maurice.fr/posts/some-vxlan-stuff-so-i-dont-forget/</guid>
+        <description>Just like my network namespace post, this post is going to be a basic cheat sheet for me so I don&amp;rsquo;t have to endlessly Google stuff for ages in case I need to use VXLANs again.
+What is a VXLAN Thta&amp;rsquo;s just a like a VLAN, essentially an overlay network that is not limited to 4000 IDs. It also has some nice features such as auto discovery of peers via broadcast on the same network.</description>
+        
+        <dc:creator>Thomas</dc:creator>
+        <media:content url="https://blog.thomas.maurice.frimages/random/box-of-cables.jpg" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        
+        
+          
+            
+              <category>linux</category>
+            
+          
+            
+              <category>networking</category>
+            
+          
+            
+              <category>kernel</category>
+            
+          
+            
+              <category>namespaces</category>
+            
+          
+            
+              <category>vxlan</category>
+            
+          
+        
+        
+          
+            
+              <category>linux</category>
+            
+          
+            
+              <category>networking</category>
+            
+          
+            
+              <category>kernel</category>
+            
+          
+            
+              <category>namespaces</category>
+            
+          
+            
+              <category>vxlan</category>
+            
+          
+        
+        
+      </item>
       
       <item>
         <title>Network namespaces in Linux</title>

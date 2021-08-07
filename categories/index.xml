@@ -14,7 +14,7 @@
     <managingEditor>thomas@maurice.fr (Thomas)</managingEditor>
     <webMaster>thomas@maurice.fr (Thomas)</webMaster>
     <copyright>©2021, All Rights Reserved</copyright>
-    <lastBuildDate>Sat, 29 Aug 2020 11:02:50 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 07 Aug 2021 13:06:36 +0100</lastBuildDate>
     
         <atom:link href="https://blog.thomas.maurice.fr/categories/index.xml" rel="self" type="application/rss+xml" />
     
@@ -23,7 +23,7 @@
       <item>
         <title>kernel</title>
         <link>https://blog.thomas.maurice.fr/categories/kernel/</link>
-        <pubDate>Sat, 29 Aug 2020 11:02:50 +0000</pubDate>
+        <pubDate>Sat, 07 Aug 2021 13:06:36 +0100</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         
         <guid>https://blog.thomas.maurice.fr/categories/kernel/</guid>
@@ -41,7 +41,7 @@
       <item>
         <title>linux</title>
         <link>https://blog.thomas.maurice.fr/categories/linux/</link>
-        <pubDate>Sat, 29 Aug 2020 11:02:50 +0000</pubDate>
+        <pubDate>Sat, 07 Aug 2021 13:06:36 +0100</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         
         <guid>https://blog.thomas.maurice.fr/categories/linux/</guid>
@@ -59,7 +59,7 @@
       <item>
         <title>namespaces</title>
         <link>https://blog.thomas.maurice.fr/categories/namespaces/</link>
-        <pubDate>Sat, 29 Aug 2020 11:02:50 +0000</pubDate>
+        <pubDate>Sat, 07 Aug 2021 13:06:36 +0100</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         
         <guid>https://blog.thomas.maurice.fr/categories/namespaces/</guid>
@@ -77,10 +77,28 @@
       <item>
         <title>networking</title>
         <link>https://blog.thomas.maurice.fr/categories/networking/</link>
-        <pubDate>Sat, 29 Aug 2020 11:02:50 +0000</pubDate>
+        <pubDate>Sat, 07 Aug 2021 13:06:36 +0100</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         
         <guid>https://blog.thomas.maurice.fr/categories/networking/</guid>
+        <description></description>
+        
+        <dc:creator>Thomas</dc:creator>
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>vxlan</title>
+        <link>https://blog.thomas.maurice.fr/categories/vxlan/</link>
+        <pubDate>Sat, 07 Aug 2021 13:06:36 +0100</pubDate>
+        <author>thomas@maurice.fr (Thomas)</author>
+        
+        <guid>https://blog.thomas.maurice.fr/categories/vxlan/</guid>
         <description></description>
         
         <dc:creator>Thomas</dc:creator>
