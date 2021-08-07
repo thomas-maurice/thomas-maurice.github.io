@@ -32,7 +32,7 @@ NB: most of the commands should be ran as root.
 Create a new netns 1 2 3 4  $ ip netns add testns # Check it works $ ip netns ls testns   Exec a command inside a netns 1 2 3  $ ip netns exec testns ip link show 1: lo: &amp;lt;LOOPBACK&amp;gt; mtu 65536 qdisc noop state DOWN mode DEFAULT group default qlen 1000 link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00   Connect the namespace from the outside Choose what we want to make as a network setup We want the following:</description>
         
         <dc:creator>Thomas</dc:creator>
-        <media:content url="https://blog.thomas.maurice.frimages/logos/tux.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://blog.thomas.maurice.frimages/logos/tux_small.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
