@@ -3,21 +3,36 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://blog.thomas.maurice.fr/</loc>
-    <lastmod>2021-08-07T13:06:36+01:00</lastmod>
+    <lastmod>2021-09-01T09:30:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.thomas.maurice.fr/categories/</loc>
-    <lastmod>2021-08-07T13:06:36+01:00</lastmod>
+    <lastmod>2021-09-01T09:30:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.thomas.maurice.fr/posts/cryptsetup/</loc>
+    <lastmod>2021-09-01T09:30:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.thomas.maurice.fr/tags/linux/</loc>
+    <lastmod>2021-09-01T09:30:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.thomas.maurice.fr/categories/linux/</loc>
+    <lastmod>2021-09-01T09:30:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.thomas.maurice.fr/posts/</loc>
+    <lastmod>2021-09-01T09:30:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.thomas.maurice.fr/tags/security/</loc>
+    <lastmod>2021-09-01T09:30:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.thomas.maurice.fr/categories/security/</loc>
+    <lastmod>2021-09-01T09:30:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.thomas.maurice.fr/tags/</loc>
+    <lastmod>2021-09-01T09:30:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.thomas.maurice.fr/tags/kernel/</loc>
     <lastmod>2021-08-07T13:06:36+01:00</lastmod>
   </url><url>
     <loc>https://blog.thomas.maurice.fr/categories/kernel/</loc>
-    <lastmod>2021-08-07T13:06:36+01:00</lastmod>
-  </url><url>
-    <loc>https://blog.thomas.maurice.fr/tags/linux/</loc>
-    <lastmod>2021-08-07T13:06:36+01:00</lastmod>
-  </url><url>
-    <loc>https://blog.thomas.maurice.fr/categories/linux/</loc>
     <lastmod>2021-08-07T13:06:36+01:00</lastmod>
   </url><url>
     <loc>https://blog.thomas.maurice.fr/tags/namespaces/</loc>
@@ -32,13 +47,7 @@
     <loc>https://blog.thomas.maurice.fr/categories/networking/</loc>
     <lastmod>2021-08-07T13:06:36+01:00</lastmod>
   </url><url>
-    <loc>https://blog.thomas.maurice.fr/posts/</loc>
-    <lastmod>2021-08-07T13:06:36+01:00</lastmod>
-  </url><url>
     <loc>https://blog.thomas.maurice.fr/posts/some-vxlan-stuff-so-i-dont-forget/</loc>
-    <lastmod>2021-08-07T13:06:36+01:00</lastmod>
-  </url><url>
-    <loc>https://blog.thomas.maurice.fr/tags/</loc>
     <lastmod>2021-08-07T13:06:36+01:00</lastmod>
   </url><url>
     <loc>https://blog.thomas.maurice.fr/tags/vxlan/</loc>
@@ -60,12 +69,6 @@
     <lastmod>2020-01-29T19:40:22+00:00</lastmod>
   </url><url>
     <loc>https://blog.thomas.maurice.fr/tags/router/</loc>
-    <lastmod>2020-01-29T19:40:22+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.thomas.maurice.fr/tags/security/</loc>
-    <lastmod>2020-01-29T19:40:22+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.thomas.maurice.fr/categories/security/</loc>
     <lastmod>2020-01-29T19:40:22+00:00</lastmod>
   </url><url>
     <loc>https://blog.thomas.maurice.fr/tags/wireguard/</loc>

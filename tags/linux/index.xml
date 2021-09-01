@@ -14,11 +14,53 @@
     <managingEditor>thomas@maurice.fr (Thomas)</managingEditor>
     <webMaster>thomas@maurice.fr (Thomas)</webMaster>
     <copyright>©2021, All Rights Reserved</copyright>
-    <lastBuildDate>Sat, 07 Aug 2021 13:06:36 +0100</lastBuildDate>
+    <lastBuildDate>Wed, 01 Sep 2021 09:30:00 +0000</lastBuildDate>
     
         <atom:link href="https://blog.thomas.maurice.fr/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     
 
+      
+      <item>
+        <title>How to use cryptsetup to create encrypted volumes</title>
+        <link>https://blog.thomas.maurice.fr/posts/cryptsetup/</link>
+        <pubDate>Wed, 01 Sep 2021 09:30:00 +0000</pubDate>
+        <author>thomas@maurice.fr (Thomas)</author>
+        <atom:modified>Wed, 01 Sep 2021 09:30:00 +0000</atom:modified>
+        <guid>https://blog.thomas.maurice.fr/posts/cryptsetup/</guid>
+        <description>On most modern Linux distributions, you have the chance during the install to tell the installer to
+do a full disk encryption on your partition, which effectively encrypts your data at rest (when the
+laptop is powered off) and can only be unlocked with your password. I will show you how to do this on
+drives, and even files.
+Install cryptsetup There is most likely a cryptsetup package for your distribution, here is how to install it on Debian/Ubuntu:</description>
+        
+        <dc:creator>Thomas</dc:creator>
+        <media:content url="https://blog.thomas.maurice.frimages/logos/luks.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        
+        
+          
+            
+              <category>security</category>
+            
+          
+            
+              <category>linux</category>
+            
+          
+        
+        
+          
+            
+              <category>security</category>
+            
+          
+            
+              <category>linux</category>
+            
+          
+        
+        
+      </item>
       
       <item>
         <title>Some VXLAN stuff so I don&#39;t forget how it works</title>

@@ -14,19 +14,19 @@
     <managingEditor>thomas@maurice.fr (Thomas)</managingEditor>
     <webMaster>thomas@maurice.fr (Thomas)</webMaster>
     <copyright>©2021, All Rights Reserved</copyright>
-    <lastBuildDate>Sat, 07 Aug 2021 13:06:36 +0100</lastBuildDate>
+    <lastBuildDate>Wed, 01 Sep 2021 09:30:00 +0000</lastBuildDate>
     
         <atom:link href="https://blog.thomas.maurice.fr/tags/index.xml" rel="self" type="application/rss+xml" />
     
 
       
       <item>
-        <title>kernel</title>
-        <link>https://blog.thomas.maurice.fr/tags/kernel/</link>
-        <pubDate>Sat, 07 Aug 2021 13:06:36 +0100</pubDate>
+        <title>linux</title>
+        <link>https://blog.thomas.maurice.fr/tags/linux/</link>
+        <pubDate>Wed, 01 Sep 2021 09:30:00 +0000</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         
-        <guid>https://blog.thomas.maurice.fr/tags/kernel/</guid>
+        <guid>https://blog.thomas.maurice.fr/tags/linux/</guid>
         <description></description>
         
         <dc:creator>Thomas</dc:creator>
@@ -39,12 +39,30 @@
       </item>
       
       <item>
-        <title>linux</title>
-        <link>https://blog.thomas.maurice.fr/tags/linux/</link>
+        <title>security</title>
+        <link>https://blog.thomas.maurice.fr/tags/security/</link>
+        <pubDate>Wed, 01 Sep 2021 09:30:00 +0000</pubDate>
+        <author>thomas@maurice.fr (Thomas)</author>
+        
+        <guid>https://blog.thomas.maurice.fr/tags/security/</guid>
+        <description></description>
+        
+        <dc:creator>Thomas</dc:creator>
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>kernel</title>
+        <link>https://blog.thomas.maurice.fr/tags/kernel/</link>
         <pubDate>Sat, 07 Aug 2021 13:06:36 +0100</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         
-        <guid>https://blog.thomas.maurice.fr/tags/linux/</guid>
+        <guid>https://blog.thomas.maurice.fr/tags/kernel/</guid>
         <description></description>
         
         <dc:creator>Thomas</dc:creator>
@@ -135,24 +153,6 @@
         <author>thomas@maurice.fr (Thomas)</author>
         
         <guid>https://blog.thomas.maurice.fr/tags/router/</guid>
-        <description></description>
-        
-        <dc:creator>Thomas</dc:creator>
-        
-        
-        
-        
-        
-        
-      </item>
-      
-      <item>
-        <title>security</title>
-        <link>https://blog.thomas.maurice.fr/tags/security/</link>
-        <pubDate>Wed, 29 Jan 2020 19:40:22 +0000</pubDate>
-        <author>thomas@maurice.fr (Thomas)</author>
-        
-        <guid>https://blog.thomas.maurice.fr/tags/security/</guid>
         <description></description>
         
         <dc:creator>Thomas</dc:creator>
