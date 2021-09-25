@@ -1736,7 +1736,7 @@ $ gunzip openwrt-blog.img.gz
 </div>
 </div><h2 id="the-handy-dandy-network-setup-script">The handy dandy network setup script</h2>
 <p>We need another thing to set up the network and to be able to connect the router to the world: bridges. The setup is going to be as follows: we are going to create a router with 4 ports as an example, so we would need 4 bridges. One will be the libvirt&rsquo;s <code>virbr0</code> bridge that will act as our WAN port, and three other ones that will be plugged to our switch, they will be named <code>sw-r0-eth[1-3]</code>. Lastly we need to make it so our laptop gets connected to the LAN of the router, so for that we will use a <code>veth</code> pair, one of the ends will be enslaved to the <code>sw-r0-eth1</code> bridge.</p>
-<p>That looks tedious so I made a script for that, you cank download it <a href="https://gist.github.com/thomas-maurice/b07dca00695f952775a5e99fe2aad8f7">here</a>.</p>
+<p>That looks tedious so I made a script for that, you can download it <a href="https://gist.github.com/thomas-maurice/b07dca00695f952775a5e99fe2aad8f7">here</a>.</p>
 <p>You can adapt it to your needs, the relevant config options are at the begining of the script:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
