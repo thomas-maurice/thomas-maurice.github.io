@@ -14,19 +14,37 @@
     <managingEditor>thomas@maurice.fr (Thomas)</managingEditor>
     <webMaster>thomas@maurice.fr (Thomas)</webMaster>
     <copyright>©2021, All Rights Reserved</copyright>
-    <lastBuildDate>Wed, 01 Sep 2021 09:30:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 24 Sep 2021 13:52:19 +0000</lastBuildDate>
     
         <atom:link href="https://blog.thomas.maurice.fr/categories/index.xml" rel="self" type="application/rss+xml" />
     
 
       
       <item>
-        <title>linux</title>
-        <link>https://blog.thomas.maurice.fr/categories/linux/</link>
-        <pubDate>Wed, 01 Sep 2021 09:30:00 +0000</pubDate>
+        <title>networking</title>
+        <link>https://blog.thomas.maurice.fr/categories/networking/</link>
+        <pubDate>Fri, 24 Sep 2021 13:52:19 +0000</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         
-        <guid>https://blog.thomas.maurice.fr/categories/linux/</guid>
+        <guid>https://blog.thomas.maurice.fr/categories/networking/</guid>
+        <description></description>
+        
+        <dc:creator>Thomas</dc:creator>
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>openwrt</title>
+        <link>https://blog.thomas.maurice.fr/categories/openwrt/</link>
+        <pubDate>Fri, 24 Sep 2021 13:52:19 +0000</pubDate>
+        <author>thomas@maurice.fr (Thomas)</author>
+        
+        <guid>https://blog.thomas.maurice.fr/categories/openwrt/</guid>
         <description></description>
         
         <dc:creator>Thomas</dc:creator>
@@ -41,10 +59,46 @@
       <item>
         <title>security</title>
         <link>https://blog.thomas.maurice.fr/categories/security/</link>
-        <pubDate>Wed, 01 Sep 2021 09:30:00 +0000</pubDate>
+        <pubDate>Fri, 24 Sep 2021 13:52:19 +0000</pubDate>
         <author>thomas@maurice.fr (Thomas)</author>
         
         <guid>https://blog.thomas.maurice.fr/categories/security/</guid>
+        <description></description>
+        
+        <dc:creator>Thomas</dc:creator>
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>virtualisation</title>
+        <link>https://blog.thomas.maurice.fr/categories/virtualisation/</link>
+        <pubDate>Fri, 24 Sep 2021 13:52:19 +0000</pubDate>
+        <author>thomas@maurice.fr (Thomas)</author>
+        
+        <guid>https://blog.thomas.maurice.fr/categories/virtualisation/</guid>
+        <description></description>
+        
+        <dc:creator>Thomas</dc:creator>
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>linux</title>
+        <link>https://blog.thomas.maurice.fr/categories/linux/</link>
+        <pubDate>Wed, 01 Sep 2021 09:30:00 +0000</pubDate>
+        <author>thomas@maurice.fr (Thomas)</author>
+        
+        <guid>https://blog.thomas.maurice.fr/categories/linux/</guid>
         <description></description>
         
         <dc:creator>Thomas</dc:creator>
@@ -81,24 +135,6 @@
         <author>thomas@maurice.fr (Thomas)</author>
         
         <guid>https://blog.thomas.maurice.fr/categories/namespaces/</guid>
-        <description></description>
-        
-        <dc:creator>Thomas</dc:creator>
-        
-        
-        
-        
-        
-        
-      </item>
-      
-      <item>
-        <title>networking</title>
-        <link>https://blog.thomas.maurice.fr/categories/networking/</link>
-        <pubDate>Sat, 07 Aug 2021 13:06:36 +0100</pubDate>
-        <author>thomas@maurice.fr (Thomas)</author>
-        
-        <guid>https://blog.thomas.maurice.fr/categories/networking/</guid>
         <description></description>
         
         <dc:creator>Thomas</dc:creator>

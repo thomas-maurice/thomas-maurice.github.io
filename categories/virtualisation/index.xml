@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>virtualisation on /var/log/tmaurice</title>
+    <link>https://blog.thomas.maurice.fr/categories/virtualisation/</link>
+    <description>Recent content in virtualisation on /var/log/tmaurice</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <managingEditor>thomas@maurice.fr (Thomas)</managingEditor>
+    <webMaster>thomas@maurice.fr (Thomas)</webMaster>
+    <copyright>©2021, All Rights Reserved</copyright>
+    <lastBuildDate>Fri, 24 Sep 2021 13:52:19 +0000</lastBuildDate>
+    
+        <atom:link href="https://blog.thomas.maurice.fr/categories/virtualisation/index.xml" rel="self" type="application/rss+xml" />
+    
+
+      
+      <item>
+        <title>Virtualise OpenWRT in virt-manager/KVM</title>
+        <link>https://blog.thomas.maurice.fr/posts/virtualise-openwrt/</link>
+        <pubDate>Fri, 24 Sep 2021 13:52:19 +0000</pubDate>
+        <author>thomas@maurice.fr (Thomas)</author>
+        <atom:modified>Fri, 24 Sep 2021 13:52:19 +0000</atom:modified>
+        <guid>https://blog.thomas.maurice.fr/posts/virtualise-openwrt/</guid>
+        <description>Introduction If you are anything like me you probably like to tinker a bit with your home network. I discovered OpenWRT a few years ago and ever since my Turris Omnia router almost never failed me. I since acquired a bunch of small ARM boards capable of running my network that rely on OpwnWRT. The thing is, I am the furthest away I would be from a legit network engineer, and it has happened a few times that I would completely fuck over my network because I did something wrong without actually realising it.</description>
+        
+        <dc:creator>Thomas</dc:creator>
+        <media:content url="https://blog.thomas.maurice.frimages/logos/openwrt.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        
+        
+          
+            
+              <category>networking</category>
+            
+          
+            
+              <category>security</category>
+            
+          
+            
+              <category>openwrt</category>
+            
+          
+            
+              <category>virtualisation</category>
+            
+          
+        
+        
+          
+            
+              <category>networking</category>
+            
+          
+            
+              <category>security</category>
+            
+          
+            
+              <category>openwrt</category>
+            
+          
+            
+              <category>virtualisation</category>
+            
+          
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>
