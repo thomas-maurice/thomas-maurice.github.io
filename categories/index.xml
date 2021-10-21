@@ -14,11 +14,65 @@
     <managingEditor>thomas@maurice.fr (Thomas)</managingEditor>
     <webMaster>thomas@maurice.fr (Thomas)</webMaster>
     <copyright>©2021, All Rights Reserved</copyright>
-    <lastBuildDate>Fri, 24 Sep 2021 13:52:19 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 14 Oct 2021 19:30:00 +0000</lastBuildDate>
     
         <atom:link href="https://blog.thomas.maurice.fr/categories/index.xml" rel="self" type="application/rss+xml" />
     
 
+      
+      <item>
+        <title>kubernetes</title>
+        <link>https://blog.thomas.maurice.fr/categories/kubernetes/</link>
+        <pubDate>Thu, 14 Oct 2021 19:30:00 +0000</pubDate>
+        <author>thomas@maurice.fr (Thomas)</author>
+        
+        <guid>https://blog.thomas.maurice.fr/categories/kubernetes/</guid>
+        <description></description>
+        
+        <dc:creator>Thomas</dc:creator>
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>security</title>
+        <link>https://blog.thomas.maurice.fr/categories/security/</link>
+        <pubDate>Thu, 14 Oct 2021 19:30:00 +0000</pubDate>
+        <author>thomas@maurice.fr (Thomas)</author>
+        
+        <guid>https://blog.thomas.maurice.fr/categories/security/</guid>
+        <description></description>
+        
+        <dc:creator>Thomas</dc:creator>
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>vault</title>
+        <link>https://blog.thomas.maurice.fr/categories/vault/</link>
+        <pubDate>Thu, 14 Oct 2021 19:30:00 +0000</pubDate>
+        <author>thomas@maurice.fr (Thomas)</author>
+        
+        <guid>https://blog.thomas.maurice.fr/categories/vault/</guid>
+        <description></description>
+        
+        <dc:creator>Thomas</dc:creator>
+        
+        
+        
+        
+        
+        
+      </item>
       
       <item>
         <title>networking</title>
@@ -45,24 +99,6 @@
         <author>thomas@maurice.fr (Thomas)</author>
         
         <guid>https://blog.thomas.maurice.fr/categories/openwrt/</guid>
-        <description></description>
-        
-        <dc:creator>Thomas</dc:creator>
-        
-        
-        
-        
-        
-        
-      </item>
-      
-      <item>
-        <title>security</title>
-        <link>https://blog.thomas.maurice.fr/categories/security/</link>
-        <pubDate>Fri, 24 Sep 2021 13:52:19 +0000</pubDate>
-        <author>thomas@maurice.fr (Thomas)</author>
-        
-        <guid>https://blog.thomas.maurice.fr/categories/security/</guid>
         <description></description>
         
         <dc:creator>Thomas</dc:creator>
@@ -189,24 +225,6 @@
         <author>thomas@maurice.fr (Thomas)</author>
         
         <guid>https://blog.thomas.maurice.fr/categories/golang/</guid>
-        <description></description>
-        
-        <dc:creator>Thomas</dc:creator>
-        
-        
-        
-        
-        
-        
-      </item>
-      
-      <item>
-        <title>vault</title>
-        <link>https://blog.thomas.maurice.fr/categories/vault/</link>
-        <pubDate>Fri, 17 Jan 2020 18:56:22 +0000</pubDate>
-        <author>thomas@maurice.fr (Thomas)</author>
-        
-        <guid>https://blog.thomas.maurice.fr/categories/vault/</guid>
         <description></description>
         
         <dc:creator>Thomas</dc:creator>

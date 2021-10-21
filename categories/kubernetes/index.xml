@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>kubernetes on /var/log/tmaurice</title>
+    <link>https://blog.thomas.maurice.fr/categories/kubernetes/</link>
+    <description>Recent content in kubernetes on /var/log/tmaurice</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <managingEditor>thomas@maurice.fr (Thomas)</managingEditor>
+    <webMaster>thomas@maurice.fr (Thomas)</webMaster>
+    <copyright>©2021, All Rights Reserved</copyright>
+    <lastBuildDate>Thu, 14 Oct 2021 19:30:00 +0000</lastBuildDate>
+    
+        <atom:link href="https://blog.thomas.maurice.fr/categories/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    
+
+      
+      <item>
+        <title>Authenticate to Kubernetes using Hashicorp Vault</title>
+        <link>https://blog.thomas.maurice.fr/posts/authenticate-with-kubernetes-using-vault/</link>
+        <pubDate>Thu, 14 Oct 2021 19:30:00 +0000</pubDate>
+        <author>thomas@maurice.fr (Thomas)</author>
+        <atom:modified>Thu, 14 Oct 2021 19:30:00 +0000</atom:modified>
+        <guid>https://blog.thomas.maurice.fr/posts/authenticate-with-kubernetes-using-vault/</guid>
+        <description>Authenticating with Kubernetes can be done in a wide variety of ways. You can use user certificates, you can use service account tokens, you can use IAM on Google GKE, you can also use AWS IAM on EKS and whatever the equivalent is on Azure AKS. But there are not many easy options to choose from if you are not using a cloud provider.
+We are going to explore how to use Hashicorp Vault to serve as an OpenID connect provider that will let you authenticate your users using Vault, and set up some basic Role Based Access Control (RBAC) for it.</description>
+        
+        <dc:creator>Thomas</dc:creator>
+        <media:content url="https://blog.thomas.maurice.frimages/logos/vault-k8s.jpg" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        
+        
+          
+            
+              <category>security</category>
+            
+          
+            
+              <category>vault</category>
+            
+          
+            
+              <category>kubernetes</category>
+            
+          
+        
+        
+          
+            
+              <category>security</category>
+            
+          
+            
+              <category>vault</category>
+            
+          
+            
+              <category>kubernetes</category>
+            
+          
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>

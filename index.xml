@@ -14,7 +14,7 @@
     <managingEditor>thomas@maurice.fr (Thomas)</managingEditor>
     <webMaster>thomas@maurice.fr (Thomas)</webMaster>
     <copyright>©2021, All Rights Reserved</copyright>
-    <lastBuildDate>Fri, 24 Sep 2021 13:52:19 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 14 Oct 2021 19:30:00 +0000</lastBuildDate>
     
         <atom:link href="https://blog.thomas.maurice.fr/index.xml" rel="self" type="application/rss+xml" />
     
@@ -22,6 +22,53 @@
       
       
 
+      
+      <item>
+        <title>Authenticate to Kubernetes using Hashicorp Vault</title>
+        <link>https://blog.thomas.maurice.fr/posts/authenticate-with-kubernetes-using-vault/</link>
+        <pubDate>Thu, 14 Oct 2021 19:30:00 +0000</pubDate>
+        <author>thomas@maurice.fr (Thomas)</author>
+        <atom:modified>Thu, 14 Oct 2021 19:30:00 +0000</atom:modified>
+        <guid>https://blog.thomas.maurice.fr/posts/authenticate-with-kubernetes-using-vault/</guid>
+        <description>Authenticating with Kubernetes can be done in a wide variety of ways. You can use user certificates, you can use service account tokens, you can use IAM on Google GKE, you can also use AWS IAM on EKS and whatever the equivalent is on Azure AKS. But there are not many easy options to choose from if you are not using a cloud provider.
+We are going to explore how to use Hashicorp Vault to serve as an OpenID connect provider that will let you authenticate your users using Vault, and set up some basic Role Based Access Control (RBAC) for it.</description>
+        
+        <dc:creator>Thomas</dc:creator>
+        <media:content url="https://blog.thomas.maurice.frimages/logos/vault-k8s.jpg" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        
+        
+          
+            
+              <category>security</category>
+            
+          
+            
+              <category>vault</category>
+            
+          
+            
+              <category>kubernetes</category>
+            
+          
+        
+        
+          
+            
+              <category>security</category>
+            
+          
+            
+              <category>vault</category>
+            
+          
+            
+              <category>kubernetes</category>
+            
+          
+        
+        
+      </item>
       
       <item>
         <title>Virtualise OpenWRT in virt-manager/KVM</title>
